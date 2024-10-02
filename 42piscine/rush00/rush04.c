@@ -1,0 +1,104 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rush04.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/12 22:56:06 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/08/14 21:05:30 by juseo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include<unistd.h>
+
+extern void	ft_putchar(char *str);
+
+void	first(int c)
+{
+	int	ii;
+
+	ii = 0;
+	while (ii < c)
+	{
+		if (ii == 0)
+		{
+			ft_putchar("A");
+		}
+		else if (ii == c - 1)
+		{
+			ft_putchar("C");
+		}
+		else
+		{
+			ft_putchar("B");
+		}
+		ii++;
+	}
+}
+
+void	last(int c)
+{
+	int	ii;
+
+	ii = 0;
+	while (ii < c)
+	{
+		if (ii == 0)
+		{
+			ft_putchar("C");
+		}
+		else if (ii == c - 1)
+		{
+			ft_putchar("A");
+		}
+		else
+		{
+			ft_putchar("B");
+		}
+		ii++;
+	}
+}
+
+void	mid(int c)
+{
+	int	ii;
+
+	ii = 0;
+	while (ii < c)
+	{
+		if (ii == 0 || ii == c - 1)
+		{
+			ft_putchar("B");
+		}
+		else
+		{
+			ft_putchar("  ");
+		}
+		ii++;
+	}
+}
+
+void	rush(int c, int r)
+{
+	int	i;
+
+	i = 0;
+	while (i < r)
+	{
+		if (i == 0)
+		{
+			first(c);
+		}
+		else if (i == r - 1)
+		{
+			last(c);
+		}
+		else
+		{
+			mid(c);
+		}
+		ft_putchar("\n");
+		i++;
+	}
+}
