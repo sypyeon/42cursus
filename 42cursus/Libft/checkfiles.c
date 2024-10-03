@@ -6,11 +6,10 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:03:21 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/03 20:32:49 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/03 22:26:22 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include <stdio.h>
 
 int		ft_isalnum(int c);
