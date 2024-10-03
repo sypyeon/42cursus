@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalmun.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:12:54 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/02 22:18:49 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/03 17:45:08 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isalnum(int c)
 {
-	if ('0' <= c && c <= '9' ||
-		 'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z')
+	if (('0' <= c && c <= '9') || 
+	('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z'))
 		return (c);
 	else
 		return (0);

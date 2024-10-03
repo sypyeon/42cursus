@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 22:05:01 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/02 22:21:38 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/03 17:46:18 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void *ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int		i;
+	size_t	i;
 	char*	temp_d;
 	char*	temp_s;
 
@@ -23,7 +23,8 @@ void *ft_memcpy(void *dest, const void *src, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		temp_d[i] = temp_s[i]
+		temp_d[i] = temp_s[i];
 		i++;
 	}
+	return (dest);
 }
