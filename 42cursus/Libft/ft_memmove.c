@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 22:24:15 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/03 17:47:35 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/04 13:50:14 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 
 	temp_dest = (char*)dest;
 	temp_src = (char*)src;
-	i = 0;
 	if (dest > src)
 	{
-		while (i >= 0)
+		i = n;
+		while (i > 0)
 		{
-			i = n;
-			temp_dest[i] = temp_src[i];
 			i--;
+			temp_dest[i] = temp_src[i];
 		}
 	}
-	else if (dest < src)
+	else
 	{
+		i = 0;
 		while (i < n)
 		{
 			temp_dest[i] = temp_src[i];
