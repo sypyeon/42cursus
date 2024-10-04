@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/01 18:22:26 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/04 15:32:18 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/04 15:19:34 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/04 16:55:35 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+#include <stddef.h>
+
+size_t	ft_strlen(const char *s);
+
+char *strrchr(const char *s, int c)
 {
-	if (0 <= c && c <= 127)
-		return (1);
-	else
-		return (0);
+	size_t	i;
+	
+	i = ft_strlen(s);
+	while (i > 0)
+	{
+		i--;
+		if (s[i] == c)
+			return ((char*)s + i);
+	}
+	return (0);
 }
