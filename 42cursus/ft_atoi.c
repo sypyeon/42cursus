@@ -1,33 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 17:03:03 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 18:02:32 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/05 17:40:02 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/05 18:02:23 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stdlib.h>
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_iswhitespace(unsigned char *c)
 {
-	size_t	i;
-	char *buf;
-
-	buf = (char *)s;
-	i = 0;
-	while (i < n)
+	if (9 <= c && c <= 13 || c == 32)
 	{
-		if (buf[i] == c)
+		return (1);
+	}
+	return (0);
+}
+
+int ft_atoi(const char *nptr)
+{
+	int	i;
+	int	is_negaitve;
+	int	num;
+
+	is_negaitve = 1;
+	i = 0;
+	num = 0;
+	while (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
 		{
-			return ((void *)s + i);
+			is_negaitve *= -1;
 		}
-		
 		i++;
 	}
-	
-	return (0);
+	while (nptr[i] != 0)
+	{
+
+		i++;
+	}
 }

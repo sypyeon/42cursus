@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 17:03:03 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 18:02:32 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/05 16:16:15 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/05 16:51:36 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <string.h>
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t	i;
-	char *buf;
+	unsigned char *temp1;
+	unsigned char *temp2;
 
-	buf = (char *)s;
+	temp1 = (unsigned char*) s1;
+	temp2 = (unsigned char*) s2;
 	i = 0;
 	while (i < n)
 	{
-		if (buf[i] == c)
-		{
-			return ((void *)s + i);
-		}
-		
+		if (temp1[i] == temp2[i])
+			return (temp1 - temp2);
 		i++;
 	}
-	
 	return (0);
 }

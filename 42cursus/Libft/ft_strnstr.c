@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 17:03:03 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 18:02:32 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/05 16:52:16 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/05 17:38:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <string.h>
 
-void	*ft_memchr(const void *s, int c, size_t n)
+char	*strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
-	char *buf;
+	size_t	cmp;
 
-	buf = (char *)s;
 	i = 0;
-	while (i < n)
+	if (*little == 0)
+		return(big);
+	while (big[i] != 0 && i < len)
 	{
-		if (buf[i] == c)
+		cmp = 0;
+		if (big[i] == little[cmp])
 		{
-			return ((void *)s + i);
+			while (little[cmp] != 0)
+			{
+				if (big[i + cmp] != little[cmp])
+					break;
+				cmp++;
+			}
+			return (big[i]);
 		}
-		
 		i++;
 	}
-	
 	return (0);
 }

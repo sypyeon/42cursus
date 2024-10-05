@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 19:05:50 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/04 16:11:28 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 18:02:27 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t	i;
-	char*	set;
+	char*	temp;
 
-	set = (char*)s;
+	temp = (char*)s;
 	i = 0;
 	while (i < n)
 	{
-		set[i] = c;
+		temp[i] = c;
 		i++;
 	}
 	return (s);
