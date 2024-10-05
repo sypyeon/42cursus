@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 22:46:07 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 21:56:17 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/06 03:03:35 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	i = 0;
 	if (dst_len > size)
 		return (src_len + size);
-	while (src[i] != 0 && (src_len + dst_len + 1 < size))
+	while (src[i] != 0 && (dst_len + i + 1 < size))
 	{
 		dst[dst_len + i] = src[i];
 		i++;

@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 17:40:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 21:54:46 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/06 03:38:19 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 int	ft_iswhitespace(unsigned char c)
 {
@@ -33,7 +33,13 @@ int	ft_atoi(const char *nptr)
 	int	i;
 	int	is_negaitve;
 	int	num;
-	while (nptr[i] == '-' || nptr[i] == '+')
+
+	i = 0;
+	is_negaitve = 1;
+	num = 0;
+	while (ft_iswhitespace(nptr[i]) == 1)
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
 			is_negaitve *= -1;

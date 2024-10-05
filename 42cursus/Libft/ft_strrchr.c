@@ -6,23 +6,21 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:19:34 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 21:56:55 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/06 03:25:25 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s);
-
-char	*strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	size_t	i;
 
-	i = ft_strlen(s);
+	i = ft_strlen(s) + 1;
 	while (i > 0)
 	{
 		i--;
-		if (s[i] == c)
+		if (s[i] == (unsigned char)c)
 			return ((char *)s + i);
 	}
 	return (0);
