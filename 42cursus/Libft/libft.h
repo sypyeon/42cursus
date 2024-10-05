@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 21:56:04 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 21:55:03 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/05 21:53:30 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/05 23:04:36 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFT_H
+# define LIBFT_H
 
-void	ft_bzero(void *s, size_t n)
-{
-	size_t	i;
-	char	*set;
+# include <unistd.h>
+# include <stdlib.h>
+# include <stddef.h>
 
-	set = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		set[i] = '\0';
-		i++;
-	}
-}
+#endif

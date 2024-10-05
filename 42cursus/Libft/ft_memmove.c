@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 22:24:15 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 20:58:46 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:56:20 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {

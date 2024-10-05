@@ -6,12 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 20:19:14 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 20:42:54 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:56:18 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char	*ft_strdup(const char *s)
 {

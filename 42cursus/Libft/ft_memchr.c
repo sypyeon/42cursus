@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 17:03:03 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 21:03:17 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:56:23 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

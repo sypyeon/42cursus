@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 16:52:16 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 21:06:43 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:56:59 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 char	*strnstr(const char *big, const char *little, size_t len)
 {
@@ -19,7 +19,7 @@ char	*strnstr(const char *big, const char *little, size_t len)
 
 	i = 0;
 	if (*little == 0)
-		return (big);
+		return ((char *)big);
 	while (big[i] != 0 && i < len)
 	{
 		cmp = 0;
@@ -31,7 +31,7 @@ char	*strnstr(const char *big, const char *little, size_t len)
 					break ;
 				cmp++;
 			}
-			return (big[i]);
+			return ((char *)big + i);
 		}
 		i++;
 	}

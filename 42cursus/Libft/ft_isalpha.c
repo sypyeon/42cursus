@@ -6,9 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:04:46 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/01 18:07:21 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:55:15 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isalpha(int c)
 {

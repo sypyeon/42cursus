@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 21:15:20 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/04 14:13:09 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:56:10 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {

@@ -6,9 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:33:49 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 21:01:19 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:56:18 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*strchr(const char *s, int c)
 {

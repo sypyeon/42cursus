@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 15:19:34 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 21:03:50 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:56:55 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *s);
 

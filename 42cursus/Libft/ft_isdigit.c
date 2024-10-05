@@ -6,9 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:05:29 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/01 18:06:07 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:56:24 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {

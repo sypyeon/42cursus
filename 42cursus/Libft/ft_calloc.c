@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 19:27:29 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 21:06:21 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:55:07 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 void	*ft_memset(void *s, int c, size_t n);
 
