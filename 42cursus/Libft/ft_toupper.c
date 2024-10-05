@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:21:38 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/04 14:29:36 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 19:28:39 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_toupper(int c)
+int	ft_toupper(int c)
 {
 	if (97 <= c && c <= 122)
 	{

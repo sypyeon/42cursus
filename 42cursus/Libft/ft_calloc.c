@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 17:03:03 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 19:18:37 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/05 19:27:29 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/05 20:19:03 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stdlib.h>
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n);
+
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	i;
-	char *buf;
+	void *alloc;
 
-	buf = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		if (buf[i] == c)
-		{
-			return ((void *)s + i);
-		}
-		i++;
-	}
-	return (0);
+	alloc = malloc(nmemb * size);
+	if (alloc == 0)
+		return (0);
+	ft_memset(alloc, 0, nmemb * size);
+	return (alloc);
 }

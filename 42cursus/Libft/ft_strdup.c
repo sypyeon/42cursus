@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 17:03:03 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 19:18:37 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/05 20:19:14 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/05 20:42:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <string.h>
+#include <stdlib.h>
 
-void	*ft_memchr(const void *s, int c, size_t n)
+char	*ft_strdup(const char *s)
 {
-	size_t	i;
-	char *buf;
+	int		i;
+	int		s_len;
+	char	*dup;
 
-	buf = (char *)s;
 	i = 0;
-	while (i < n)
+	s_len = 0;
+	while (s[s_len] != 0)
+		s_len++;
+	dup = (char *)malloc(sizeof(char) * s_len + 1);
+	if (!(dup))
+		return (0);
+	while (s[i] != 0)
 	{
-		if (buf[i] == c)
-		{
-			return ((void *)s + i);
-		}
-		i++;
+		dup[i] = s[i];
+		i ++;
 	}
-	return (0);
+	dup[i] = '\0';
+	return (dup);
 }
