@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 17:03:03 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 19:18:37 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:03:17 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	size_t	i;
-	char *buf;
+	char	*buf;
 
 	buf = (char *)s;
 	i = 0;

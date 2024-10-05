@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 21:56:04 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/04 14:11:05 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 20:54:34 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
-	char*	set;
+	char	*set;
 
-	set = (char*)s;
+	set = (char *)s;
 	i = 0;
 	while (i < n)
 	{

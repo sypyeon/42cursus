@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 17:40:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 19:27:11 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:06:00 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	ft_iswhitespace(unsigned char *c)
 int	ft_isnum(unsigned char *c)
 {
 	if ('0' <= c && c <= '9')
-		return(1);
+		return (1);
 	return (0);
 }
 
-int ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
 	int	i;
 	int	is_negaitve;

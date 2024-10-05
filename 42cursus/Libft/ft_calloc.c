@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 19:27:29 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 20:19:03 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:06:21 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memset(void *s, int c, size_t n);
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void *alloc;
+	void	*alloc;
 
 	alloc = malloc(nmemb * size);
 	if (alloc == 0)

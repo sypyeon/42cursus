@@ -6,16 +6,13 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:29:53 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/04 14:33:33 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:07:19 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-int ft_tolower(int c)
+int	ft_tolower(int c)
 {
 	if (65 <= c && c <= 90)
-	{
 		c += 32;
-	}
-	return(c);
+	return (c);
 }

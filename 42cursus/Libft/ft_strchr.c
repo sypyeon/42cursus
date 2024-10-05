@@ -6,22 +6,22 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:33:49 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/04 15:19:07 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:01:19 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *strchr(const char *s, int c)
+char	*strchr(const char *s, int c)
 {
 	int	i;
-	
+
 	i = 0;
 	while (s[i] != 0)
 	{
 		if (s[i] == c)
-			return ((char*)s + i);
+			return ((char *)s + i);
 		i++;
 	}
 	if (s[i] == c)
-		return ((char*)s + i);
+		return ((char *)s + i);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 16:52:16 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/05 17:38:54 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/05 21:06:43 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*strnstr(const char *big, const char *little, size_t len)
 
 	i = 0;
 	if (*little == 0)
-		return(big);
+		return (big);
 	while (big[i] != 0 && i < len)
 	{
 		cmp = 0;
@@ -28,7 +28,7 @@ char	*strnstr(const char *big, const char *little, size_t len)
 			while (little[cmp] != 0)
 			{
 				if (big[i + cmp] != little[cmp])
-					break;
+					break ;
 				cmp++;
 			}
 			return (big[i]);
