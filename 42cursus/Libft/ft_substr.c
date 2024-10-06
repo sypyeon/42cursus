@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 15:38:35 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/06 20:23:55 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/07 01:43:50 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
     size_t  s_len;
     char    *substring;
 
-//    if (!s)
-//        return (NULL);
+    if (!s)
+        return (NULL);
     s_len = ft_strlen(s);
     if (start > s_len)
         return (ft_strdup(""));
