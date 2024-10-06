@@ -3,21 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 00:09:05 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/07 01:43:41 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/07 03:39:03 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	
-
 char *ft_strtrim(char const *s1, char const *set)
 {
 	size_t	i;
-	size_t	trim_len;
+	size_t	start_i;
+	size_t	end_i;
+	char	*new_str;
 
-
+	if (!s1)
+		return (NULL);
+	start_i = 0;
+	while (ft_strchr(set, s1[start_i]) && s1[start_i])
+		start_i++;
+	end_i = ft_strlen(s1);
+	while (ft_strchr(set, s1[end_i - 1]) && start_i < end_i)
+		end_i--;
+	new_str = (char *)malloc(sizeof(char) * (end_i - start_i + 1));
+	if (!new_str)
+		return (NULL);
+	i = 0;
+	while (i < end_i - start_i && s1[start_i + i])
+	{
+		new_str[i] = s1[start_i + i];
+		i++;
+	}
+	new_str[i] = '\0';
+	return (new_str);
 }
