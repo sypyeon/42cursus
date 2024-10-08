@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:44:43 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/07 18:50:16 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/08 17:05:48 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strdup_split(char const *src, size_t size)
 {
 	size_t		i;
-	char	*cpy;
+	char		*cpy;
 
 	cpy = (char *)malloc((size + 1) * sizeof(char));
 	if (!cpy)
@@ -30,7 +30,7 @@ char	*ft_strdup_split(char const *src, size_t size)
 	return (cpy);
 }
 
-size_t	ft_word_count(char const *s , char c)
+size_t	ft_word_count(char const *s, char c)
 {
 	size_t	i;
 	size_t	word_count;
@@ -54,11 +54,49 @@ size_t	ft_word_count(char const *s , char c)
 	return (word_count);
 }
 
-char **ft_split(char const *s, char c)
+void	free_alloc(char **split)
+{
+	size_t	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+char	**ft_split_start(char **split_str, const char *s, char c)
 {
 	size_t	i;
 	size_t	str;
 	size_t	split_i;
+
+	i = 0;
+	split_i = 0;
+	while (s[i] && ft_word_count(s, c) > 0)
+	{
+		while (s[i] == c && s[i])
+			i++;
+		if (!s[i])
+			break ;
+		str = i;
+		while (s[i] != c && s[i])
+			i++;
+		split_str[split_i++] = ft_strdup_split(s + str, i - str);
+		if (!split_str[split_i - 1])
+		{
+			free_alloc(split_str);
+			return (NULL);
+		}
+	}
+	split_str[split_i] = NULL;
+	return (split_str);
+}
+
+char	**ft_split(char const *s, char c)
+{
 	char	**split_str;
 
 	if (!s)
@@ -66,19 +104,5 @@ char **ft_split(char const *s, char c)
 	split_str = (char **)malloc(sizeof(char *) * (ft_word_count(s, c) + 1));
 	if (!split_str)
 		return (NULL);
-	i = 0;
-	split_i = 0;
-	while (s[i] && ft_word_count(s, c) > 0)
-	{
-		while (s[i] == c && s[i])
-			i++;
-		str = i;
-		while (s[i] != c && s[i])
-			i++;
-		if (!ft_strdup_split(s + str, i - str))
-			return (NULL);
-		split_str[split_i++] = ft_strdup_split(s + str, i - str);
-	}
-	split_str[split_i] = NULL;
-	return (split_str);
+	return (ft_split_start(split_str, s, c));
 }

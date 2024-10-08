@@ -6,16 +6,14 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 21:27:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/06 23:42:16 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/08 17:07:06 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-//	size_t	i;
-//	size_t	s_i;
 	size_t	total_len;
 	char	*new_string;
 
