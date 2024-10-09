@@ -37,7 +37,7 @@ SOURCES = ft_isalpha.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c \
+	ft_putnbr_fd.c
 
 BONUSSRC = ft_lstnew.c \
 	ft_lstadd_front.c
@@ -57,9 +57,13 @@ $(NAME) : $(OBJECTS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) $(BONUSOBJ) bonus
 
 fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
+
+bonus : $(BONUSOBJ)
+	ar rc $(NAME) $^
+	touch $@
