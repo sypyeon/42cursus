@@ -32,9 +32,19 @@ SOURCES = ft_isalpha.c \
 	ft_strtrim.c \
 	ft_split.c \
 	ft_itoa.c \
-	ft_strmapi.c
+	ft_strmapi.c \
+	ft_striteri.c \
+	ft_putchar_fd.c \
+	ft_putstr_fd.c \
+	ft_putendl_fd.c \
+	ft_putnbr_fd.c \
+
+BONUSSRC = ft_lstnew.c \
+	ft_lstadd_front.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
+
+BONUSOBJ = $(BONUSSRC:%.c=%.o)
 
 .PHONY : all clean fclean re
 

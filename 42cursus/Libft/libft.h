@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 21:53:30 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/07 18:50:23 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:33:46 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+
+typedef struct	s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
