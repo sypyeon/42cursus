@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 19:27:29 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/06 00:23:42 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/10 18:51:02 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	void	*alloc;
 	size_t	total_size;
 
-	if (size && nmemb > 4294967295 / size)
+	if (size && nmemb > __SIZE_MAX__ / size)
 		return (NULL);
 	total_size = (nmemb * size);
 	alloc = malloc(total_size);

@@ -45,9 +45,9 @@ BONUSSRC = ft_lstnew.c \
 	ft_lstlast.c \
 	ft_lstadd_back.c
 
-OBJECTS = $(SOURCES:%.c=%.o)
+OBJECTS = $(SOURCES:.c=.o)
 
-BONUSOBJ = $(BONUSSRC:%.c=%.o)
+BONUSOBJ = $(BONUSSRC:.c=.o)
 
 .PHONY : all clean fclean re
 
