@@ -1,22 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 19:18:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/10 23:06:34 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/10 23:50:31 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/11 03:09:01 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstdelone(t_list *lst, void (*del)(void*))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *),void (*del)(void *))
 {
-	if (lst)
+	t_list	*new_lst;
+	t_list	*new_node;
+	t_list	*temp;
+
+	if (!lst || !f)
+		return (NULL);
+	new_lst = NULL;
+	while (lst)
 	{
-		del(lst -> content);
-		free(lst);
+		new_node = ft_lstnew(f(lst->content));
+		if (!new_node)
+		{
+			ft_lstclear(&new_lst, del);
+			return (NULL);
+		}
+		if (!new_lst)
+			new_lst = new_node;
+		else
+			temp->next = new_node;
+		temp = new_node;
+		lst = lst->next;
 	}
+	return (new_lst);
 }

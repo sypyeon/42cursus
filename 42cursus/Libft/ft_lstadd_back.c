@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 01:33:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/10 02:12:01 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/10 23:02:08 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
-	back = *lst;
-	while (back)
-		back = back -> next;
+	back = ft_lstlast(*lst);
 	back -> next = new;
 }
