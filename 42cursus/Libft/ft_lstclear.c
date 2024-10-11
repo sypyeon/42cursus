@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:07:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/11 00:03:23 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/11 16:26:02 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 		return ;
 	while (*lst)
 	{
-		temp = (*lst) -> next;
-		del((*lst) -> content);
+		temp = (*lst)-> next;
+		del((*lst)-> content);
 		free(*lst);
 		*lst = temp;
 	}

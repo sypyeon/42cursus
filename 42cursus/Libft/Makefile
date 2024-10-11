@@ -73,4 +73,4 @@ re : fclean all
 
 bonus : $(BONUSOBJ)
 	ar rc $(NAME) $^
-	touch $@
+	@touch $@
