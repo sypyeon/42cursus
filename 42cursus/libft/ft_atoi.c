@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 17:40:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/06 03:38:19 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/11 19:15:43 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_iswhitespace(unsigned char c)
+static int	ft_iswhitespace(unsigned char c)
 {
 	if ((9 <= c && c <= 13) || c == 32)
 	{
@@ -21,7 +21,7 @@ int	ft_iswhitespace(unsigned char c)
 	return (0);
 }
 
-int	ft_isnum(unsigned char c)
+static int	ft_isnum(unsigned char c)
 {
 	if ('0' <= c && c <= '9')
 		return (1);

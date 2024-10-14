@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:44:43 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/08 17:05:48 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/11 19:13:07 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup_split(char const *src, size_t size)
+static char	*ft_strdup_split(char const *src, size_t size)
 {
 	size_t		i;
 	char		*cpy;
@@ -30,7 +30,7 @@ char	*ft_strdup_split(char const *src, size_t size)
 	return (cpy);
 }
 
-size_t	ft_word_count(char const *s, char c)
+static size_t	ft_word_count(char const *s, char c)
 {
 	size_t	i;
 	size_t	word_count;
@@ -54,7 +54,7 @@ size_t	ft_word_count(char const *s, char c)
 	return (word_count);
 }
 
-void	free_alloc(char **split)
+static void	free_alloc(char **split)
 {
 	size_t	i;
 
@@ -67,7 +67,7 @@ void	free_alloc(char **split)
 	free(split);
 }
 
-char	**ft_split_start(char **split_str, const char *s, char c)
+static char	**ft_split_start(char **split_str, const char *s, char c)
 {
 	size_t	i;
 	size_t	str;

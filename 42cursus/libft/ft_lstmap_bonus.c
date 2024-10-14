@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 23:50:31 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/11 16:25:15 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:33:12 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*new_node;
 	t_list	*temp;
 
-	if (!lst || !f)
+	if (!lst)
 		return (NULL);
+	temp = NULL;
 	new_lst = NULL;
 	while (lst)
 	{
