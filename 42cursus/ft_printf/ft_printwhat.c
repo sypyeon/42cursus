@@ -6,19 +6,19 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 03:07:44 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/16 03:47:37 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/17 16:13:32 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_printwhat(const char *str, ...)
+int	ft_printwhat(const char *s, ...)
 {
 	size_t	i;
 	
-	while (str[i])
+	while (s[i])
 	{
-		 
+		if (ft_strchr())
 	}
 	
 }

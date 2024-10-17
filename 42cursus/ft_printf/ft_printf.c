@@ -6,13 +6,12 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 02:37:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/16 03:06:33 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/17 16:13:21 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_printf(const char *, ...)
+int	ft_printf(const char *s, ...)
 {
-	
 }
