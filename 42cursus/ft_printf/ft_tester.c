@@ -1,50 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printwhat.c                                     :+:      :+:    :+:   */
+/*   ft_tester.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 03:07:44 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/18 21:06:05 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/18 18:45:04 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/18 19:36:58 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-int	ft_printwhat(const char *s, ...)
+int	main()
 {
-	size_t	i;
-	size_t	arg_count;
-
-	i = 0;
-	arg_count = 0;
-	while (s[i])
-	{
-		if (s[i] == '%')
-		{
-			arg_count++;
-			i++;
-		}
-		i++;
-	}
-	i = 0;
-	if (arg_count == 0)
-	{
-		while (s[i])
-		{
-			write(1, s + i, 1);
-			i++;
-		}
-	}
-	while (arg_count != 0)
-	{
-		if (s[i] != '%')
-		{
-			if (s[i + 1] == 'd');
-				
-		}
-		
-	}
-	
+	char *s = "hello";
+	printf(s);
+	return (0);
 }
