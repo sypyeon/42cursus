@@ -1,50 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printwhat.c                                     :+:      :+:    :+:   */
+/*   ft_d.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 03:07:44 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/18 21:06:05 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/21 00:51:42 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/21 00:51:55 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "ft_printf.h"
 
-int	ft_printwhat(const char *s, ...)
+void	ft_d(long nb)
 {
-	size_t	i;
-	size_t	arg_count;
-
-	i = 0;
-	arg_count = 0;
-	while (s[i])
+	if (nb < 0)
 	{
-		if (s[i] == '%')
-		{
-			arg_count++;
-			i++;
-		}
-		i++;
+		write(1, "-", 1);
+		nb = nb * -1;
 	}
-	i = 0;
-	if (arg_count == 0)
-	{
-		while (s[i])
-		{
-			write(1, s + i, 1);
-			i++;
-		}
-	}
-	while (arg_count != 0)
-	{
-		if (s[i] != '%')
-		{
-			if (s[i + 1] == 'd');
-				
-		}
-		
-	}
-	
+	if (nb >= 10)
+		ft_d(nb / 10);
+	ft_putchar(nb % 10);
 }

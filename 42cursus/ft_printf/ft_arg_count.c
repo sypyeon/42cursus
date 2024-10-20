@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_arg_count.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 03:03:46 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/21 00:52:08 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/20 17:39:52 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/20 18:05:41 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdarg.h>
-# include "./libft/libft.h"
+int	ft_arg_count(const char *s)
+{
+	int	i;
+	int	arg_count;
 
-void	ft_d(long nb);
-void	ft_putchar(long num);
-int		ft_printf(const char *s, ...);
-int		ft_arg_count(const char *s);
-
-#endif
+	arg_count = 0;
+	i = 0;
+	while (s[i])
+	{
+		if(s[i] == '%' && s[i + 1] != '%')
+			arg_count++;
+		i++;
+	}
+	return (arg_count);
+}

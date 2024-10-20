@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 18:45:04 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/19 17:13:21 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/20 18:08:08 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,8 @@ foo(char *fmt, ...)   /* '...' is C syntax for a variadic function */
 
 	va_start(ap, fmt);
 	while (*fmt)
-		switch (*fmt++) {
+		switch (*fmt++)
+        {
 		case 's':              /* string */
 			s = va_arg(ap, char *);
 			printf("string %s\n", s);

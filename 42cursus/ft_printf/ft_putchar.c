@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/16 03:03:46 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/21 00:52:08 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/21 00:15:05 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/21 00:15:25 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdarg.h>
-# include "./libft/libft.h"
+void	ft_putchar(long num)
+{
+	char	c;
 
-void	ft_d(long nb);
-void	ft_putchar(long num);
-int		ft_printf(const char *s, ...);
-int		ft_arg_count(const char *s);
-
-#endif
+	c = num + '0';
+	write(1, &c, 1);
+}
