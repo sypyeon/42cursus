@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 02:37:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/22 17:30:40 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/22 22:32:40 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 int	ft_print_arg(char c, va_list arg)
 {
-	if (c == '%')
-		return (write (1, "%", 1));
 	if (c == 'c')
 		return (write(1, (char)va_arg(arg, int), 1));
-	if (c == 'd' || c == 'i')
-		return (ft_d(arg));
 	if (c == 's')
-		ft_s();
-	if (c == 'u')
-	
-	if (c == 'x')
-
-	if (c == 'X')
-
+		return (ft_s(va_arg(arg, char *)));
 	if (c == 'p')
-	
+		return (ft_p(va_arg(arg, void *)));
+	if (c == 'd' || c == 'i')
+		return (ft_d(va_arg(arg, int)));
+	if (c == 'u')
+		return (ft_u(va_arg(arg, unsigned int)));
+	if (c == 'x')
+		return (ft_x(va_arg(arg, unsigned int), "0123456789abcdef"));
+	if (c == 'X')
+		return (ft_x(va_arg(arg, unsigned int), "0123456789ABCDEF"));
+	if (c == '%')
+		return (write (1, "%", 1));
 	return (-1);
 }
 
@@ -37,28 +37,25 @@ int	ft_printf(const char *s, ...)
 {
 	int		i;
 	int		count;
-	int		argc;
 	int		temp;
 	va_list	arg;
 
 	va_start(arg, s);
-	argc = ft_arg_count(s);
 	count = 0;
 	i = 0;
 	while (s[i])
 	{
-		if(s[i] == '%' && argc < ft_arg_count(s))
+		if(s[i] == '%')
 		{
 			i++;
-			if (s[i])
-				
 			temp = ft_print_arg(s[i], arg);
 			if (temp == -1)
 				return (-1);
 			count += temp;
-			argc++;
 			i++;
 		}
 		write(1, s + i, 1);
+		i++;
 	}
+	return (count + i);
 }

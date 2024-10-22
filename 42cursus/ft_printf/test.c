@@ -1,40 +1,25 @@
-#include "ft_printf.h"
+#include <stdlib.h>
 #include <stdio.h>
-
-void	print_numbers(int count, ...)
-{
-	int		i;
-	va_list	args;
-
-	va_start(args, count);
-	i = 0;
-	while (i < count)
-	{
-		printf("%d\n", va_arg(args, int));
-		i++;
-	}
-	va_end(args);
-}
 
 int	main(void)
 {
 	int d;
-	int	word;
 	char c;
 	char *s;
+	char *nl;
 
-	word = write(1, "hi", 2);
+	nl = NULL;
 	d = 1515;
 	c = 'c';
 	s = "Hello World";
-	printf("%d\n", word);
-	printf("%c\n", c);
-	printf("%s\n", s);
-	printf("%p\n", s);
-	printf("%d\n", d);
-	printf("%i\n", d);
-	printf("%u\n", d);
-	printf("%x\n", d);
-	printf("%X\n", d);
+	printf("%s\n", nl);
+	printf("%c\n", nl);
+	printf("%s\n", nl);
+	printf("%p\n", nl);
+	printf("%d\n", nl);
+	printf("%i\n", nl);
+	printf("%u\n", nl);
+	printf("%x\n", nl);
+	printf("%X\n", nl);
 	return (0);
 }

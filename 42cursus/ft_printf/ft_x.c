@@ -1,58 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_x.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 17:30:58 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/22 22:32:58 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/22 21:05:38 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/22 22:46:00 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	ft_digit(long n)
+static int	ft_hexa_digit(unsigned int arg)
 {
-	size_t	digit;
+	int	digit;
 
 	digit = 1;
-	if (n < 0)
+	if (arg < 0)
 	{
 		digit++;
-		n *= -1;
+		arg *= -1;
 	}
-	while (n >= 10)
+	while (arg >= 16)
 	{
-		n = n / 10;
+		arg = arg / 16;
 		digit++;
 	}
 	return (digit);
 }
 
-char	*ft_itoa(long n)
+int	ft_x(unsigned int arg, char *base)
 {
 	size_t		digit;
 	size_t		i;
-	char		*a;
+	char		*x;
 	
-	digit = ft_digit(n);
-	a = (char *)malloc(sizeof(char) * digit + 1);
-	if (!a)
+	digit = ft_hexa_digit(arg);
+	x = (char *)malloc(sizeof(char) * digit + 1);
+	if (!x)
 		return (NULL);
-	i = 0;
-	if (n < 0)
-	{
-		a[i] = '-';
-		n *= -1;
-		i++;
-	}
-	a[digit] = '\0';
-	while (digit > i)
+	x[digit] = '\0';
+	while (digit > 0)
 	{
 		digit--;
-		a[digit] = n % 10 + '0';
-		n = n / 10;
+		x[digit] = base[arg % 16];
+		arg = arg / 16;
 	}
-	return (a);
+	return (x);
 }
