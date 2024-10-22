@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 03:03:46 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/21 00:52:08 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/22 13:12:57 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include <unistd.h>
 # include <stdarg.h>
-# include "./libft/libft.h"
 
 void	ft_d(long nb);
-void	ft_putchar(long num);
 int		ft_printf(const char *s, ...);
 int		ft_arg_count(const char *s);
+void	ft_putchar(long c);
+void	ft_putstr(char *s);
 
 #endif

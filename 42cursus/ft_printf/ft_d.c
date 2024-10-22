@@ -6,15 +6,18 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 00:51:42 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/21 00:51:55 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:00:13 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
 
-void	ft_d(long nb)
+int	ft_d(va_list arg)
 {
+	int	nb;
+
+	nb = va_arg(arg, int);
 	if (nb < 0)
 	{
 		write(1, "-", 1);

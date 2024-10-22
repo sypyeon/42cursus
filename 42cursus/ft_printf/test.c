@@ -1,7 +1,5 @@
-
-#include <stdarg.h>
+#include "ft_printf.h"
 #include <stdio.h>
-#include "./libft/libft.h"
 
 void	print_numbers(int count, ...)
 {
@@ -18,27 +16,18 @@ void	print_numbers(int count, ...)
 	va_end(args);
 }
 
-void	ft_putstr(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(1, s + i, 1);
-		i++;
-	}
-}
-
 int	main(void)
 {
 	int d;
+	int	word;
 	char c;
 	char *s;
 
+	word = write(1, "hi", 2);
 	d = 1515;
 	c = 'c';
 	s = "Hello World";
+	printf("%d\n", word);
 	printf("%c\n", c);
 	printf("%s\n", s);
 	printf("%p\n", s);
@@ -47,6 +36,5 @@ int	main(void)
 	printf("%u\n", d);
 	printf("%x\n", d);
 	printf("%X\n", d);
-	printf("%%\n", d);
 	return (0);
 }
