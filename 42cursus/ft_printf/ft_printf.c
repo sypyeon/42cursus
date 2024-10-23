@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 02:37:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/22 22:32:40 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:20:43 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_printf(const char *s, ...)
 	i = 0;
 	while (s[i])
 	{
-		if(s[i] == '%')
+		if (s[i] == '%')
 		{
 			i++;
 			temp = ft_print_arg(s[i], arg);

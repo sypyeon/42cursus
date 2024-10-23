@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 21:05:38 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/22 22:46:00 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:21:55 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,24 @@ static int	ft_hexa_digit(unsigned int arg)
 
 int	ft_x(unsigned int arg, char *base)
 {
-	size_t		digit;
-	size_t		i;
-	char		*x;
-	
+	size_t	digit;
+	size_t	s_len;
+	size_t	i;
+	char	*x;
+
 	digit = ft_hexa_digit(arg);
 	x = (char *)malloc(sizeof(char) * digit + 1);
 	if (!x)
-		return (NULL);
+		return (-1);
 	x[digit] = '\0';
+	s_len = digit;
 	while (digit > 0)
 	{
 		digit--;
 		x[digit] = base[arg % 16];
 		arg = arg / 16;
 	}
-	return (x);
+	write(1, x, s_len);
+	free(x);
+	return (s_len);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_put_str_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 00:15:05 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/22 13:15:36 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/23 17:43:51 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(long c)
+void	ft_putchar(int c)
 {
 	c = (unsigned char)c;
 	write(1, &c, 1);
@@ -28,9 +28,3 @@ void	ft_putstr(char *s)
 		s++;
 	}
 }
-
-// int	main()
-// {
-// 	ft_putchar('');
-// 	return 0;
-// }

@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 00:51:42 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/22 22:33:23 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/23 17:55:09 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,10 @@ int	ft_d(int arg)
 	char	*s;
 	int		len;
 
-	s = ft_itoa((long)arg);
+	s = ft_l_itoa((long)arg);
 	if (!s)
 		return (-1);
 	len = write(1, s, ft_strlen(s));
 	free(s);
 	return (len);
-}
-
-int	main()
-{
-	ft_d(1234);
-	return 0;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_l_itoa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:30:58 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/22 22:32:58 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/23 18:28:36 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static size_t	ft_digit(long n)
 	return (digit);
 }
 
-char	*ft_itoa(long n)
+char	*ft_l_itoa(long n)
 {
 	size_t		digit;
 	size_t		i;
 	char		*a;
-	
+
 	digit = ft_digit(n);
 	a = (char *)malloc(sizeof(char) * digit + 1);
 	if (!a)
