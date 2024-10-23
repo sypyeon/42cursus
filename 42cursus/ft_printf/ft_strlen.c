@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:56:22 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/23 18:21:02 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/24 00:52:01 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_strlen(char *s)
 {

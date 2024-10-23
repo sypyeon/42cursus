@@ -2,7 +2,7 @@ CC = cc
 
 CFLAG = -Wall -Werror -Wextra
 
-NAME = ft_printf.a
+NAME = libftprintf.a
 
 SOURCES = ft_printf.c \
 	ft_s.c \
@@ -21,7 +21,7 @@ OBJECTS = $(SOURCES:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJECTS)
-	ar rcs $@ $<
+	ar rcs $@ $^
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@

@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 21:05:40 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/23 18:22:12 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/24 02:15:21 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 static size_t	ft_hexa_digit(size_t arg)
 {
@@ -34,7 +34,6 @@ int	ft_p(void *arg, char *base)
 {
 	size_t	digit;
 	size_t	s_len;
-	size_t	i;
 	size_t	arg_mem;
 	char	*s_to_mem;
 
@@ -46,14 +45,15 @@ int	ft_p(void *arg, char *base)
 	if (!s_to_mem)
 		return (-1);
 	s_len = digit;
-	s_to_mem[s_len] = '\0';
+	s_to_mem[digit] = '\0';
 	while (digit > 0)
 	{
 		digit--;
 		s_to_mem[digit] = base[arg_mem % 16];
 		arg_mem = arg_mem / 16;
 	}
+	write(1, "0x", 2);
 	write(1, s_to_mem, s_len);
 	free(s_to_mem);
-	return (s_len);
+	return (s_len + 2);
 }

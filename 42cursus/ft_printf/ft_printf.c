@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 02:37:02 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/23 18:20:43 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/10/24 02:12:48 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 int	ft_print_arg(char c, va_list arg)
 {
+	char	c_arg;
+
 	if (c == 'c')
-		return (write(1, (char)va_arg(arg, int), 1));
+	{
+		c_arg = va_arg(arg, int);
+		return (write(1, &c_arg, 1));
+	}
 	if (c == 's')
 		return (ft_s(va_arg(arg, char *)));
 	if (c == 'p')
-		return (ft_p(va_arg(arg, void *)));
+		return (ft_p(va_arg(arg, void *), "0123456789abcdef"));
 	if (c == 'd' || c == 'i')
 		return (ft_d(va_arg(arg, int)));
 	if (c == 'u')
@@ -45,16 +50,16 @@ int	ft_printf(const char *s, ...)
 	i = 0;
 	while (s[i])
 	{
+		if (s[i] != '%')
+			write(1, s + i, 1);
 		if (s[i] == '%')
 		{
 			i++;
 			temp = ft_print_arg(s[i], arg);
 			if (temp == -1)
 				return (-1);
-			count += temp;
-			i++;
+			count += temp - 2;
 		}
-		write(1, s + i, 1);
 		i++;
 	}
 	return (count + i);
