@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_d.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 00:51:42 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/26 17:16:29 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/30 21:37:32 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/30 21:56:55 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef GET_NEXT_LINE__H
+# define GET_NEXT_LINE__H
 
-int	ft_d(int arg)
-{
-	char	*s;
-	int		len;
+# include <stdlib.h>
+# include <unistd.h>
 
-	s = ft_l_itoa((long)arg);
-	if (!s)
-		return (-1);
-	len = write(1, s, ft_strlen(s));
-	free(s);
-	return (len);
-}
+char *get_next_line(int fd);
+
+#endif
