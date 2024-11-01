@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:37 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/30 23:00:31 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/01 18:46:05 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,10 @@ char	*ft_str_join(char *dest, char *src)
 		join[dest_len + i] = src[i];
 		i++;
 	}
-	return (join)
+	return (join);
+}
+
+int main()
+{
+	read()
 }
