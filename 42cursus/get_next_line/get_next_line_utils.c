@@ -6,30 +6,46 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:37 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/01 18:46:05 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/03 23:02:59 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (s[i] != 0)
 		i++;
 	return (i);
 }
 
-char	*ft_sub_string(char *s)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int	i;
-	int	str_len;
-	
-	while (s[i] != '/n' || s[i] != '/0')
+	size_t	i;
+	size_t	s_len;
+	char	*substring;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start > s_len)
+		return (ft_strdup(""));
+	if (start + len > s_len)
+		len = s_len - start;
+	substring = (char *)malloc(sizeof(char) * len + 1);
+	if (!substring)
+		return (NULL);
+	i = 0;
+	while (s[start + i] != 0 && i < len)
+	{
+		substring[i] = s[start + i];
 		i++;
-	return (s + i);
+	}
+	substring[i] = '\0';
+	return (substring);
 }
 
 char	*ft_str_join(char *dest, char *src)
@@ -43,10 +59,7 @@ char	*ft_str_join(char *dest, char *src)
 	src_len = ft_strlen(src);
 	join = (char *)malloc(sizeof(char) * (dest_len + src_len + 1));
 	if (!join)
-	{
-		free(join);
 		return (NULL);
-	}
 	i = 0;
 	while (dest[i])
 	{
@@ -62,7 +75,24 @@ char	*ft_str_join(char *dest, char *src)
 	return (join);
 }
 
-int main()
+char	*ft_strdup(const char *s)
 {
-	read()
+	int		i;
+	int		s_len;
+	char	*dup;
+
+	i = 0;
+	s_len = 0;
+	while (s[s_len] != 0)
+		s_len++;
+	dup = (char *)malloc(sizeof(char) * s_len + 1);
+	if (!(dup))
+		return (0);
+	while (s[i] != 0)
+	{
+		dup[i] = s[i];
+		i ++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }
