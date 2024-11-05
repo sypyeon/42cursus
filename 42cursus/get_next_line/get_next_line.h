@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:32 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/03 23:18:09 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/05 16:33:53 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+#include <fcntl.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_str_join(char *dest, char *src);
 char	*ft_strdup(const char *s);
-
 
 #endif
