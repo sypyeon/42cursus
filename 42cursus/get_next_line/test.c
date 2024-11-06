@@ -34,18 +34,27 @@ int	main()
 	// printf("%s", buf);
 	// free(buf);
 
-	n = read(fd, buf, 41);
-	buf[n] = '\0';
-	printf("%s\n", buf);
-	printf("%d\n", n);
-	n = read(fd, buf, 41);
-	buf[n] = '\0';
-	printf("%s\n", buf);
-	printf("%d\n", n);
-	n = read(fd, buf, 41);
-	buf[n] = '\0';
-	printf("%s\n", buf);
-	printf("%d\n", n);
+	// n = read(fd, buf, 41);
+	// buf[n] = '\0';
+	// printf("%s\n", buf);
+	// printf("%d\n", n);
+	// n = read(fd, buf, 41);
+	// buf[n] = '\0';
+	// printf("%s\n", buf);
+	// printf("%d\n", n);
+	// n = read(fd, buf, 41);
+	// buf[n] = '\0';
+	// printf("%s\n", buf);
+	// printf("%d\n", n);
+	
+	n = 1;
+	while(n)
+	{
+		n = read(fd, buf, 2);
+		buf[n] = '\0';
+		printf("%s", buf);
+		// printf("%d", n);
+	}
 
 	close(fd);
 	return (0);

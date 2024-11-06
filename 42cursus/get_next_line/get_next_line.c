@@ -6,19 +6,34 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:35 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/05 19:13:27 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/06 16:07:56 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	read_file(int fd, char *buf, char *save_line)
+static char	*ft_cut_line(char *read_line)
+{
+	int		i;
+	char	*save_line;
+
+	save_line = ft_strdup(read_line);
+	while (read_line[i] != '\n' && read_line)
+		i++;
+	save_line = ft_strchr(save_line, '\n');
+	read_line = ft_substr(read_line, 0, i + 1);
+	if (!read_line)
+		return (NULL);
+	
+}
+
+static int	ft_read_file(int fd, char *buf, char *save_line)
 {
 	int		n;
 	char	*tmp;
 
 	n = 1;
-	while (!(ft_strchr(save_line, '\n')) || n)
+	while (!(ft_strchr(save_line, '\n')) && n)
 	{
 		n = read(fd, buf, BUFFER_SIZE);
 		if (n == -1)
@@ -33,17 +48,17 @@ int	read_file(int fd, char *buf, char *save_line)
 	return (n);
 }
 
-char	*get_line(int fd, char *buf, char *save_line)
+static char	*ft_get_line(int fd, char *buf, char *save_line)
 {
 	int	n;
 
-	n = read_file(fd, buf, save_line);
+	n = ft_read_file(fd, buf, save_line);
 	if (n == -1 || !save_line)
 		return (NULL);
+	if (save_line && n > 0)
+		return (save_line);
 	if (n == 0)
-		return ()
-	
-	
+		return ('\0');
 }
 
 char	*get_next_line(int fd)
@@ -57,7 +72,7 @@ char	*get_next_line(int fd)
 	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
-	read_line = get_line(fd, buf, save_line);
-	
+	read_line = ft_get_line(fd, buf, save_line);
+	save_line = ft_cut_line(read_line);
 	return (read_line);
 }
