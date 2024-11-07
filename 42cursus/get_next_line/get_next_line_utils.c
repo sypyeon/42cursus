@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:37 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/05 16:30:10 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/07 23:48:10 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 char	*ft_str_join(char *dest, char *src)
 {
 	int		i;
+	int		j;
 	int		dest_len;
 	int		src_len;
 	char	*join;
@@ -77,17 +78,18 @@ char	*ft_str_join(char *dest, char *src)
 	if (!join)
 		return (NULL);
 	i = 0;
-	while (dest[i])
+	while (i < dest_len)
 	{
 		join[i] = dest[i];
 		i++;
 	}
-	i = 0;
-	while (src[i])
+	j = 0;
+	while (j < src_len)
 	{
-		join[dest_len + i] = src[i];
-		i++;
+		join[i + j] = src[j];
+		j++;
 	}
+	join[i + j] = '\0';
 	return (join);
 }
 

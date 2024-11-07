@@ -6,73 +6,85 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:35 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/06 16:07:56 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/08 00:16:25 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_cut_line(char *read_line)
+static void	ft_cut_line(char **read_line, char **save_line)
 {
 	int		i;
-	char	*save_line;
+	char	*tmp;
 
-	save_line = ft_strdup(read_line);
-	while (read_line[i] != '\n' && read_line)
+	i = 0;
+	tmp = *save_line;
+	while (tmp[i] != '\n' && tmp[i])
 		i++;
-	save_line = ft_strchr(save_line, '\n');
-	read_line = ft_substr(read_line, 0, i + 1);
-	if (!read_line)
-		return (NULL);
-	
+	*save_line = ft_substr(*read_line, i + 1, ft_strlen(*read_line));
+	free(tmp);
+	tmp = *read_line;
+	*read_line = ft_substr(*read_line, 0, i + 1);
+	free(tmp);
 }
 
-static int	ft_read_file(int fd, char *buf, char *save_line)
+static int	ft_read_file(int fd, char **buf, char **save_line)
 {
 	int		n;
 	char	*tmp;
 
+	if (!*save_line)
+		*save_line = ft_strdup("");
 	n = 1;
-	while (!(ft_strchr(save_line, '\n')) && n)
+	while (!(ft_strchr(*save_line, '\n')) && n)
 	{
-		n = read(fd, buf, BUFFER_SIZE);
+		n = read(fd, *buf, BUFFER_SIZE);
 		if (n == -1)
 			return (-1);
-		buf[n] = '\0';
-		tmp = save_line;
-		save_line = ft_str_join(save_line, buf);
+		(*buf)[n] = '\0';
+		tmp = *save_line;
+		*save_line = ft_str_join(tmp, *buf);
 		free(tmp);
-		if (!save_line)
+		tmp = NULL;
+		if (!*save_line)
 			return (-1);
 	}
 	return (n);
 }
 
-static char	*ft_get_line(int fd, char *buf, char *save_line)
+static char	*ft_get_line(int fd, char **buf, char **save_line)
 {
 	int	n;
 
 	n = ft_read_file(fd, buf, save_line);
 	if (n == -1 || !save_line)
 		return (NULL);
-	if (save_line && n > 0)
-		return (save_line);
+	if (*save_line && n > 0)
+		return (ft_strdup(*save_line));
 	if (n == 0)
-		return ('\0');
+		return (NULL);
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*save_line;
+	static char	*save_line[1048577];
 	char		*buf;
 	char		*read_line;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	if (fd < 0 || fd > 1048576 || BUFFER_SIZE < 1)
 		return (NULL);
 	buf = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
-	read_line = ft_get_line(fd, buf, save_line);
-	save_line = ft_cut_line(read_line);
+	read_line = ft_get_line(fd, &buf, &save_line[fd]);
+	if (read_line)
+		ft_cut_line(&read_line, &save_line[fd]);
+	else
+	{
+		free(save_line[fd]);
+		save_line[fd] = NULL;
+	}
+	free(buf);
 	return (read_line);
 }
