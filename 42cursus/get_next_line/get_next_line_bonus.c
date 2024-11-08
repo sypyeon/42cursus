@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:35 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/08 18:24:19 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/08 21:17:07 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ static char	*ft_get_line(int fd, char **buf, char **save_line)
 	n = ft_read_file(fd, buf, save_line);
 	if (n == -1 || !save_line)
 		return (NULL);
+	if (n == 0 && !save_line)
+		return (NULL);
 	if (*save_line || n > 0)
 		return (ft_strdup(*save_line));
-	if (n == 0)
-		return (NULL);
 	return (NULL);
 }
 
