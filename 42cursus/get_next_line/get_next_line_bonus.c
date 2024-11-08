@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:35 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/08 17:34:41 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/08 18:24:19 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ static void	ft_cut_line(char **read_line, char **save_line)
 		i++;
 	*save_line = ft_substr(*read_line, i + 1, ft_strlen(*read_line));
 	free(tmp);
-	tmp = NULL;
 	tmp = *read_line;
 	*read_line = ft_substr(*read_line, 0, i + 1);
 	free(tmp);
-	tmp = NULL;
 }
 
 static int	ft_read_file(int fd, char **buf, char **save_line)
@@ -82,7 +80,7 @@ char	*get_next_line(int fd)
 	read_line = ft_get_line(fd, &buf, &save_line[fd]);
 	if (read_line)
 		ft_cut_line(&read_line, &save_line[fd]);
-	if (*read_line == '\0')
+	if (!read_line || *read_line == '\0')
 	{
 		free(save_line[fd]);
 		save_line[fd] = NULL;

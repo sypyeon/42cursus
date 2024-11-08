@@ -7,41 +7,27 @@ int	main()
 {
 	char	*buf;
 	int		fd = open("test.txt", O_RDONLY);
-	// int		n;
 
-	while (1)
+	// while (1)
+	for(int i = 0; i < 20; ++i)
 	{
-		buf = get_next_line(fd);
-		if (!buf)
-			break ;
+		buf = get_next_line(123);
 		printf("%s", buf);
-		free(buf);
+		if (buf)
+			free(buf);
 	}
 
-	buf = get_next_line(fd);
-	printf("%s", buf);
-	free(buf);
-	buf = get_next_line(fd);
-	printf("%s", buf);
-	free(buf);
-	// buf = get_next_line(fd);
-	// printf("%s", buf);
-	// free(buf);
-	// buf = get_next_line(fd);
-	// printf("%s", buf);
-	// free(buf);
-	// buf = get_next_line(fd);
-	// printf("%s", buf);
-	// free(buf);
 
-	// n = read(fd, buf, 41);
-	// buf[n] = '\0';
-	// printf("%s\n", buf);
-	// printf("%d\n", n);
-	// n = read(fd, buf, 41);
-	// buf[n] = '\0';
-	// printf("%s\n", buf);
-	// printf("%d\n", n);
+	// int	i = 0;
+	// while (i < 10)
+	// {
+	// 	buf = get_next_line(fd);
+	// 	printf("%s", buf);
+	// 	free(buf);
+	// 	i++;
+	// }
+
+	// int		n;
 	// n = read(fd, buf, 41);
 	// buf[n] = '\0';
 	// printf("%s\n", buf);
