@@ -11,7 +11,7 @@ int	main()
 	// while (1)
 	for(int i = 0; i < 20; ++i)
 	{
-		buf = get_next_line(123);
+		buf = get_next_line(fd);
 		printf("%s", buf);
 		if (buf)
 			free(buf);
