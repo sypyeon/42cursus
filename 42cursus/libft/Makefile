@@ -37,7 +37,17 @@ SOURCES = ft_isalpha.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c
+	ft_putnbr_fd.c \
+	ft_printf.c \
+	ft_s.c \
+	ft_p.c \
+	ft_d.c \
+	ft_u.c \
+	ft_x.c \
+	ft_put_str_char.c \
+	ft_l_itoa.c \
+	get_next_line.c \
+	get_next_line_utils.c
 
 BONUSSRC = ft_lstnew_bonus.c \
 	ft_lstadd_front_bonus.c \
@@ -55,7 +65,7 @@ BONUSOBJ = $(BONUSSRC:.c=.o)
 
 .PHONY : all clean fclean re
 
-all : $(NAME)
+all : $(NAME) bonus
 
 $(NAME) : $(OBJECTS)
 	ar rcs $@ $^

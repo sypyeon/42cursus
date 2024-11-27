@@ -6,21 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:37 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/27 23:31:23 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/27 16:49:58 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 char	*ft_gnl_strchr(const char *s, int c)
 {

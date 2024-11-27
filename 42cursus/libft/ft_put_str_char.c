@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_put_str_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/27 17:25:50 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/21 00:15:05 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/11/27 16:42:09 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-# include "../libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-typedef struct	s_list
+void	ft_putchar(int c)
 {
-	int				nb;
-	struct s_list	*next;
-	struct s_list	*prev;
-}	t_list;
+	c = (unsigned char)c;
+	write(1, &c, 1);
+}
 
-typedef struct	s_stack
+void	ft_putstr(char *s)
 {
-	int		size;
-	t_list	*head;
-	t_list	*tail;
-}	t_stack;
-
-#endif
+	if (!s)
+		return ;
+	while (*s)
+	{
+		ft_putchar(*s);
+		s++;
+	}
+}
