@@ -6,7 +6,13 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:48 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/26 19:02:49 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/29 00:18:10 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
+int	main(int ac, char **av)
+{
+	
+}
