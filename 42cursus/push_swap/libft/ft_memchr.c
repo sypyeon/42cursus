@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 19:02:48 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 22:42:59 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/04 17:03:03 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/06 03:28:40 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int	i = 0;
-	while (av[i])
-		ft_printf("%s", av[i++]);
-	ft_printf("%d\n", ac);
-	return 0;
+	size_t			i;
+	unsigned char	*buf;
+
+	buf = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (buf[i] == (unsigned char)c)
+		{
+			return ((char *)s + i);
+		}
+		i++;
+	}
+	return (0);
 }

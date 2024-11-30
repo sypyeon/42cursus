@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 21:41:08 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 17:46:11 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/11/30 20:42:12 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_push(t_stack *a, t_stack *b, int flag)
 	t_list	*a_first;
 	t_list	*b_first;
 
-	if (b->size > 0)
+	if (b->size >= 1)
 	{
 		b_first = b->head;
 		a_first = a->head;
@@ -56,42 +56,54 @@ void	ft_push(t_stack *a, t_stack *b, int flag)
 		ft_printf("pa");
 	else if (flag == 'b')
 		ft_printf("pb");
-	else if (flag == 'c')
-		ft_push(b, a, ++flag);
 }
 
-void	ft_rotate(t_stack *stack, int flag)
+void	ft_rotate(t_stack *a, t_stack *b, int flag)
 {
 	t_list	*first;
 	t_list	*last;
 
-	if (stack->size < 2)
-		return ;
-	last = stack->head;
-	first = last->prev;
-	first->prev = NULL;
-	last->prev = stack->tail;
-	last->next = NULL;
+	if (a->size >= 2)
+	{
+		last = a->head;
+		first = last->prev;
+		first->prev = NULL;
+		last->prev = a->tail;
+		last->next = NULL;
+	}
 	if (flag == 'a')
 		ft_printf("ra");
 	else if (flag == 'b')
 		ft_printf("rb");
+	else if (flag == 'c')
+		ft_rotate(b, a, ++flag);
+	else if (flag == 'd')
+		ft_printf("rr");
 }
 
-void	ft_rr(t_stack *stack, int flag)
+void	ft_rr(t_stack *a, t_stack *b, int flag)
 {
 	t_list	*first;
 	t_list	*last;
 
-	if (stack->size < 2)
+	if (a->size < 2)
 		return ;
-	first = stack->tail;
-	last = first->prev;
-	last->next = NULL;
-	first->next = stack->head;
-	first->prev = NULL;
+	if (a->size >= 2)
+	{
+		first = a->tail;
+		last = first->prev;
+		a->tail = last;
+		last->next = NULL;
+		first->next = a->head;
+		a->head = first;
+		first->prev = NULL;
+	}
 	if (flag == 'a')
 		ft_printf("rra");
 	else if (flag == 'b')
 		ft_printf("rrb");
+	else if (flag == 'c')
+		ft_rr(b, a, ++flag);
+	else if (flag == 'd')
+		ft_printf("rr");
 }

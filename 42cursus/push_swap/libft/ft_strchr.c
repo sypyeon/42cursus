@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 22:34:13 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/04 14:33:49 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/15 20:22:43 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-typedef struct s_stack
+char	*ft_strchr(const char *s, int c)
 {
-	int		size;
-	t_list	*head;
-	t_list	*tail;
-}	t_stack;
+	int	i;
 
-#endif
+	i = 0;
+	while (s[i] != 0)
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if ((char)c == '\0')
+		return ((char *)s + i);
+	return (0);
+}

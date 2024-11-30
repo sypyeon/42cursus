@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 22:34:13 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/05 19:27:29 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/15 20:14:19 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-typedef struct s_stack
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int		size;
-	t_list	*head;
-	t_list	*tail;
-}	t_stack;
+	void	*alloc;
+	size_t	total_size;
 
-#endif
+	if (size && nmemb > __SIZE_MAX__ / size)
+		return (NULL);
+	total_size = (nmemb * size);
+	alloc = malloc(total_size);
+	if (!alloc)
+		return (NULL);
+	ft_memset(alloc, 0, total_size);
+	return (alloc);
+}

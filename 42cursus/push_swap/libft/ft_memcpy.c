@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 22:34:13 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/11 21:13:07 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/15 15:34:58 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-typedef struct s_stack
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int		size;
-	t_list	*head;
-	t_list	*tail;
-}	t_stack;
+	size_t	i;
+	char	*temp_d;
+	char	*temp_s;
 
-#endif
+	if (dest == src || n == 0)
+		return (dest);
+	temp_d = (char *)dest;
+	temp_s = (char *)src;
+	i = 0;
+	while (i < n)
+	{
+		temp_d[i] = temp_s[i];
+		i++;
+	}
+	return (dest);
+}

@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_u.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 22:34:13 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/23 17:10:06 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/11/27 16:43:28 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include "./libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-
-typedef struct s_stack
+int	ft_u(unsigned int arg)
 {
-	int		size;
-	t_list	*head;
-	t_list	*tail;
-}	t_stack;
+	char	*s;
+	int		len;
 
-#endif
+	s = ft_l_itoa((long)arg);
+	if (!s)
+		return (-1);
+	len = write(1, s, ft_strlen(s));
+	free(s);
+	return (len);
+}
