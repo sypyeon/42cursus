@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:48 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/08 16:25:44 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/09 00:21:51 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ int	main(int ac, char **av)
 	t_stack	b;
 
 	i = 0;
+	if (ac != 2)
+		return (0);
 	while (i < ac)
 	{
 		nums = *av[i];
 	}
-	return 0;
+	return (0);
 }

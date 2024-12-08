@@ -16,7 +16,7 @@ $(NAME) : $(OBJECTS) $(LIBFT)
 %.o : %.c
 	$(CC) $(CFLAGS) -o $@ -c  $<
 
-$(LIBFT)
+$(LIBFT) :
 	make -C $(LIBFT_DIR)
 
 clean :
