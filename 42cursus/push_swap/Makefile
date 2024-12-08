@@ -1,30 +1,23 @@
 CC = cc
-
 CFLAGS = -Wall -Werror -Wextra
-
 NAME = push_swap
-
-LIBFT = $(LIBFT_DIR)/libft.a
-
-LIBFT_DIR = ./libft
-
 SOURCES = push_swap.c\
 	sorting_fuction.c
-
 OBJECTS = $(SOURCES:.c=.o)
 
-.PHONY : $(NAME) all clean fclean re
+LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT_DIR = ./libft
 
 all : $(NAME)
 
 $(NAME) : $(OBJECTS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(LIBFT)
-	make -C $(LIBFT_DIR) all
-
 %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -o $@ -c  $<
+
+$(LIBFT)
+	make -C $(LIBFT_DIR)
 
 clean :
 	rm -f $(OBJECTS)
@@ -36,3 +29,4 @@ fclean : clean
 
 re : fclean all
 
+.PHONY : $(NAME) all clean fclean re
