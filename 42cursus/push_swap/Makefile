@@ -8,7 +8,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 LIBFT_DIR = ./libft
 
-SOURCES = 
+SOURCES = push_swap.c\
+	sorting_fuction.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

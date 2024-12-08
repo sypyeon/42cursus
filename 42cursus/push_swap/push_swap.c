@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:48 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 22:42:59 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/08 16:25:44 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 int	main(int ac, char **av)
 {
-	int	i = 0;
-	while (av[i])
-		ft_printf("%s", av[i++]);
-	ft_printf("%d\n", ac);
+	int 	i;
+	int 	nums;
+	t_stack	a;
+	t_stack	b;
+
+	i = 0;
+	while (i < ac)
+	{
+		nums = *av[i];
+	}
 	return 0;
 }
