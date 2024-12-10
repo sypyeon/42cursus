@@ -1,4 +1,4 @@
-CC = cc
+CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 NAME = push_swap
 SOURCES = push_swap.c\
