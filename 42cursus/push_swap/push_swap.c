@@ -6,31 +6,31 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:48 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/10 20:30:29 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/10 20:56:06 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*ft_int_dup(int *nums)
+int	*ft_int_dup(int *nums, int ac)
 {
 	int	i;
-	int	arr_len;
 	int	*dup;
 
 	i = 0;
-	arr_len = 0;
-	while (nums[arr_len] != 0)
-		arr_len++;
-	dup = (int *)malloc(sizeof(int) * (arr_len + 1));
+	dup = (int *)malloc(sizeof(int) * ac);
 	if (!(dup))
 		return (0);
-	while (nums[i] != 0)
+	while (i < ac)
 	{
 		dup[i] = nums[i];
-		i ++;
+		i++;
 	}
 	dup[i] = '\0';
+	for(int j = 0; j < 5; ++j)
+	{
+		ft_printf("%d\n", dup[j]);
+	}
 	return (dup);
 }
 
@@ -40,10 +40,6 @@ int	*ft_bsort(int *num)
 	int	compare_i;
 	int	temp;
 
-	for(int j = 0; j < 5; ++j)
-	{
-		ft_printf("%d\n", num[j]);
-	}
 	i = 0;
 	compare_i = 0;
 	while (num[i])
@@ -64,13 +60,13 @@ int	*ft_bsort(int *num)
 	return (num);
 }
 
-int *ft_minimize_num(int *nums)
+int *ft_minimize_num(int *nums, int ac)
 {
 	int	i;
 	int	min_num;
 	int	*sorted_nums;
 
-	sorted_nums = ft_bsort(ft_int_dup(nums));
+	sorted_nums = ft_bsort(ft_int_dup(nums, ac));
 	min_num = 0;
 	while (sorted_nums[min_num])
 	{
@@ -104,7 +100,7 @@ int	*ft_arrange_nums(int ac, char **av)
 		nums[i - 1] = ft_atoi(av[i]);
 		i++;
 	}
-	return(ft_minimize_num(nums));
+	return(ft_minimize_num(nums, ac));
 }
 
 int	main(int ac, char **av)
