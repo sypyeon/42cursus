@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:35 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/26 22:24:20 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/12 17:28:20 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static void	ft_cut_line(char **read_line, char **save_line)
 {

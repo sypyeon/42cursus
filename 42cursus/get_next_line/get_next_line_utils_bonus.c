@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:37 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/08 20:40:32 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/12 17:28:23 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
