@@ -1,8 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 NAME = push_swap
-SOURCES = push_swap.c\
-	sorting_fuction.c
+SOURCES = push_swap.c \
+	sorting_fuction.c \
+	main.c
 OBJECTS = $(SOURCES:.c=.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a

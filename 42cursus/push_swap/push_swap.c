@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:48 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/11 18:03:37 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/12 17:54:33 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,26 +101,4 @@ unsigned int	*ft_arrange_nums(int ac, char **av)
 		i++;
 	}
 	return(ft_minimize_num(nums, ac));
-}
-
-void	ft_check_valid()
-{
-	
-}
-
-int	main(int ac, char **av)
-{
-	// int 	i;
-	// int 	*nums;
-	// t_stack	a;
-	// t_stack	b;
-
-	ft_check_valid();
-	ft_arrange_nums(ac, av);
-	// i = 0;
-	// for(int j = 0; j < ac - 1; ++j)
-	// {
-	// 	ft_printf("%d\n", nums[j]);
-	// }
-	return (0);
 }
