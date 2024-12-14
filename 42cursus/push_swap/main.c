@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/13 22:14:22 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/14 18:43:07 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	ft_is_numstr(char *str)
 	int i;
 
 	i = 0;
+	if (str[i] == '-')
+		i++;
 	while (str[i])
 	{
 		if ('0' > str[i] || str[i] > '9')
@@ -77,10 +79,9 @@ int *ft_minimize(int *nums, int *new_nums, int len)
 	int	s_i;
 	int	from_zero;
 
-	from_zero = 0;
 	i = 0;
 	s_num = INT_MIN;
-	while (nums[i])
+	while (i < len)
 	{
 		if (s_num < nums[i])
 		{
@@ -90,11 +91,13 @@ int *ft_minimize(int *nums, int *new_nums, int len)
 		i++;
 	}
 	new_nums[s_i] = len - 1;
-	i = 0;
-	while (from_zero < len)
+	nums[s_i] = INT_MAX;
+	from_zero = 0;
+	while (from_zero < len - 1)
 	{
 		i = 0;
-		while (nums[i])
+		s_num = INT_MAX;
+		while (i < len)
 		{
 			if (s_num > nums[i])
 			{
@@ -106,10 +109,6 @@ int *ft_minimize(int *nums, int *new_nums, int len)
 		new_nums[s_i] = from_zero;
 		nums[s_i] = INT_MAX;
 		from_zero++;
-	}
-	for(int j = 0; j < len; ++j)
-	{
-		ft_printf("%d\n", len);
 	}
 	return (new_nums);
 }
@@ -132,12 +131,13 @@ int	main(int ac, char **av)
 
 	if (ac < 3)
 		return(0);
-	nums = ft_arr_atoi(ac - 1, av);
+	ac--;
+	nums = ft_arr_atoi(ac, av);
 	ft_check_valid(nums);
-	nums = ft_arrange_nums(ac - 1, nums);
-	// for(int j = 0; j < ac - 1; ++j)
-	// {
-	// 	ft_printf("%d\n", nums[j]);
-	// }
+	nums = ft_arrange_nums(ac, nums);
+	for(int j = 0; j < ac; ++j)
+	{
+		ft_printf("%d\n", nums[j]);
+	}
 	return (0);
 }
