@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 21:41:08 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 20:42:12 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/20 02:32:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_swap(t_stack *a, t_stack *b, int flag)
 		ft_printf("sa");
 	else if (flag == 'b')
 		ft_printf("sb");
-	else if (flag == 'c')
+	else if (flag == 'd')
 		ft_printf("ss");
 	if (flag == 'c')
 		ft_swap(b, a, ++flag);
