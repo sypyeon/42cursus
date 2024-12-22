@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 22:34:13 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/22 22:58:13 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ typedef struct s_stack
 	t_list	*head;
 	t_list	*tail;
 }	t_stack;
+
+t_stack	*ft_init_stack(int *nums, int ac);
 
 #endif

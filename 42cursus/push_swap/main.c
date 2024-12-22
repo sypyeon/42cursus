@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/14 18:43:07 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/22 23:15:13 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,13 @@ int	*ft_arrange_nums(int ac, int *nums)
 	return (new_nums);
 }
 
+#include<stdio.h>
+
 int	main(int ac, char **av)
 {
 	int 	*nums;
+	t_stack	*a;
+	t_stack	*b;
 
 	if (ac < 3)
 		return(0);
@@ -135,9 +139,33 @@ int	main(int ac, char **av)
 	nums = ft_arr_atoi(ac, av);
 	ft_check_valid(nums);
 	nums = ft_arrange_nums(ac, nums);
+	a = ft_init_stack(nums, ac);
+	b = ft_init_stack(NULL, ac);
 	for(int j = 0; j < ac; ++j)
 	{
 		ft_printf("%d\n", nums[j]);
 	}
+	printf("------------------------------\n");
+    t_list *now;
+    t_list *now2;
+    int    d;
+    now = a->head;
+    now2 = b->head;
+    d = 1;
+    while (a->size - d + 1 > 0 || b->size - d + 1> 0)
+    {
+        if(a->size - d + 1 > 0 && b->size - d + 1 > 0)
+            printf("%d = b :%d    a :%d\n",d, now2->nb, now->nb);
+        else if (a->size - d + 1 > 0)
+            printf("%d = b :     a :%d\n",d, now->nb);
+        else if (b->size - d + 1 > 0)
+            printf("%d = b :%d    a :\n",d, now2->nb);
+        d++;
+        if (now)
+            now = now->next;
+        if (now2)
+            now2 = now2->next;
+    }
+    printf("------------------------------\n");
 	return (0);
 }
