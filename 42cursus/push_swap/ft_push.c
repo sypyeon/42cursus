@@ -6,30 +6,52 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:19:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/14 22:19:32 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/23 17:58:15 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_push(t_stack *a, t_stack *b, int flag)
+void	ft_pa(t_stack *a, t_stack *b)
 {
 	t_list	*a_first;
 	t_list	*b_first;
 
-	if (b->size >= 1)
+	if (b->size > 0)
 	{
-		b_first = b->head;
 		a_first = a->head;
+		b_first = b->head;
 		if (b_first->next)
 			b_first->next->prev = NULL;
 		b->head = b_first->next;
 		b_first->next = a_first;
-		a_first->prev = b_first;
+		if (a_first)
+			a_first->prev = b_first;
 		a->head = b_first;
+		a->size++;
+		b->size--;
+		ft_printf("pa\n");
 	}
-	if (flag == 'a')
-		ft_printf("pa");
-	else if (flag == 'b')
-		ft_printf("pb");
+}
+
+void	ft_pb(t_stack *a, t_stack *b)
+{
+	t_list	*b_first;
+	t_list	*a_first;
+
+	if (a->size > 0)
+	{
+		b_first = b->head;
+		a_first = a->head;
+		if (a_first->next)
+			a_first->next->prev = NULL;
+		a->head = a_first->next;
+		a_first->next = b_first;
+		if (b_first)
+			b_first->prev = a_first;
+		b->head = a_first;
+		a->size--;
+		b->size++;
+		ft_printf("pb\n");
+	}
 }

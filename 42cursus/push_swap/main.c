@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/22 23:15:13 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/23 19:02:21 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,26 +140,31 @@ int	main(int ac, char **av)
 	ft_check_valid(nums);
 	nums = ft_arrange_nums(ac, nums);
 	a = ft_init_stack(nums, ac);
-	b = ft_init_stack(NULL, ac);
+	b = ft_newstack();
 	for(int j = 0; j < ac; ++j)
 	{
 		ft_printf("%d\n", nums[j]);
 	}
+	ft_pb(a, b);
+	ft_pb(a, b);
+	ft_ss(a, b);
+	ft_rra(a);
 	printf("------------------------------\n");
     t_list *now;
     t_list *now2;
     int    d;
+
     now = a->head;
     now2 = b->head;
     d = 1;
     while (a->size - d + 1 > 0 || b->size - d + 1> 0)
     {
         if(a->size - d + 1 > 0 && b->size - d + 1 > 0)
-            printf("%d = b :%d    a :%d\n",d, now2->nb, now->nb);
-        else if (a->size - d + 1 > 0)
-            printf("%d = b :     a :%d\n",d, now->nb);
+            printf("%d = a :%d    b :%d\n",d, now->nb, now2->nb);
         else if (b->size - d + 1 > 0)
-            printf("%d = b :%d    a :\n",d, now2->nb);
+            printf("%d = a :     b :%d\n",d, now2->nb);
+        else if (a->size - d + 1 > 0)
+            printf("%d = a :%d    b :\n",d, now->nb);
         d++;
         if (now)
             now = now->next;

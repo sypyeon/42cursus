@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 21:54:06 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/17 17:10:53 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/23 18:43:24 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void	ft_sa(t_stack *a)
 	{
 		first = a->head;
 		second = first->next;
-		first->next = second->next;
+		a->head = second;
 		first->prev = second;
-		second->next = first;
+		first->next = second->next;
 		second->prev = NULL;
+		second->next = first;
+		ft_printf("sa\n");
 	}
-	ft_printf("sa");
 }
 void	ft_sb(t_stack *b)
 {
@@ -37,35 +38,35 @@ void	ft_sb(t_stack *b)
 	{
 		first = b->head;
 		second = first->next;
-		first->next = second->next;
+		b->head = second;
 		first->prev = second;
-		second->next = first;
+		first->next = second->next;
 		second->prev = NULL;
+		second->next = first;
+		ft_printf("sb\n");
 	}
-	ft_printf("sb");
 }
 void	ft_ss(t_stack *a, t_stack *b)
 {
 	t_list	*first;
 	t_list	*second;
 
-	if (a->size >= 2)
+	if (a->size >= 2 && b->size >= 2)
 	{
 		first = a->head;
 		second = first->next;
-		first->next = second->next;
+		a->head = second;
 		first->prev = second;
-		second->next = first;
+		first->next = second->next;
 		second->prev = NULL;
-	}
-	if (b->size >= 2)
-	{
+		second->next = first;
 		first = b->head;
 		second = first->next;
-		first->next = second->next;
+		b->head = second;
 		first->prev = second;
-		second->next = first;
+		first->next = second->next;
 		second->prev = NULL;
+		second->next = first;
+		ft_printf("ss\n");
 	}
-	ft_printf("ss");
 }

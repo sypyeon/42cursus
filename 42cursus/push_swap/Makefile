@@ -3,7 +3,11 @@ CFLAGS = -Wall -Werror -Wextra -g
 NAME = push_swap
 SOURCES = main.c \
 	sorting_fuction.c \
-	ft_init_stack.c
+	ft_init_stack.c \
+	ft_push.c \
+	ft_swap.c \
+	ft_rotate.c \
+	ft_rev_rotate.c
 OBJECTS = $(SOURCES:.c=.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a
