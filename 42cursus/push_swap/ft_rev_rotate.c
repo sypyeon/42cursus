@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:43:57 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/23 19:02:00 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/23 21:05:20 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	ft_rra(t_stack *a)
 	{
 		first = a->tail;
 		last = first->prev;
-		last->next = NULL;
 		a->head->prev = first;
 		first->next = a->head;
 		first->prev = NULL;
+		last->next = NULL;
 		a->head = first;
 		a->tail = last;
 		ft_printf("rra");

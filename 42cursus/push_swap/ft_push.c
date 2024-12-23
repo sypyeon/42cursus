@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:19:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/23 17:58:15 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/23 23:08:03 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_pa(t_stack *a, t_stack *b)
 		b_first->next = a_first;
 		if (a_first)
 			a_first->prev = b_first;
+		else
+			a->tail = b_first;
 		a->head = b_first;
 		a->size++;
 		b->size--;
@@ -49,6 +51,8 @@ void	ft_pb(t_stack *a, t_stack *b)
 		a_first->next = b_first;
 		if (b_first)
 			b_first->prev = a_first;
+		else
+			b->tail = a_first;	
 		b->head = a_first;
 		a->size--;
 		b->size++;

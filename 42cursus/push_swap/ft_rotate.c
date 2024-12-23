@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:40:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/23 19:03:47 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/24 00:03:50 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@ void	ft_ra(t_stack *a)
 	t_list	*first;
 	t_list	*last;
 
-	if (a->size >= 2)
+	if (a->size == 2)
+		ft_sa(a);
+	else if (a->size > 2)
 	{
 		last = a->head;
-		first = last->prev;
-		first->prev = NULL;
-		last->prev = a->tail;
+		first = last->next;
+		a->head = first;
+		a->tail->next = last;
 		last->next = NULL;
-		ft_printf("ra");
+		a->tail = last;
+		first->prev = NULL;
+		ft_printf("ra\n");
 	}
 }
 
@@ -33,14 +37,18 @@ void	ft_rb(t_stack *b)
 	t_list	*first;
 	t_list	*last;
 
+	// if (b->size == 2)
+	// 	ft_sb(b);
 	if (b->size >= 2)
 	{
 		last = b->head;
-		first = last->prev;
-		first->prev = NULL;
-		last->prev = b->tail;
+		first = last->next;
+		b->head = first;
+		b->tail->next = last;
 		last->next = NULL;
-		ft_printf("rb");
+		b->tail = last;
+		first->prev = NULL;
+		ft_printf("rb\n");
 	}
 }
 
@@ -52,10 +60,19 @@ void	ft_rr(t_stack *a, t_stack *b)
 	if (a->size >= 2 && b->size >= 2)
 	{
 		last = a->head;
-		first = last->prev;
-		first->prev = NULL;
-		last->prev = a->tail;
+		first = last->next;
+		a->head = first;
+		a->tail->next = last;
 		last->next = NULL;
-		ft_printf("rr");
+		a->tail = last;
+		first->prev = NULL;
+		last = b->head;
+		first = last->next;
+		b->head = first;
+		b->tail->next = last;
+		last->next = NULL;
+		b->tail = last;
+		first->prev = NULL;
+		ft_printf("rr\n");
 	}
 }

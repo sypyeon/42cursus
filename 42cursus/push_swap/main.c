@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/23 19:02:21 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/23 23:18:12 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,33 @@ int	*ft_arrange_nums(int ac, int *nums)
 
 #include<stdio.h>
 
+void	ft_print_stack(t_stack *a, t_stack *b)
+{
+	printf("------------------------------\n");
+    t_list *now;
+    t_list *now2;
+    int    d;
+
+    now = a->head;
+    now2 = b->head;
+    d = 1;
+    while (a->size - d + 1 > 0 || b->size - d + 1> 0)
+    {
+        if(a->size - d + 1 > 0 && b->size - d + 1 > 0)
+            printf("%d = a :%d	b :%d\n",d, now->nb, now2->nb);
+        else if (b->size - d + 1 > 0)
+            printf("%d = a :     b :%d\n",d, now2->nb);
+        else if (a->size - d + 1 > 0)
+            printf("%d = a :%d	b :\n",d, now->nb);
+        d++;
+        if (now)
+            now = now->next;
+        if (now2)
+            now2 = now2->next;
+    }
+    printf("------------------------------\n");
+}
+
 int	main(int ac, char **av)
 {
 	int 	*nums;
@@ -141,36 +168,22 @@ int	main(int ac, char **av)
 	nums = ft_arrange_nums(ac, nums);
 	a = ft_init_stack(nums, ac);
 	b = ft_newstack();
-	for(int j = 0; j < ac; ++j)
-	{
-		ft_printf("%d\n", nums[j]);
-	}
+	ft_print_stack(a,b);
 	ft_pb(a, b);
+	ft_print_stack(a,b);
 	ft_pb(a, b);
+	ft_print_stack(a,b);
+	ft_pb(a, b);
+	ft_print_stack(a,b);
+	ft_pa(a, b);
+	ft_print_stack(a,b);
 	ft_ss(a, b);
-	ft_rra(a);
-	printf("------------------------------\n");
-    t_list *now;
-    t_list *now2;
-    int    d;
-
-    now = a->head;
-    now2 = b->head;
-    d = 1;
-    while (a->size - d + 1 > 0 || b->size - d + 1> 0)
-    {
-        if(a->size - d + 1 > 0 && b->size - d + 1 > 0)
-            printf("%d = a :%d    b :%d\n",d, now->nb, now2->nb);
-        else if (b->size - d + 1 > 0)
-            printf("%d = a :     b :%d\n",d, now2->nb);
-        else if (a->size - d + 1 > 0)
-            printf("%d = a :%d    b :\n",d, now->nb);
-        d++;
-        if (now)
-            now = now->next;
-        if (now2)
-            now2 = now2->next;
-    }
-    printf("------------------------------\n");
+	ft_print_stack(a,b);
+	ft_ra(a);
+	ft_print_stack(a,b);
+	ft_rb(b);
+	ft_print_stack(a,b);
+	ft_rr(a, b);
+	ft_print_stack(a, b);
 	return (0);
 }

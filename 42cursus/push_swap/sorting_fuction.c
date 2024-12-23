@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 21:41:08 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/20 02:32:54 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/23 20:53:14 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_rotate(t_stack *a, t_stack *b, int flag)
 		ft_printf("rr");
 }
 
-void	ft_rr(t_stack *a, t_stack *b, int flag)
+void	ft_rev_rotate(t_stack *a, t_stack *b, int flag)
 {
 	t_list	*first;
 	t_list	*last;
@@ -103,7 +103,7 @@ void	ft_rr(t_stack *a, t_stack *b, int flag)
 	else if (flag == 'b')
 		ft_printf("rrb");
 	else if (flag == 'c')
-		ft_rr(b, a, ++flag);
+		ft_rev_rotate(b, a, ++flag);
 	else if (flag == 'd')
 		ft_printf("rr");
 }
