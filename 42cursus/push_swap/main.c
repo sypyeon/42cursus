@@ -6,25 +6,27 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/23 23:18:12 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/24 21:42:21 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_check_valid(int *nums)
+
+
+void	ft_check_valid(int ac, char **av)
 {
 	int	i;
 	int	comp;
 
 	i = 0;
-	while (nums[i])
+	while (i < ac)
 	{
 		comp = i + 1;
-		while (nums[comp])
+		while (av[comp])
 		{
-			if (nums[i] == nums[comp])
-				exit (ft_printf("Error"));
+			if (!ft_strncmp(av[i], av[comp], INT_MAX))
+				exit (ft_printf("Error(same numbers)"));
 			comp++;
 		}
 		i++;
@@ -41,10 +43,7 @@ static void	ft_is_numstr(char *str)
 	while (str[i])
 	{
 		if ('0' > str[i] || str[i] > '9')
-		{
-			ft_printf("Error");
-			exit(1);
-		}
+			exit(ft_printf("Error(not a number)"));
 		i++;
 	}
 }
@@ -163,8 +162,8 @@ int	main(int ac, char **av)
 	if (ac < 3)
 		return(0);
 	ac--;
+	ft_check_valid(ac, av);
 	nums = ft_arr_atoi(ac, av);
-	ft_check_valid(nums);
 	nums = ft_arrange_nums(ac, nums);
 	a = ft_init_stack(nums, ac);
 	b = ft_newstack();
@@ -176,6 +175,10 @@ int	main(int ac, char **av)
 	ft_pb(a, b);
 	ft_print_stack(a,b);
 	ft_pa(a, b);
+	ft_print_stack(a,b);
+	ft_sa(a);
+	ft_print_stack(a,b);
+	ft_sb(b);
 	ft_print_stack(a,b);
 	ft_ss(a, b);
 	ft_print_stack(a,b);

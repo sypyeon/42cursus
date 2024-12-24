@@ -6,71 +6,50 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:43:57 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/23 21:05:20 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/24 21:38:32 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rra(t_stack *a)
+void	ft_rev_rotate(t_stack *stack)
 {
 	t_list	*first;
 	t_list	*last;
 
-	if (a->size >= 2)
-	{
-		first = a->tail;
-		last = first->prev;
-		a->head->prev = first;
-		first->next = a->head;
-		first->prev = NULL;
-		last->next = NULL;
-		a->head = first;
-		a->tail = last;
-		ft_printf("rra");
-	}
+	first = stack->tail;
+	last = first->prev;
+	stack->head->prev = first;
+	first->next = stack->head;
+	first->prev = NULL;
+	last->next = NULL;
+	stack->head = first;
+	stack->tail = last;
 }
 
+void	ft_rra(t_stack *a)
+{
+	if (a->size >= 2)
+		{
+			ft_rev_rotate(a);
+			ft_printf("rra\n");
+		}
+}
 void	ft_rrb(t_stack *b)
 {
-	t_list	*first;
-	t_list	*last;
-
 	if (b->size >= 2)
-	{
-		first = b->tail;
-		last = first->prev;
-		last->next = NULL;
-		first->next = b->head;
-		b->head = first;
-		b->tail = last;
-		first->prev = NULL;
-		ft_printf("rrb");
-	}
+		{
+			ft_rev_rotate(b);
+			ft_printf("rrb\n");
+		}
 }
 
 void	ft_rrr(t_stack *a, t_stack *b)
 {
-	t_list	*first;
-	t_list	*last;
-
 	if (a->size >= 2 && b->size >= 2)
 	{
-		first = a->tail;
-		last = first->prev;
-		a->tail = last;
-		last->next = NULL;
-		first->next = a->head;
-		a->head = first;
-		first->prev = NULL;
-
-		first = b->tail;
-		last = first->prev;
-		b->tail = last;
-		last->next = NULL;
-		first->next = b->head;
-		b->head = first;
-		first->prev = NULL;
+		ft_rev_rotate(a);
+		ft_rev_rotate(b);
 		ft_printf("rrr");
 	}
 }

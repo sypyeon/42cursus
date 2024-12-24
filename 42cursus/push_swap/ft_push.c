@@ -6,56 +6,46 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:19:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/23 23:08:03 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/24 21:47:26 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	ft_push(t_stack *to, t_stack *from)
+{
+	t_list	*from_head;
+	t_list	*to_head;
+
+	from_head = from->head;
+	to_head = to->head;
+	if (from_head->next)
+		from_head->next->prev = NULL;
+	from->head = from_head->next;
+	from_head->next = to_head;
+	if (to_head)
+		to_head->prev = from_head;
+	else
+		to->tail = from->head;
+	to->head = from->head;
+	to->size++;
+	from->size--;
+}
+
 void	ft_pa(t_stack *a, t_stack *b)
 {
-	t_list	*a_first;
-	t_list	*b_first;
-
-	if (b->size > 0)
+	if (b->size >= 2)
 	{
-		a_first = a->head;
-		b_first = b->head;
-		if (b_first->next)
-			b_first->next->prev = NULL;
-		b->head = b_first->next;
-		b_first->next = a_first;
-		if (a_first)
-			a_first->prev = b_first;
-		else
-			a->tail = b_first;
-		a->head = b_first;
-		a->size++;
-		b->size--;
+		ft_push(a, b);
 		ft_printf("pa\n");
 	}
 }
 
 void	ft_pb(t_stack *a, t_stack *b)
 {
-	t_list	*b_first;
-	t_list	*a_first;
-
-	if (a->size > 0)
+	if (a->size >= 2)
 	{
-		b_first = b->head;
-		a_first = a->head;
-		if (a_first->next)
-			a_first->next->prev = NULL;
-		a->head = a_first->next;
-		a_first->next = b_first;
-		if (b_first)
-			b_first->prev = a_first;
-		else
-			b->tail = a_first;	
-		b->head = a_first;
-		a->size--;
-		b->size++;
+		ft_push(b, a);
 		ft_printf("pb\n");
 	}
 }
