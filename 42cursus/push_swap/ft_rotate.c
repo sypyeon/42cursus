@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:40:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/24 20:46:06 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/26 19:31:06 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_rotate(t_stack *stack)
 		first->next = NULL;
 		stack->tail = first;
 		second->prev = NULL;
-		ft_printf("ra\n");
 	}
 }
 

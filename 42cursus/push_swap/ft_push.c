@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:19:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/24 21:47:26 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/26 19:35:38 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void	ft_push(t_stack *to, t_stack *from)
 {
-	t_list	*from_head;
-	t_list	*to_head;
+	t_list	*from_first;
+	t_list	*to_first;
 
-	from_head = from->head;
-	to_head = to->head;
-	if (from_head->next)
-		from_head->next->prev = NULL;
-	from->head = from_head->next;
-	from_head->next = to_head;
-	if (to_head)
-		to_head->prev = from_head;
+	from_first = from->head;
+	to_first = to->head;
+	if (from_first->next)
+		from_first->next->prev = NULL;
+	from->head = from_first->next;
+	from_first->next = to_first;
+	if (to_first)
+		to_first->prev = from_first;
 	else
-		to->tail = from->head;
-	to->head = from->head;
+		to->tail = from_first;
+	to->head = from_first;
 	to->size++;
 	from->size--;
 }
 
 void	ft_pa(t_stack *a, t_stack *b)
 {
-	if (b->size >= 2)
+	if (b->size >= 1)
 	{
 		ft_push(a, b);
 		ft_printf("pa\n");
@@ -43,7 +43,7 @@ void	ft_pa(t_stack *a, t_stack *b)
 
 void	ft_pb(t_stack *a, t_stack *b)
 {
-	if (a->size >= 2)
+	if (a->size >= 1)
 	{
 		ft_push(b, a);
 		ft_printf("pb\n");

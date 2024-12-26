@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/24 21:42:21 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/26 19:34:44 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,26 +129,26 @@ int	*ft_arrange_nums(int ac, int *nums)
 void	ft_print_stack(t_stack *a, t_stack *b)
 {
 	printf("------------------------------\n");
-    t_list *now;
-    t_list *now2;
+    t_list *a_stack;
+    t_list *b_stack;
     int    d;
 
-    now = a->head;
-    now2 = b->head;
+    a_stack = a->head;
+    b_stack = b->head;
     d = 1;
     while (a->size - d + 1 > 0 || b->size - d + 1> 0)
     {
         if(a->size - d + 1 > 0 && b->size - d + 1 > 0)
-            printf("%d = a :%d	b :%d\n",d, now->nb, now2->nb);
+            printf("%d = a :%d	b :%d\n",d, a_stack->nb, b_stack->nb);
         else if (b->size - d + 1 > 0)
-            printf("%d = a :     b :%d\n",d, now2->nb);
+            printf("%d = a :     b :%d\n",d, b_stack->nb);
         else if (a->size - d + 1 > 0)
-            printf("%d = a :%d	b :\n",d, now->nb);
+            printf("%d = a :%d	b :\n",d, a_stack->nb);
         d++;
-        if (now)
-            now = now->next;
-        if (now2)
-            now2 = now2->next;
+        if (a_stack)
+            a_stack = a_stack->next;
+        if (b_stack)
+            b_stack = b_stack->next;
     }
     printf("------------------------------\n");
 }
@@ -187,6 +187,16 @@ int	main(int ac, char **av)
 	ft_rb(b);
 	ft_print_stack(a,b);
 	ft_rr(a, b);
+	ft_print_stack(a, b);
+	ft_rra(a);
+	ft_print_stack(a, b);
+	ft_rrb(b);
+	ft_print_stack(a, b);
+	ft_rrr(a, b);
+	ft_print_stack(a, b);
+	ft_pa(a, b);
+	ft_print_stack(a, b);
+	ft_pa(a, b);
 	ft_print_stack(a, b);
 	return (0);
 }
