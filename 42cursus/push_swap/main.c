@@ -6,44 +6,53 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/26 19:34:44 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/26 21:16:27 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 
-
-void	ft_check_valid(int ac, char **av)
+static void	ft_is_int(char *str)
 {
-	int	i;
-	int	comp;
+	int			i;
+	int			minus;
+	long long	num;
 
+	minus = 0;
+	if (str[0] == '-')
+		minus++;
 	i = 0;
-	while (i < ac)
+	num = 0;
+	while (str[i + minus])
 	{
-		comp = i + 1;
-		while (av[comp])
-		{
-			if (!ft_strncmp(av[i], av[comp], INT_MAX))
-				exit (ft_printf("Error(same numbers)"));
-			comp++;
-		}
+		num = (num * 10) + (str[i + minus] - '0');
+		if (num - minus > 2147483647)
+			exit(ft_printf("Error (cannot fit in int) \n"));
+		else if ('0' > str[i + minus] || str[i + minus] > '9')
+			exit(ft_printf("Error (not a number) \n"));
 		i++;
 	}
 }
 
-static void	ft_is_numstr(char *str)
+void	ft_check_valid(char **av)
 {
-	int i;
+	int		i;
+	int		comp;
+	char	*str;
 
-	i = 0;
-	if (str[i] == '-')
-		i++;
-	while (str[i])
+	i = 1;
+	while (av[i])
 	{
-		if ('0' > str[i] || str[i] > '9')
-			exit(ft_printf("Error(not a number)"));
+		str = av[i];
+		ft_is_int(av[i]);
+		comp = i + 1;
+		while (av[comp])
+		{
+			if (!ft_strncmp(av[i], av[comp], INT_MAX))
+				exit (ft_printf("Error (same numbers) \n"));
+			comp++;
+		}
 		i++;
 	}
 }
@@ -56,12 +65,6 @@ int *ft_arr_atoi(int ac, char **av)
 	int_arr = (int *)malloc(sizeof(int) * (ac));
 	if (!int_arr)
 		return (0);
-	i = 1;
-	while (av[i])
-	{
-		ft_is_numstr(av[i]);
-		i++;
-	}
 	i = 0;
 	while (av[i + 1])
 	{
@@ -124,35 +127,6 @@ int	*ft_arrange_nums(int ac, int *nums)
 	return (new_nums);
 }
 
-#include<stdio.h>
-
-void	ft_print_stack(t_stack *a, t_stack *b)
-{
-	printf("------------------------------\n");
-    t_list *a_stack;
-    t_list *b_stack;
-    int    d;
-
-    a_stack = a->head;
-    b_stack = b->head;
-    d = 1;
-    while (a->size - d + 1 > 0 || b->size - d + 1> 0)
-    {
-        if(a->size - d + 1 > 0 && b->size - d + 1 > 0)
-            printf("%d = a :%d	b :%d\n",d, a_stack->nb, b_stack->nb);
-        else if (b->size - d + 1 > 0)
-            printf("%d = a :     b :%d\n",d, b_stack->nb);
-        else if (a->size - d + 1 > 0)
-            printf("%d = a :%d	b :\n",d, a_stack->nb);
-        d++;
-        if (a_stack)
-            a_stack = a_stack->next;
-        if (b_stack)
-            b_stack = b_stack->next;
-    }
-    printf("------------------------------\n");
-}
-
 int	main(int ac, char **av)
 {
 	int 	*nums;
@@ -162,41 +136,11 @@ int	main(int ac, char **av)
 	if (ac < 3)
 		return(0);
 	ac--;
-	ft_check_valid(ac, av);
-	nums = ft_arr_atoi(ac, av);
-	nums = ft_arrange_nums(ac, nums);
+	ft_check_valid(av);
+	nums = ft_arrange_nums(ac, ft_arr_atoi(ac, av));
 	a = ft_init_stack(nums, ac);
 	b = ft_newstack();
-	ft_print_stack(a,b);
-	ft_pb(a, b);
-	ft_print_stack(a,b);
-	ft_pb(a, b);
-	ft_print_stack(a,b);
-	ft_pb(a, b);
-	ft_print_stack(a,b);
-	ft_pa(a, b);
-	ft_print_stack(a,b);
-	ft_sa(a);
-	ft_print_stack(a,b);
-	ft_sb(b);
-	ft_print_stack(a,b);
-	ft_ss(a, b);
-	ft_print_stack(a,b);
-	ft_ra(a);
-	ft_print_stack(a,b);
-	ft_rb(b);
-	ft_print_stack(a,b);
-	ft_rr(a, b);
-	ft_print_stack(a, b);
-	ft_rra(a);
-	ft_print_stack(a, b);
-	ft_rrb(b);
-	ft_print_stack(a, b);
-	ft_rrr(a, b);
-	ft_print_stack(a, b);
-	ft_pa(a, b);
-	ft_print_stack(a, b);
-	ft_pa(a, b);
-	ft_print_stack(a, b);
+	
+	ft_check_sorting_functions(a, b);
 	return (0);
 }

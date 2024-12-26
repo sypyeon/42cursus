@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/24 21:21:02 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/26 19:49:10 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ typedef struct s_stack
 t_stack	*ft_init_stack(int *nums, int ac);
 t_stack	*ft_newstack(void);
 t_list	*ft_lstnew_nb(int nb);
+
+void	ft_print_stack(t_stack *a, t_stack *b);
+void	ft_check_sorting_functions(t_stack *a, t_stack *b);
 
 void	ft_swap(t_stack *stack);
 void	ft_sa(t_stack *a);
