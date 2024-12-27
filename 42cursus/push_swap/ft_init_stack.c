@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:39:27 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/23 16:38:12 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/27 17:45:03 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_stack	*ft_init_stack(int *nums, int ac)
 
 	stack = ft_newstack();
 	i = 0;
-	while(i < ac)
+	while (i < ac)
 	{
 		add = ft_lstnew_nb(nums[i]);
 		ft_lstadd_back(&stack->head, add);

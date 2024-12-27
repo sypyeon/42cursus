@@ -6,12 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/26 21:16:27 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/28 00:17:27 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 static void	ft_is_int(char *str)
 {
@@ -27,7 +26,7 @@ static void	ft_is_int(char *str)
 	while (str[i + minus])
 	{
 		num = (num * 10) + (str[i + minus] - '0');
-		if (num - minus > 2147483647)
+		if (num - minus > 2147483647 || i > 10)
 			exit(ft_printf("Error (cannot fit in int) \n"));
 		else if ('0' > str[i + minus] || str[i + minus] > '9')
 			exit(ft_printf("Error (not a number) \n"));
@@ -39,17 +38,15 @@ void	ft_check_valid(char **av)
 {
 	int		i;
 	int		comp;
-	char	*str;
 
 	i = 1;
 	while (av[i])
 	{
-		str = av[i];
 		ft_is_int(av[i]);
 		comp = i + 1;
 		while (av[comp])
 		{
-			if (!ft_strncmp(av[i], av[comp], INT_MAX))
+			if (!ft_strncmp(av[i], av[comp], 11))
 				exit (ft_printf("Error (same numbers) \n"));
 			comp++;
 		}
@@ -57,10 +54,10 @@ void	ft_check_valid(char **av)
 	}
 }
 
-int *ft_arr_atoi(int ac, char **av)
+int	*ft_arr_atoi(int ac, char **av)
 {
 	int	i;
-	int *int_arr;
+	int	*int_arr;
 
 	int_arr = (int *)malloc(sizeof(int) * (ac));
 	if (!int_arr)
@@ -74,7 +71,7 @@ int *ft_arr_atoi(int ac, char **av)
 	return (int_arr);
 }
 
-int *ft_minimize(int *nums, int *new_nums, int len)
+int	*ft_minimize(int *nums, int *new_nums, int len)
 {
 	int	i;
 	int	s_num;
@@ -127,20 +124,62 @@ int	*ft_arrange_nums(int ac, int *nums)
 	return (new_nums);
 }
 
+void	ft_free(void *to_free)
+{
+	if (to_free)
+		free(to_free);
+	to_free = NULL;
+}
+
+char	**ps_split(char **av)
+{
+	char	*str;
+	char	*temp;
+	int		i;
+	
+	i = 0;
+	temp = NULL;
+	while (av[i])
+	{
+		if (str)
+			temp = str;
+		str = ft_strjoin(str, ft_strjoin(av[i], " "));
+		ft_free(temp);
+		temp = NULL;
+		i++;
+	}
+	av = ft_split(str, ' ');
+	ft_free(str);
+	return (av);
+}
+
+void	ft_free_stack(t_stack *stack)
+{
+	t_list	*temp;
+
+	if (!stack)
+		return ;
+	while (stack->tail)
+	{
+		temp = (stack)->next;
+		free(stack);
+		stack = temp;
+	}
+}
+
 int	main(int ac, char **av)
 {
-	int 	*nums;
+	int		*nums;
 	t_stack	*a;
 	t_stack	*b;
 
-	if (ac < 3)
-		return(0);
-	ac--;
+	av = ps_split(av);
+	while (av[ac + 1])
+		ac++;
 	ft_check_valid(av);
 	nums = ft_arrange_nums(ac, ft_arr_atoi(ac, av));
 	a = ft_init_stack(nums, ac);
 	b = ft_newstack();
-	
 	ft_check_sorting_functions(a, b);
 	return (0);
 }

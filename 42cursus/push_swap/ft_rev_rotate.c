@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:43:57 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/24 21:38:32 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/27 17:44:44 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ void	ft_rev_rotate(t_stack *stack)
 void	ft_rra(t_stack *a)
 {
 	if (a->size >= 2)
-		{
-			ft_rev_rotate(a);
-			ft_printf("rra\n");
-		}
+	{
+		ft_rev_rotate(a);
+		ft_printf("rra\n");
+	}
 }
+
 void	ft_rrb(t_stack *b)
 {
 	if (b->size >= 2)
-		{
-			ft_rev_rotate(b);
-			ft_printf("rrb\n");
-		}
+	{
+		ft_rev_rotate(b);
+		ft_printf("rrb\n");
+	}
 }
 
 void	ft_rrr(t_stack *a, t_stack *b)
