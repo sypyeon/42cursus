@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/28 00:17:27 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/29 19:55:32 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,18 +134,12 @@ void	ft_free(void *to_free)
 char	**ps_split(char **av)
 {
 	char	*str;
-	char	*temp;
 	int		i;
 	
 	i = 0;
-	temp = NULL;
 	while (av[i])
 	{
-		if (str)
-			temp = str;
 		str = ft_strjoin(str, ft_strjoin(av[i], " "));
-		ft_free(temp);
-		temp = NULL;
 		i++;
 	}
 	av = ft_split(str, ' ');
@@ -159,12 +153,14 @@ void	ft_free_stack(t_stack *stack)
 
 	if (!stack)
 		return ;
-	while (stack->tail)
+	while (stack->head)
 	{
-		temp = (stack)->next;
-		free(stack);
-		stack = temp;
+		temp = stack->head;
+		stack->head = stack->head->next;
+		free(temp);
 	}
+	// if (stack)
+	// 	free(stack);
 }
 
 int	main(int ac, char **av)
@@ -174,6 +170,7 @@ int	main(int ac, char **av)
 	t_stack	*b;
 
 	av = ps_split(av);
+	ac = 0;
 	while (av[ac + 1])
 		ac++;
 	ft_check_valid(av);
@@ -181,5 +178,7 @@ int	main(int ac, char **av)
 	a = ft_init_stack(nums, ac);
 	b = ft_newstack();
 	ft_check_sorting_functions(a, b);
+	ft_free_stack(a);
+	ft_free_stack(b);
 	return (0);
 }
