@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/29 19:55:32 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:38:23 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,6 @@ int	*ft_arrange_nums(int ac, int *nums)
 	return (new_nums);
 }
 
-void	ft_free(void *to_free)
-{
-	if (to_free)
-		free(to_free);
-	to_free = NULL;
-}
-
 char	**ps_split(char **av)
 {
 	char	*str;
@@ -147,22 +140,6 @@ char	**ps_split(char **av)
 	return (av);
 }
 
-void	ft_free_stack(t_stack *stack)
-{
-	t_list	*temp;
-
-	if (!stack)
-		return ;
-	while (stack->head)
-	{
-		temp = stack->head;
-		stack->head = stack->head->next;
-		free(temp);
-	}
-	// if (stack)
-	// 	free(stack);
-}
-
 int	main(int ac, char **av)
 {
 	int		*nums;
@@ -177,7 +154,9 @@ int	main(int ac, char **av)
 	nums = ft_arrange_nums(ac, ft_arr_atoi(ac, av));
 	a = ft_init_stack(nums, ac);
 	b = ft_newstack();
-	ft_check_sorting_functions(a, b);
+	// ft_check_sorting_functions(a, b);
+	ps_radix_sort(a, b, ac);
+	ft_print_stack(a, b);
 	ft_free_stack(a);
 	ft_free_stack(b);
 	return (0);

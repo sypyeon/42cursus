@@ -6,13 +6,13 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:43:57 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/27 17:44:44 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/30 19:40:16 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rev_rotate(t_stack *stack)
+static void	ft_rev_rotate(t_stack *stack)
 {
 	t_list	*first;
 	t_list	*last;

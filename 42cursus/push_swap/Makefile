@@ -7,7 +7,9 @@ SOURCES = main.c \
 	ft_push.c \
 	ft_swap.c \
 	ft_rotate.c \
-	ft_rev_rotate.c
+	ft_rev_rotate.c \
+	ps_radix_sort.c \
+	ft_free.c
 OBJECTS = $(SOURCES:.c=.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a

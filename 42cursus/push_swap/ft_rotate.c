@@ -6,13 +6,13 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:40:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/26 19:31:06 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:02:27 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_rotate(t_stack *stack)
+static int	ft_rotate(t_stack *stack)
 {
 	t_list	*first;
 	t_list	*second;
@@ -27,23 +27,27 @@ void	ft_rotate(t_stack *stack)
 		first->next = NULL;
 		stack->tail = first;
 		second->prev = NULL;
+		return (1);
 	}
+	return (0);
 }
 
 void	ft_ra(t_stack *a)
 {
-	ft_rotate(a);
-	ft_printf("ra\n");
+	if (ft_rotate(a))
+		ft_printf("ra\n");
 }
 
 void	ft_rb(t_stack *b)
 {
-	ft_rotate(b);
-	ft_printf("rb\n");
+	if (ft_rotate(b))
+		ft_printf("rb\n");
 }
 
 void	ft_rr(t_stack *a, t_stack *b)
 {
+	if (a->size < 2 || b->size < 2)
+		return ;
 	ft_rotate(a);
 	ft_rotate(b);
 	ft_printf("rr\n");

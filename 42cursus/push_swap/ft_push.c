@@ -6,13 +6,13 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 22:19:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/26 19:35:38 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/30 19:40:09 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_push(t_stack *to, t_stack *from)
+static void	ft_push(t_stack *to, t_stack *from)
 {
 	t_list	*from_first;
 	t_list	*to_first;

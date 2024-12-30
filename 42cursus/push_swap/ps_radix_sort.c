@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sorting.c                                       :+:      :+:    :+:   */
+/*   ps_radix_sort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:51:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/29 21:53:21 by sipyeon          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:38:09 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,32 @@ int	ft_stack_align(t_stack *a, int ac)
 	return (1);
 }
 
-void	ps_greedy(t_stack *a, t_stack *b)
-{
-	
-}
 
-void	ft_how_big(t_stack *a)
-{
-	
-}
 
-int	ft_what_to_do(t_stack *a, t_stack *b, int ac)
+int	ps_radix_sort(t_stack *stack_a, t_stack *stack_b, int ac)
 {
-	int	i;
+	t_list	*a;
+	int		bit;
+	int		i;
+	int		size;
 
-	while (!ft_stack_align(a, ac))
+	bit = 1;
+	size = stack_a->size;
+	while (!ft_stack_align(stack_a, ac))
 	{
-		
+		i = 0;
+		while (i < size)
+		{
+			a = stack_a->head;
+			if (!(a->nb & bit))
+				ft_pb(stack_a, stack_b);
+			else
+				ft_ra(stack_a);
+			i++;
+		}
+		while (stack_b->size)
+			ft_pa(stack_a, stack_b);
+		bit = bit << 1;
 	}
+	return (0);
 }
