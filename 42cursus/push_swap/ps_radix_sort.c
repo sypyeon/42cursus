@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:51:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/30 20:38:09 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/05 18:30:21 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,33 @@ int	ft_stack_align(t_stack *a, int ac)
 	return (1);
 }
 
+void	ps_greedy_sort(t_stack *stack_a, t_stack *stack_b, int ac)
+{
+	t_list	*a;
+	int		i;
 
+	a = stack_a->head;
+	i = stack_a->size - 1;
+	while (3 <= stack_a->size)
+	{
+		if (a->nb != 0 || a->nb != i || a->nb != i / 2)
+			ft_pb(stack_a, stack_b);
+	}
+	while (stack_b->size)
+	{
+		if ()	
+		ft_pa(stack_a, stack_b);
+	}
+	while (!ft_stack_align(stack_a, ac))
+	{
+		i = 0;
+		while (i < stack_a->size)
+		{
+			
+		}
+	}
+	
+}
 
 int	ps_radix_sort(t_stack *stack_a, t_stack *stack_b, int ac)
 {
