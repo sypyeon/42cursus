@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/05 17:23:53 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/06 19:36:51 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_rrb(t_stack *b);
 void	ft_rrr(t_stack *a, t_stack *b);
 
 int		ft_stack_align(t_stack *a, int ac);
+void	ps_sort(t_stack *a, t_stack *b, int ac);
 int		ps_radix_sort(t_stack *stack_a, t_stack *stack_b, int ac);
 
 void	ft_free(void *to_free);

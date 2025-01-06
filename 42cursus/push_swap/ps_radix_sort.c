@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:51:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/05 18:30:21 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/06 19:53:42 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,48 @@ int	ft_stack_align(t_stack *a, int ac)
 	return (1);
 }
 
-void	ps_greedy_sort(t_stack *stack_a, t_stack *stack_b, int ac)
+void	ps_sort_three(t_stack *a)
 {
-	t_list	*a;
-	int		i;
+	if (a->head->nb == 2)
+		ft_ra(a);
+	else if (a->head->nb == 0)
+		ft_rra(a);
+	if (a->head->next->nb == 0)
+		ft_sa(a);
+	else if (a->tail->nb == 0)
+		ft_rra(a);
+}
 
-	a = stack_a->head;
-	i = stack_a->size - 1;
-	while (3 <= stack_a->size)
+void	ps_sort_five(t_stack *a, t_stack *b)
+{
+	while (3 < a->size)
 	{
-		if (a->nb != 0 || a->nb != i || a->nb != i / 2)
-			ft_pb(stack_a, stack_b);
+		if (a->head->nb == 1 || a->head->nb == 3)
+			ft_pb(a, b);
+		else
+			ft_ra(a);
 	}
-	while (stack_b->size)
+	if (!(a->head->nb == 4 && a->head->next->nb == 0 && a->tail->nb == 2))
 	{
-		if ()	
-		ft_pa(stack_a, stack_b);
+		if (a->head->nb == 2)
+			ft_ra(a);
+		else if (a->head->nb == 4)
+			ft_rra(a);
+		if (a->tail->nb == 4)
+			ft_rra(a);
+		if (a->head->nb == 0 && b->head->nb == 1)
+			ft_ss(a, b);
+		else if (a->head->nb == 0)
+			ft_sa(a);
 	}
-	while (!ft_stack_align(stack_a, ac))
-	{
-		i = 0;
-		while (i < stack_a->size)
-		{
-			
-		}
-	}
-	
+	ft_print_stack(a, b);
+	ft_pa(a, b);
+	ft_print_stack(a, b);
+	ft_rra(a);
+	ft_print_stack(a, b);
+	ft_pa(a, b);
+	ft_print_stack(a, b);
+	ft_rra(a);
 }
 
 int	ps_radix_sort(t_stack *stack_a, t_stack *stack_b, int ac)
@@ -82,4 +98,17 @@ int	ps_radix_sort(t_stack *stack_a, t_stack *stack_b, int ac)
 		bit = bit << 1;
 	}
 	return (0);
+}
+
+void	ps_sort(t_stack *a, t_stack *b, int ac)
+{
+	if (!ft_stack_align(a, ac))
+	{
+		if (ac == 3)
+			ps_sort_three(a);
+		if (ac == 5)
+			ps_sort_five(a, b);
+		else
+			ps_radix_sort(a, b, ac);
+	}
 }

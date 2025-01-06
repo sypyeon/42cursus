@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:40:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/30 20:02:27 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/06 19:39:41 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static int	ft_rotate(t_stack *stack)
 	{
 		first = stack->head;
 		second = first->next;
-		stack->head = second;
 		first->prev = stack->tail;
 		stack->tail->next = first;
 		first->next = NULL;
 		stack->tail = first;
+		stack->head = second;
 		second->prev = NULL;
 		return (1);
 	}

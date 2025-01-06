@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 21:54:06 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/30 19:39:57 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/06 20:32:15 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,47 @@ static void	ft_swap(t_stack *stack)
 
 	if (stack->size >= 2)
 	{
+		// int tmp;
+
+		// tmp = stack->head->nb;
+		// stack->head->nb = stack->head->next->nb;
+		// stack->head->next->nb = tmp;
 		first = stack->head;
 		second = first->next;
-		if (second == stack->tail)
-			stack->tail = first;
 		stack->head = second;
-		first->prev = second;
-		first->next = second->next;
+		first->prev = stack->head;
+		first->next = stack->head->next->next;
 		second->prev = NULL;
 		second->next = first;
+		if (stack->size == 2)
+			stack->tail = first;
 	}
 }
 
 void	ft_sa(t_stack *a)
 {
-	ft_swap(a);
-	ft_printf("sa\n");
+	if (a->size >= 2)
+	{
+		ft_swap(a);
+		ft_printf("sa\n");
+	}
 }
 
 void	ft_sb(t_stack *b)
 {
-	ft_swap(b);
-	ft_printf("sb\n");
+	if (b->size >= 2)
+	{
+		ft_swap(b);
+		ft_printf("sb\n");
+	}
 }
 
 void	ft_ss(t_stack *a, t_stack *b)
 {
-	ft_swap(a);
-	ft_swap(b);
-	ft_printf("ss\n");
+	if (a->size >= 2 && b->size >= 2)
+	{
+		ft_swap(a);
+		ft_swap(b);
+		ft_printf("ss\n");
+	}
 }

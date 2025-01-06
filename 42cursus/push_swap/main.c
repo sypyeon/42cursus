@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/05 17:58:36 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/06 19:37:09 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int	main(int ac, char **av)
 	a = ft_init_stack(nums, ac);
 	b = ft_newstack();
 	// ft_check_sorting_functions(a, b);
-	ps_radix_sort(a, b, ac);
+	ps_sort(a, b, ac);
 	ft_print_stack(a, b);
 	ft_free_stack(a);
 	ft_free_stack(b);
