@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_radix_sort.c                                    :+:      :+:    :+:   */
+/*   ps_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:51:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/06 19:53:42 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/07 17:30:21 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ps_sort_five(t_stack *a, t_stack *b)
 {
 	while (3 < a->size)
 	{
+		if (a->tail->nb == 1 || a->tail->nb == 3)
+			ft_rra(a);
 		if (a->head->nb == 1 || a->head->nb == 3)
 			ft_pb(a, b);
 		else
@@ -51,24 +53,28 @@ void	ps_sort_five(t_stack *a, t_stack *b)
 	}
 	if (!(a->head->nb == 4 && a->head->next->nb == 0 && a->tail->nb == 2))
 	{
-		if (a->head->nb == 2)
+		if (a->head->nb == 2 && b->head->nb == 1)
+			ft_rr(a, b);
+		else if (a->head->nb == 2)
 			ft_ra(a);
+		else if (a->head->nb == 4 && b->head->nb == 1)
+			ft_rrr(a, b);
 		else if (a->head->nb == 4)
 			ft_rra(a);
-		if (a->tail->nb == 4)
+		if (a->tail->nb == 4 && b->head->nb == 1)
+			ft_rrr(a, b);
+		else if (a->tail->nb == 4)
 			ft_rra(a);
 		if (a->head->nb == 0 && b->head->nb == 1)
 			ft_ss(a, b);
 		else if (a->head->nb == 0)
 			ft_sa(a);
 	}
-	ft_print_stack(a, b);
+	if (b->head->nb == 1)
+		ft_sb(b);
 	ft_pa(a, b);
-	ft_print_stack(a, b);
 	ft_rra(a);
-	ft_print_stack(a, b);
 	ft_pa(a, b);
-	ft_print_stack(a, b);
 	ft_rra(a);
 }
 
@@ -106,7 +112,7 @@ void	ps_sort(t_stack *a, t_stack *b, int ac)
 	{
 		if (ac == 3)
 			ps_sort_three(a);
-		if (ac == 5)
+		else if (ac == 5)
 			ps_sort_five(a, b);
 		else
 			ps_radix_sort(a, b, ac);

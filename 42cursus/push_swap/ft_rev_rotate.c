@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:43:57 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/12/30 19:40:16 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/07 16:11:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_rev_rotate(t_stack *stack)
 	t_list	*last;
 
 	first = stack->tail;
-	last = first->prev;
+	last = stack->tail->prev;
 	stack->head->prev = first;
 	first->next = stack->head;
 	first->prev = NULL;
@@ -51,6 +51,6 @@ void	ft_rrr(t_stack *a, t_stack *b)
 	{
 		ft_rev_rotate(a);
 		ft_rev_rotate(b);
-		ft_printf("rrr");
+		ft_printf("rrr\n");
 	}
 }

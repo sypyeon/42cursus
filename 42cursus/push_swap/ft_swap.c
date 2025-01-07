@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 21:54:06 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/06 20:32:15 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/07 15:41:16 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,18 @@ static void	ft_swap(t_stack *stack)
 		// tmp = stack->head->nb;
 		// stack->head->nb = stack->head->next->nb;
 		// stack->head->next->nb = tmp;
-		first = stack->head;
-		second = first->next;
-		stack->head = second;
-		first->prev = stack->head;
-		first->next = stack->head->next->next;
-		second->prev = NULL;
-		second->next = first;
+		second = stack->head;
+		first = stack->head->next;
+		if (stack->size > 2)
+			first->next->prev = second;
+		second->next = first->next;
+		second->prev = first;
+		first->next = second;
+		first->prev = NULL;
+		stack->head = first;
+		stack->head->next = second;
 		if (stack->size == 2)
-			stack->tail = first;
+			stack->tail = second;
 	}
 }
 

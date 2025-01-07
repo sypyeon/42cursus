@@ -6,7 +6,7 @@
 		"type": "cppdbg",
 		"request": "launch",
 		"program": "${workspaceFolder}/push_swap/push_swap",  // 빌드된 실행 파일 경로
-		"args": ["2 3 1 5 8"],
+		"args": ["2 4 5 3 1"],
 		"stopAtEntry": false,
 		"cwd": "${workspaceFolder}/push_swap",
 		"environment": [],

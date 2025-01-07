@@ -1,4 +1,4 @@
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 NAME = push_swap
 SOURCES = main.c \
@@ -8,7 +8,7 @@ SOURCES = main.c \
 	ft_swap.c \
 	ft_rotate.c \
 	ft_rev_rotate.c \
-	ps_radix_sort.c \
+	ps_sort.c \
 	ft_free.c
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -36,4 +36,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : $(NAME) all clean fclean re
+.PHONY : all clean fclean re

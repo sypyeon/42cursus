@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/06 19:37:09 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/07 17:39:02 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ char	**ps_split(char **av)
 	int		i;
 	
 	i = 0;
+	str = "";
 	while (av[i])
 	{
 		str = ft_strjoin(str, ft_strjoin(av[i], " "));
