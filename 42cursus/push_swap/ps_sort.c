@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:51:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/07 17:30:21 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/08 18:38:30 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	ps_sort_five(t_stack *a, t_stack *b)
 {
 	while (3 < a->size)
 	{
-		if (a->tail->nb == 1 || a->tail->nb == 3)
-			ft_rra(a);
 		if (a->head->nb == 1 || a->head->nb == 3)
 			ft_pb(a, b);
 		else
@@ -53,21 +51,13 @@ void	ps_sort_five(t_stack *a, t_stack *b)
 	}
 	if (!(a->head->nb == 4 && a->head->next->nb == 0 && a->tail->nb == 2))
 	{
-		if (a->head->nb == 2 && b->head->nb == 1)
-			ft_rr(a, b);
-		else if (a->head->nb == 2)
+		if (a->head->nb == 2)
 			ft_ra(a);
-		else if (a->head->nb == 4 && b->head->nb == 1)
-			ft_rrr(a, b);
 		else if (a->head->nb == 4)
 			ft_rra(a);
-		if (a->tail->nb == 4 && b->head->nb == 1)
-			ft_rrr(a, b);
-		else if (a->tail->nb == 4)
+		if (a->tail->nb == 4)
 			ft_rra(a);
-		if (a->head->nb == 0 && b->head->nb == 1)
-			ft_ss(a, b);
-		else if (a->head->nb == 0)
+		if (a->head->nb == 0)
 			ft_sa(a);
 	}
 	if (b->head->nb == 1)
@@ -78,7 +68,7 @@ void	ps_sort_five(t_stack *a, t_stack *b)
 	ft_rra(a);
 }
 
-int	ps_radix_sort(t_stack *stack_a, t_stack *stack_b, int ac)
+void	ps_radix_sort(t_stack *stack_a, t_stack *stack_b, int ac)
 {
 	t_list	*a;
 	int		bit;
@@ -103,11 +93,12 @@ int	ps_radix_sort(t_stack *stack_a, t_stack *stack_b, int ac)
 			ft_pa(stack_a, stack_b);
 		bit = bit << 1;
 	}
-	return (0);
 }
 
 void	ps_sort(t_stack *a, t_stack *b, int ac)
 {
+	if (ac == 2 && !ft_stack_align(a, ac))
+		ft_sa(a);
 	if (!ft_stack_align(a, ac))
 	{
 		if (ac == 3)

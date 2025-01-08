@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:39:27 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/07 15:26:13 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/08 19:28:45 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ t_stack	*ft_init_stack(int *nums, int ac)
 		stack->size++;
 		i++;
 	}
+	ft_free(nums);
 	return (stack);
 }
