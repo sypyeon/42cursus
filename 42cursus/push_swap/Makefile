@@ -2,14 +2,15 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 NAME = push_swap
 SOURCES = main.c \
-	stack_function_check.c\
 	ft_init_stack.c \
 	ft_push.c \
 	ft_swap.c \
 	ft_rotate.c \
 	ft_rev_rotate.c \
+	ps_check_error.c \
+	ps_free.c \
 	ps_sort.c \
-	ft_free.c
+	ps_split_av.c
 OBJECTS = $(SOURCES:.c=.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a

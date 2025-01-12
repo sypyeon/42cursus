@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:22:58 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/08 20:23:00 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/10 17:21:57 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_is_int(char *str)
 			return (0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
 void	ft_check_valid(char **av)
@@ -45,7 +45,7 @@ void	ft_check_valid(char **av)
 	{
 		if (!ft_is_int(av[i]))
 		{
-			ft_av_free(av);
+			ps_av_free(av);
 			exit(ft_printf("Error (not an int) \n"));
 		}
 		comp = i + 1;
@@ -53,7 +53,7 @@ void	ft_check_valid(char **av)
 		{
 			if (!ft_strncmp(av[i], av[comp], 11))
 			{
-				ft_av_free(av);
+				ps_av_free(av);
 				exit (ft_printf("Error (same numbers) \n"));
 			}
 			comp++;
