@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/10 17:28:16 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/12 16:36:11 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,5 @@ void	ps_sort(t_stack *a, t_stack *b, int ac);
 void	ps_free(void *to_free);
 void	ps_av_free(char **to_free);
 void	ps_free_stack(t_stack *stack);
-
-void    ft_print_stack(t_stack *a, t_stack *b);
 
 #endif
