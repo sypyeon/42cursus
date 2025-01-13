@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_d.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: sipyeon <sipyeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 00:51:42 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/13 19:35:10 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/01 19:05:50 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/05 21:56:19 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_d(int arg)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	char	*s;
-	int		len;
+	size_t	i;
+	char	*temp;
 
-	s = ft_l_itoa((long)arg);
-	if (!s)
-		return (-1);
-	len = write(1, s, ft_strlen(s));
-	free(s);
-	return (len);
+	temp = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		temp[i] = c;
+		i++;
+	}
+	return (s);
 }

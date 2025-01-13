@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_d.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 00:51:42 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/13 19:35:10 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/05 19:27:29 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/15 20:14:19 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_d(int arg)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*s;
-	int		len;
+	void	*alloc;
+	size_t	total_size;
 
-	s = ft_l_itoa((long)arg);
-	if (!s)
-		return (-1);
-	len = write(1, s, ft_strlen(s));
-	free(s);
-	return (len);
+	if (size && nmemb > __SIZE_MAX__ / size)
+		return (NULL);
+	total_size = (nmemb * size);
+	alloc = malloc(total_size);
+	if (!alloc)
+		return (NULL);
+	ft_memset(alloc, 0, total_size);
+	return (alloc);
 }

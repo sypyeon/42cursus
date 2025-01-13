@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_d.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 00:51:42 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/13 19:35:10 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/10 01:33:02 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/11 16:27:42 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_d(int arg)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	char	*s;
-	int		len;
+	t_list	*back;
 
-	s = ft_l_itoa((long)arg);
-	if (!s)
-		return (-1);
-	len = write(1, s, ft_strlen(s));
-	free(s);
-	return (len);
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	back = ft_lstlast(*lst);
+	back -> next = new;
 }

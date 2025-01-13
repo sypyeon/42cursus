@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_d.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 00:51:42 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/13 19:35:10 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/02 22:24:15 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/10/14 21:26:39 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_d(int arg)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*s;
-	int		len;
+	size_t	i;
+	char	*temp_dest;
+	char	*temp_src;
 
-	s = ft_l_itoa((long)arg);
-	if (!s)
-		return (-1);
-	len = write(1, s, ft_strlen(s));
-	free(s);
-	return (len);
+	if (n == 0 || dest == src)
+		return (dest);
+	temp_dest = (char *)dest;
+	temp_src = (char *)src;
+	if (dest > src)
+	{
+		i = n;
+		while (i-- > 0)
+			temp_dest[i] = temp_src[i];
+	}
+	else
+	{
+		i = 0;
+		while (i < n)
+		{
+			temp_dest[i] = temp_src[i];
+			i++;
+		}
+	}
+	return (dest);
 }

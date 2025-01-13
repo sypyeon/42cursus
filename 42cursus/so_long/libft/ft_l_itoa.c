@@ -1,55 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_x.c                                             :+:      :+:    :+:   */
+/*   ft_l_itoa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 21:05:38 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/13 17:52:15 by sipyeon          ###   ########.fr       */
+/*   Created: 2024/10/22 17:30:58 by sipyeon           #+#    #+#             */
+/*   Updated: 2024/11/27 16:42:21 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static int	ft_hexa_digit(unsigned int arg)
+static size_t	ft_digit(long n)
 {
-	int	digit;
+	size_t	digit;
 
 	digit = 1;
-	if (arg < 0)
+	if (n < 0)
 	{
 		digit++;
-		arg *= -1;
+		n *= -1;
 	}
-	while (arg >= 16)
+	while (n >= 10)
 	{
-		arg = arg / 16;
+		n = n / 10;
 		digit++;
 	}
 	return (digit);
 }
 
-int	ft_x(unsigned int arg, char *base)
+char	*ft_l_itoa(long n)
 {
-	size_t	digit;
-	size_t	s_len;
-	size_t	i;
-	char	*x;
+	size_t		digit;
+	size_t		i;
+	char		*a;
 
-	digit = ft_hexa_digit(arg);
-	x = (char *)malloc(sizeof(char) * digit + 1);
-	if (!x)
-		return (-1);
-	x[digit] = '\0';
-	s_len = digit;
-	while (digit > 0)
+	digit = ft_digit(n);
+	a = (char *)malloc(sizeof(char) * digit + 1);
+	if (!a)
+		return (NULL);
+	i = 0;
+	if (n < 0)
+	{
+		a[i] = '-';
+		n *= -1;
+		i++;
+	}
+	a[digit] = '\0';
+	while (digit > i)
 	{
 		digit--;
-		x[digit] = base[arg % 16];
-		arg = arg / 16;
+		a[digit] = n % 10 + '0';
+		n = n / 10;
 	}
-	write(1, x, s_len);
-	free(x);
-	return (s_len);
+	return (a);
 }
