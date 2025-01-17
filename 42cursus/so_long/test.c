@@ -1,74 +1,85 @@
-#include "./mlx/mlx.h"
+#include "so_long.h"
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
-
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
-
-// int	close(int keycode, t_vars *vars)
-// {
-// 	mlx_destroy_window(vars->mlx, vars->win);
-// 	return (0);
-// }
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int	mlx_close(int keycode, t_vars *game)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	if (keycode == KEY_ESC)
+	{
+		mlx_destroy_image(game->mlx, game->img.img);
+		mlx_destroy_display(game->mlx);
+		mlx_destroy_window(game->mlx, game->win);
+		free(game->mlx);
+		exit (0);
+	}
+	return (0);
 }
 
-int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
+int	mlx_red_x(t_vars *game)
 {
-	return (*(int *)(unsigned char [4]){b, g, r, t});
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_image(game->mlx, game->img.img);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	exit (0);
+	return (0);
 }
 
-unsigned char	get_t(int trgb)
+int	mlx_charactor_move(int keycode, t_vars game)
 {
-	return (((unsigned char *)&trgb)[3]);
+	if (keycode == 'd')
+		game.img.location.x++;
+	else if (keycode == 's')
+		game.img.location.y++;
+	if (keycode == 'a')
+		game.img.location.x--;
+	if (keycode == 'w')
+		game.img.location.y--;
+	return (0);
 }
 
-unsigned char	get_r(int trgb)
+void	param_init(t_param param)
 {
-	return (((unsigned char *)&trgb)[2]);
-}
-
-unsigned char	get_g(int trgb)
-{
-	return (((unsigned char *)&trgb)[1]);
-}
-
-unsigned char	get_b(int trgb)
-{
-	return (((unsigned char *)&trgb)[0]);
+	param.x = 3;
+	param.y = 4;
 }
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-	t_data	drawing;
+	t_vars	game;
 
-	char	*relative_path = "./pokemon.xpm";
-	int		img_width = 500;
-	int		img_height = 500;
+	char	*relative_path = "./character.xpm";
+	int		img_width = 64;
+	int		img_height = 64;
 
-	mlx = mlx_init();
-	drawing.img = mlx_new_image(mlx, 500, 500);
-	img.img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
-	mlx_win = mlx_new_window(mlx, 500, 500, "Hello world!");
+	param_init(game.img.location);
 
+	game.mlx = mlx_init();
+	game.win = mlx_new_window(game.mlx, 1024, 768, "so_long");
+	game.img.img = mlx_xpm_file_to_image(game.mlx, relative_path, &img_width, &img_height);
+
+	mlx_put_image_to_window(game.mlx, game.win, game.img.img, game.img.location.x, game.img.location.y);
+
+	mlx_hook(game.win, 2, 1L<<0, mlx_charactor_move, &game);
+
+	mlx_hook(game.win, 2, 1L<<0, mlx_close, &game);
+	mlx_hook(game.win, 17, 0L, mlx_red_x, &game);
+	mlx_loop(game.mlx);
+}
+
+// int	main(void)
+// {
+// 	void	*img;
+// 	char	*relative_path = "./pokemon.xpm";
+// 	int		img_width;
+// 	int		img_height;
+
+// 	mlx = mlx_init();
+// 	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
+// }
+
+// int	main()
+// {
+	// drawing.img = mlx_new_image(mlx, 500, 500);
+	// drawing.img = mlx_new_image(mlx, 500, 500);
 	// int x = 1;
 	// int y = 1;
 	// drawing.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
@@ -97,18 +108,6 @@ int	main(void)
 	// 	y++;
 	// 	z++;
 	// }
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	// mlx_put_image_to_window(mlx, mlx_win, drawing.img, 0, 0);
-	mlx_loop(mlx);
-}
-
-// int	main(void)
-// {
-// 	void	*img;
-// 	char	*relative_path = "./pokemon.xpm";
-// 	int		img_width;
-// 	int		img_height;
-
-// 	mlx = mlx_init();
-// 	img = mlx_xpm_file_to_image(mlx, relative_path, &img_width, &img_height);
+	// mlx_loop(mlx);
 // }
