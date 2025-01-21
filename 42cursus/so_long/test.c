@@ -23,47 +23,44 @@ int	mlx_red_x(t_vars *game)
 	return (0);
 }
 
-int	mlx_charactor_move(int keycode, t_vars game)
+int	sl_player_move(int keycode, t_vars game)
 {
 	if (keycode == 'd')
-		game.img.location.x++;
+		game.img[PLAYER].location.x++;
 	else if (keycode == 's')
-		game.img.location.y++;
+		game.img[PLAYER].location.y++;
 	if (keycode == 'a')
-		game.img.location.x--;
+		game.img[PLAYER].location.x--;
 	if (keycode == 'w')
-		game.img.location.y--;
+		game.img[PLAYER].location.y--;
 	return (0);
-}
-
-void	param_init(t_param param)
-{
-	param.x = 3;
-	param.y = 4;
 }
 
 int	main(void)
 {
 	t_vars	game;
 
-	char	*relative_path = "./character.xpm";
+	char	*player = "./img_src/textures/player/player.xpm";
+	char	*block_tile = "./img_src/textures/block_tile.xpm";
 	int		img_width = 64;
 	int		img_height = 64;
 
-	param_init(game.img.location);
-
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, 1024, 768, "so_long");
-	game.img.img = mlx_xpm_file_to_image(game.mlx, relative_path, &img_width, &img_height);
+	game.img[PLAYER].img = mlx_xpm_file_to_image(game.mlx, player, &img_width, &img_height);
+	game.img[WALL_TILE].img = mlx_xpm_file_to_image(game.mlx, block_tile, &img_width, &img_height);
+	game.img[PLAYER].location.x = 1;
+	game.img[PLAYER].location.y = 1;
 
-	mlx_put_image_to_window(game.mlx, game.win, game.img.img, game.img.location.x, game.img.location.y);
+	mlx_put_image_to_window(game.mlx, game.win, game.img[PLAYER].img, game.img[PLAYER].location.x, game.img[PLAYER].location.y);
 
-	mlx_hook(game.win, 2, 1L<<0, mlx_charactor_move, &game);
-
-	mlx_hook(game.win, 2, 1L<<0, mlx_close, &game);
+	mlx_hook(game.win, X_EVENT_KEY_PRESS, 1L<<0, mlx_close, &game);
 	mlx_hook(game.win, 17, 0L, mlx_red_x, &game);
 	mlx_loop(game.mlx);
+	return (0);
 }
+
+mlx_put
 
 // int	main(void)
 // {

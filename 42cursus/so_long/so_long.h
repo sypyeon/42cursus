@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:17:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/17 23:55:52 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/20 19:15:35 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 # define WALL			1
 # define COLLECT		67
 # define EXIT			69
+
+# define PLAYER			'P'
+# define EXIT_TILE		'E'
+# define WALL_TILE		1
+# define ROAD_TILE		0
 
 enum {
 	ON_KEYDOWN = 2,
@@ -53,10 +58,21 @@ typedef struct	s_data {
 	t_param	location;
 }				t_data;
 
+typedef struct s_map{
+	int		x_len;
+	int		y_len;
+	int		map_size;
+	int		valid;
+	char	**map;
+}				t_map;
+
+
 typedef struct	s_vars {
 	void	*mlx;
 	void	*win;
-	t_data	img;
+	t_data	img[256];
+	t_map	map;
+	
 }				t_vars;
 
 int				create_trgb(unsigned char t, unsigned char r, 

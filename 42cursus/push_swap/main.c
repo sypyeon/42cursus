@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:08:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/10 17:49:54 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/21 20:53:46 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int ac, char **av)
 	while (av[ac + 1])
 		ac++;
 	nums = ft_arrange_nums(ac, ft_arr_atoi(ac, av));
-	ps_av_free(av);
 	a = ft_init_stack(nums, ac);
 	b = ft_newstack();
 	ps_sort(a, b, ac);

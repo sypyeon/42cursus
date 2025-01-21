@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:23:44 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/10 17:30:03 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/21 21:34:27 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	*ft_arr_atoi(int ac, char **av)
 		int_arr[i] = ft_atoi(av[i + 1]);
 		i++;
 	}
+	ps_av_free(av);
 	return (int_arr);
 }
 
@@ -62,6 +63,12 @@ int	*ft_minimize(int *nums, int *new_nums, int len)
 	int	s_num;
 	int	s_i;
 
+	if (!ps_int_dup_check(nums, len))
+	{
+		ps_free(nums);
+		ps_free(new_nums);
+		exit(ft_printf("Error (int dup)\n"));
+	}
 	i = 0;
 	s_num = INT_MIN;
 	while (i < len)

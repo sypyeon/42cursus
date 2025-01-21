@@ -8,13 +8,14 @@ int	main()
 	char	*buf;
 	int		fd = open("test.txt", O_RDONLY);
 
-	while (1)
-	// for(int i = 0; i < 20; ++i)
+	// while (1)
+	for(int i = 0; i < 9; ++i)
 	{
 		buf = get_next_line(fd);
 		printf("%s", buf);
-		if (buf)
-			free(buf);
+		if (!buf)
+			break;
+		free(buf);
 	}
 
 

@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:02:45 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/12 16:36:11 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/21 21:34:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ t_stack	*ft_newstack(void);
 t_list	*ft_lstnew_nb(int nb);
 
 void	ft_check_valid(char **av);
+int		ps_int_dup_check(int *nums, int ac);
+
+char	**ps_split(char **av);
 
 int		*ft_arr_atoi(int ac, char **av);
 int		*ft_minimize(int *nums, int *new_nums, int len);
 int		*ft_arrange_nums(int ac, int *nums);
-char	**ps_split(char **av);
 
 void	ft_sa(t_stack *a);
 void	ft_sb(t_stack *b);
