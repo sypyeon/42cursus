@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:37:32 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/20 20:02:22 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/22 18:17:52 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 
 char	*get_next_line(int fd);
+
 size_t	ft_gnl_strlen(const char *s);
 char	*ft_gnl_strchr(const char *s, int c);
 char	*ft_gnl_substr(char const *s, unsigned int start, size_t len);

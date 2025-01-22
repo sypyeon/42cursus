@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 20:23:44 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/21 21:34:27 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/22 17:50:33 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int	*ft_minimize(int *nums, int *new_nums, int len)
 	{
 		ps_free(nums);
 		ps_free(new_nums);
-		exit(ft_printf("Error (int dup)\n"));
+		ft_putendl_fd("Error (int dup)\n", 2);
+		exit(1);
 	}
 	i = 0;
 	s_num = INT_MIN;
