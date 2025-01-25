@@ -1,0 +1,143 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sl_map.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 16:42:14 by sipyeon           #+#    #+#             */
+/*   Updated: 2025/01/25 22:35:04 by sipyeon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
+
+
+void	check_path_dfs(t_vars *game, int y, int x)
+{
+	const int	dy[4] = {1, -1, 0, 0};
+	const int	dx[4] = {0, 0, 1, -1}; // 네 방향 탐색
+	int			ny;
+	int			nx;
+	int			i;
+
+	game->map.visited[y][x] = 1;
+	if (game->map.info[y][x] == 'C')
+		game->map.c_count -= 1;
+	if (game->map.info[y][x] == 'E')
+	{
+		game->valid_path = 1; // 출구가 존재하므로 유효한 경로로 임시 지정
+		return ;
+	}
+	i = -1;
+	while (++i < 4)
+	{
+		ny = y + dy[i];
+		nx = x + dx[i];
+		if (game->map.info[ny][nx] != '1' && !game->map.visited[ny][nx]) // 새로운 좌표가 벽이 아니고 방문하지 않았을 떄 dfs 탐색
+			check_path_dfs(game, game->map.info.ny, nx);
+	}
+}
+
+void	map_size_check(t_vars *game, char **map) //맵 열어서 총 길이 확인하고 
+{
+	int		i;
+	char	*buf;
+	char	*temp;
+
+	i = 0;
+	game->map.flat = ft_strdup("");
+	while (*map[i])
+	{
+		temp = game->map.flat;
+		game->map.flat = ft_strjoin(game->map.flat, buf);
+		free(buf);
+		free(temp);
+		i++;
+	}
+	game->map.y_len = i;
+	game->map.size = ft_strlen(game->map.flat);
+}
+
+void	sl_wall_check(t_vars *game, char **map, int bottom)
+{
+	int	i;
+	int	last;
+
+	i = 0;
+	last = ft_strlen(map[0]);
+	while (map[0][i] || map[bottom][i])
+	{
+		if (map[0][i] != '1' || map[bottom][i] != '1')
+			exit(write(2, "Invalid map", 12));
+		i++;
+	}
+	i = 0;
+	while (map[i][0])
+	{
+		if (map[i][0] != '1' || map[i][last] != '1')
+			exit(write(2, "Invalid map\n", 12));
+		i++;
+	}
+	game->map.valid = 1;
+}
+
+void	map_obj_counter(t_vars *game, char **map)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'P')
+				game->map.player_count++;
+			else if (map[y][x] == 'C')
+				game->map.c_count++;
+			else if (map[y][x] == 'E')
+				game->map.exit_count++;
+			x++;
+		}
+		y++;
+	}
+	if (game->map.player_count != 1 || game->map.exit_count != 1)
+		exit(write(2, "Invalid player or exit count\n", 12));
+	else if (game->map.c_count <= 0)
+		exit(write(2, "Need collectibles\n", 12));
+}
+
+void	check_map_validity(t_vars *game, char **map)
+{
+	map_size_check(game, map);
+	sl_wall_check(game, map[0], game->map.y_len - 1);
+	map_obj_counter(game, map);
+	two_d_free(map);
+}
+
+void	get_map(t_vars *game, char *map_info)
+{
+	int		i;
+	char	**map;
+	int		fd;
+
+	fd = open(map_info, O_RDONLY);
+	map = (char **)malloc(sizeof(char *) * game->map.size + 1);
+	if (!map)
+	{
+		perror("map");
+		exit(errno);
+	}
+	i = 0;
+	while (map[i]) //맵 한줄씩 저장해서 2차원 배열에 넣어두기
+	{
+		map[i] = get_next_line(fd);
+		i++;
+	}
+	game->map.x_len = ft_strlen(map[0]);
+	game->map.info = map;
+	close(fd);
+}

@@ -1,7 +1,10 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 NAME = so_long
-SOURCES = test.c
+SOURCES = sl_main.c \
+		sl_map.c \
+		sl_key.c \
+		ft_free.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

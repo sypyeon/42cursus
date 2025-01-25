@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dummy.c                                            :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 23:07:31 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/17 23:07:48 by sipyeon          ###   ########.fr       */
+/*   Created: 2025/01/25 20:39:11 by sipyeon           #+#    #+#             */
+/*   Updated: 2025/01/25 20:40:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	ft_free(void *to_free)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	if (to_free)
+		free(to_free);
+	to_free = NULL;
 }
 
-void	param_init(t_param *param)
+void	two_d_free(char **to_free)
 {
-	param->x = 3;
-	param->y = 4;
+	int	i;
+
+	i = 0;
+	while (to_free[i])
+	{
+		ft_free(to_free[i]);
+		i++;
+	}
+	ft_free(to_free);
 }

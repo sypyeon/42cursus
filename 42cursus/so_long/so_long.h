@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:17:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/22 23:04:15 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/25 22:31:02 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ enum {
 	ON_DESTROY = 17
 };
 
-typedef struct s_param{
+typedef struct s_param
+{
 	int		x;
 	int		y;
 }				t_param;
 
-typedef struct	s_img {
+typedef struct	s_img
+{
 	void	*ptr;
 	char	*addr;
 	int		bpp;
@@ -60,21 +62,27 @@ typedef struct	s_img {
 	int		endian;
 }				t_img;
 
-typedef struct s_map{
+typedef struct s_map
+{
 	char	**info;
+	char	*flat;
 	int		x_len;
 	int		y_len;
 	int		size;
 	int		valid;
+	int		**visited;
+	int		player_count;
+	int		exit_count;
+	int		c_count;
 }				t_map;
 
-typedef struct	s_vars {
+typedef struct	s_vars
+{
 	void	*mlx;
 	void	*win;
 	t_img	img;
 	t_map	map;
 	t_param	location;
-	
 }				t_vars;
 
 typedef struct s_check //맵 유효성 확인
@@ -85,11 +93,14 @@ typedef struct s_check //맵 유효성 확인
 	int	**visited;
 }	t_check;
 
-int				create_trgb(unsigned char t, unsigned char r, 
-							unsigned char g, unsigned char b);
-unsigned char	get_t(int trgb);
-unsigned char	get_r(int trgb);
-unsigned char	get_g(int trgb);
-unsigned char	get_b(int trgb);
+int				close_game(t_vars *game);
+int				sl_keybind(int keycode, t_vars *game);
+
+void			map_size_check(t_vars *game, char **map);
+void			get_map(t_vars *game, char *map);
+void			check_map_validity(t_vars *game, char **map);
+int 			check_path_dfs(int x, int y, char **map, char find_char, int height);
+
+void			two_d_free(char **to_free);
 
 #endif
