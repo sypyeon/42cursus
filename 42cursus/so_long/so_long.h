@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:17:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/25 22:31:02 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/26 19:14:33 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_param
 {
 	int		x;
 	int		y;
+	void	*player;
 }				t_param;
 
 typedef struct	s_img
@@ -70,7 +71,8 @@ typedef struct s_map
 	int		y_len;
 	int		size;
 	int		valid;
-	int		**visited;
+	int		p_x;
+	int		p_y;
 	int		player_count;
 	int		exit_count;
 	int		c_count;
@@ -80,6 +82,7 @@ typedef struct	s_vars
 {
 	void	*mlx;
 	void	*win;
+	int		valid_path;
 	t_img	img;
 	t_map	map;
 	t_param	location;
@@ -99,8 +102,11 @@ int				sl_keybind(int keycode, t_vars *game);
 void			map_size_check(t_vars *game, char **map);
 void			get_map(t_vars *game, char *map);
 void			check_map_validity(t_vars *game, char **map);
-int 			check_path_dfs(int x, int y, char **map, char find_char, int height);
+void			check_path_dfs(t_vars *game, t_check *route, int y, int x);
 
-void			two_d_free(char **to_free);
+void			draw_map(t_vars *game, char *line, int l);
+
+void			d_ptr_free(char **to_free);
+void			visited_free(int **to_free);
 
 #endif

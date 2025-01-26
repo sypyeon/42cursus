@@ -2,6 +2,8 @@
 
 void	struct_init(t_vars *game)
 {
+	game->valid_path = 0;
+
 	game->img.ptr = 0;
 	game->img.addr = 0;
 	game->img.line_length = 0;
@@ -21,25 +23,19 @@ void	struct_init(t_vars *game)
 int	main(int ac, char **av)
 {	
 	t_vars	game;
+	int		i;
 
 	if (ac != 2)
-	{
-		ft_putstr_fd("Error\n", 2);
-		return (1);
-	}
+		return (write(2, "Error (no input)\n", 17));
 	struct_init(&game);
 	get_map(&game, av[1]);
-	char	*player = "./textures/player/player.xpm";
-	char	*block_tile = "./textures/block_tile.xpm";
-	int		img_width = 64;
-	int		img_height = 64;
-
+	check_map_validity(&game, game.map.info);
+	
 	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, 1024, 768, "so_long");
-	game.img.ptr = mlx_xpm_file_to_image(game.mlx, player, &img_width, &img_height);
-	game.img.ptr = mlx_xpm_file_to_image(game.mlx, block_tile, &img_width, &img_height);
 
-	mlx_put_image_to_window(game.mlx, game.win, game.img.ptr, game.location.x * TILE, game.location.y * TILE);
+	i = -1;
+	while(++i < game.map.y_len)
+		draw_map(&game, game.map.info[i], i);
 
 	mlx_hook(game.win, KEY_PRESS, 0, sl_keybind, &game); //조작 키 및 ESC
 	mlx_hook(game.win, ON_DESTROY, 0L, close_game, &game); //X키 클릭

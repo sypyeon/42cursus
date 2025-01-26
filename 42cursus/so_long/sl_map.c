@@ -6,27 +6,59 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:42:14 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/25 22:35:04 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/26 19:26:00 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-
-void	check_path_dfs(t_vars *game, int y, int x)
+int	**sl_visited_init(t_vars *game)
 {
-	const int	dy[4] = {1, -1, 0, 0};
+	int	**visited;
+	int	i;
+	int	j;
+
+	i = -1;
+	visited = (int **)malloc(sizeof(int *) * game->map.y_len);
+	if (!visited)
+		return(0);
+	while (++i < game->map.y_len - 1)
+	{
+		visited[i] = (int *)malloc(sizeof(int) * (game->map.x_len + 1));
+		if (!visited[i])
+		{
+			visited_free(visited);
+			return (0);
+		}
+		j = -1;
+		while (j < game->map.x_len)
+			visited[i][++j] = 0;
+	}
+	return (visited);
+}
+
+void	sl_init_route(t_check *route, t_vars *game)
+{
+	route->x = 0;
+	route->y = 0;
+	route->c_count = 0;
+	route->visited = sl_visited_init(game);
+}
+
+void	check_path_dfs(t_vars *game, t_check *route, int y, int x)
+{
 	const int	dx[4] = {0, 0, 1, -1}; // 네 방향 탐색
+	const int	dy[4] = {1, -1, 0, 0};
 	int			ny;
 	int			nx;
 	int			i;
 
-	game->map.visited[y][x] = 1;
+	route->visited[y][x] = 1;
 	if (game->map.info[y][x] == 'C')
 		game->map.c_count -= 1;
 	if (game->map.info[y][x] == 'E')
 	{
-		game->valid_path = 1; // 출구가 존재하므로 유효한 경로로 임시 지정
+		game->valid_path += 1; // 출구가 존재하므로 유효한 경로로 임시 지정
 		return ;
 	}
 	i = -1;
@@ -34,15 +66,14 @@ void	check_path_dfs(t_vars *game, int y, int x)
 	{
 		ny = y + dy[i];
 		nx = x + dx[i];
-		if (game->map.info[ny][nx] != '1' && !game->map.visited[ny][nx]) // 새로운 좌표가 벽이 아니고 방문하지 않았을 떄 dfs 탐색
-			check_path_dfs(game, game->map.info.ny, nx);
+		if (game->map.info[ny][nx] != '1' && !route->visited[ny][nx]) // 새로운 좌표가 벽이 아니고 방문하지 않았을 떄 dfs 탐색
+			check_path_dfs(game, route, ny, nx);
 	}
 }
 
 void	map_size_check(t_vars *game, char **map) //맵 열어서 총 길이 확인하고 
 {
 	int		i;
-	char	*buf;
 	char	*temp;
 
 	i = 0;
@@ -50,8 +81,7 @@ void	map_size_check(t_vars *game, char **map) //맵 열어서 총 길이 확인�
 	while (*map[i])
 	{
 		temp = game->map.flat;
-		game->map.flat = ft_strjoin(game->map.flat, buf);
-		free(buf);
+		game->map.flat = ft_strjoin(game->map.flat, map[i]);
 		free(temp);
 		i++;
 	}
@@ -95,7 +125,11 @@ void	map_obj_counter(t_vars *game, char **map)
 		while (map[y][x])
 		{
 			if (map[y][x] == 'P')
+			{
 				game->map.player_count++;
+				game->map.p_x = x;
+				game->map.p_y = y;
+			}
 			else if (map[y][x] == 'C')
 				game->map.c_count++;
 			else if (map[y][x] == 'E')
@@ -112,10 +146,13 @@ void	map_obj_counter(t_vars *game, char **map)
 
 void	check_map_validity(t_vars *game, char **map)
 {
+	t_check	route;
 	map_size_check(game, map);
-	sl_wall_check(game, map[0], game->map.y_len - 1);
+	sl_wall_check(game, map, game->map.y_len - 1);
 	map_obj_counter(game, map);
-	two_d_free(map);
+	sl_init_route(&route, game);
+	check_path_dfs(game, &route, game->map.p_x, game->map.p_y);
+	d_ptr_free(map);
 }
 
 void	get_map(t_vars *game, char *map_info)
