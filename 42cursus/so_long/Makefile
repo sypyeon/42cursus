@@ -21,7 +21,7 @@ $(NAME): $(OBJECTS) $(LIBFT) $(MLX)
 	$(CC) $(OBJECTS) -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME) $(LIBFT)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I/usr/include -Imlx -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include -Imlx -c $< -o $@
 
 $(LIBFT) :
 	make -C $(LIBFT_DIR)

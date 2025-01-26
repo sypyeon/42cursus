@@ -2,8 +2,6 @@
 
 void	struct_init(t_vars *game)
 {
-	game->valid_path = 0;
-
 	game->img.ptr = 0;
 	game->img.addr = 0;
 	game->img.line_length = 0;
@@ -20,25 +18,33 @@ void	struct_init(t_vars *game)
 	game->map.player_count = 0;
 }
 
+int	game_loop(t_vars *game)
+{
+	int	i;
+
+	i = -1;
+	while(++i < game->map.y_len)
+		draw_map(game, game->map.info[i], i);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {	
 	t_vars	game;
-	int		i;
 
 	if (ac != 2)
 		return (write(2, "Error (no input)\n", 17));
 	struct_init(&game);
+	map_size_check(&game, av[1]);
 	get_map(&game, av[1]);
 	check_map_validity(&game, game.map.info);
 	
 	game.mlx = mlx_init();
+	game.win = mlx_new_window(game.mlx, game.map.x_len * TILE, game.map.y_len * TILE, "so_long");
 
-	i = -1;
-	while(++i < game.map.y_len)
-		draw_map(&game, game.map.info[i], i);
-
-	mlx_hook(game.win, KEY_PRESS, 0, sl_keybind, &game); //조작 키 및 ESC
+	mlx_hook(game.win, KEY_PRESS, 1L<<0, sl_keybind, &game); //조작 키 및 ESC
 	mlx_hook(game.win, ON_DESTROY, 0L, close_game, &game); //X키 클릭
+	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

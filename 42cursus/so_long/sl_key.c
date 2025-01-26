@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:40:01 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/25 21:34:45 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/26 23:14:24 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,42 @@ int	close_game(t_vars *game)
 	return (0);
 }
 
+void	sl_player_move(t_vars *game, int x_move, int y_move)
+{
+	int		x;
+	int		y;
+	char	**map;
+
+	x = game->map.p_x;
+	y = game->map.p_y;
+	map = game->map.info;
+	if (map[y + y_move][x + x_move] != '1')
+	{
+		if (map[y + y_move][x + x_move] == 'C')
+			game->map.c_count--;
+		else if (map[y + y_move][x + x_move] == 'E')
+		{
+			if (game->map.c_count == 0)
+				exit(0);
+			return ;
+		}
+		map[y + y_move][x + x_move] = 'P';
+		map[y][x] = '0';
+		game->map.p_x += x_move;
+		game->map.p_y += y_move;
+	}
+}
+
 int	sl_keybind(int keycode, t_vars *game)
 {
 	if (keycode == KEY_W)
-		game->location.y -= TILE;
+		sl_player_move(game, 0, -1);
 	else if (keycode == KEY_A)
-		game->location.x -= TILE;
+		sl_player_move(game, -1, 0);
 	else if (keycode == KEY_S)
-		game->location.y += TILE;	
+		sl_player_move(game, 0, 1);
 	else if (keycode == KEY_D)
-		game->location.x += TILE;
+		sl_player_move(game, 1, 0);
 	else if (keycode == KEY_ESC)
 		close_game(game);
 	return (0);

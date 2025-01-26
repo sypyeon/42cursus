@@ -5,10 +5,10 @@
 		"name": "Debug Makefile Program",
 		"type": "cppdbg",
 		"request": "launch",
-		"program": "${workspaceFolder}/push_swap/push_swap",  // 빌드된 실행 파일 경로
-		"args": ["2 4 5 3 1"],
+		"program": "${workspaceFolder}/so_long/so_long",  // 빌드된 실행 파일 경로
+		"args": ["./maps/map1.ber"],
 		"stopAtEntry": false,
-		"cwd": "${workspaceFolder}/push_swap",
+		"cwd": "${workspaceFolder}/so_long",
 		"environment": [],
 		"externalConsole": false,
 		"MIMode": "gdb",
