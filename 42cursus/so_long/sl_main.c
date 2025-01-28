@@ -2,6 +2,9 @@
 
 void	struct_init(t_vars *game)
 {
+	game->player_face = 0;
+	game->move_count = 0;
+
 	game->img.ptr = 0;
 	game->img.addr = 0;
 	game->img.line_length = 0;
