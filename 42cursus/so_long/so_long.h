@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:17:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/26 23:08:22 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/28 17:41:53 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@
 # define EXIT			69
 # define PLAYER			'P'
 # define TILE			64
+
+# define DOWN			0
+# define UP				1
+# define LEFT			2
+# define RIGHT			3
 
 enum {
 	ON_KEYDOWN = 2,
@@ -85,6 +90,8 @@ typedef struct	s_vars
 	t_img	img;
 	t_map	map;
 	t_param	location;
+	int		player_face;
+	int		move_count;
 }				t_vars;
 
 typedef struct s_check //맵 유효성 확인

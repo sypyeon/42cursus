@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:40:01 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/26 23:14:24 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/28 17:43:17 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,32 @@ void	sl_player_move(t_vars *game, int x_move, int y_move)
 		map[y][x] = '0';
 		game->map.p_x += x_move;
 		game->map.p_y += y_move;
+		ft_printf("%d\n", game->move_count++);
 	}
 }
 
 int	sl_keybind(int keycode, t_vars *game)
 {
 	if (keycode == KEY_W)
+	{
 		sl_player_move(game, 0, -1);
+		game->player_face = UP;
+	}
 	else if (keycode == KEY_A)
+	{
 		sl_player_move(game, -1, 0);
+		game->player_face = LEFT;
+	}
 	else if (keycode == KEY_S)
+	{
 		sl_player_move(game, 0, 1);
+		game->player_face = DOWN;
+	}
 	else if (keycode == KEY_D)
+	{
 		sl_player_move(game, 1, 0);
+		game->player_face = RIGHT;
+	}
 	else if (keycode == KEY_ESC)
 		close_game(game);
 	return (0);

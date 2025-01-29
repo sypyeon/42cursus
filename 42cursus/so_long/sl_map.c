@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:42:14 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/26 23:10:05 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/28 18:43:07 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void	check_map_validity(t_vars *game, char **map)
 	sl_init_route(&route, game);
 	check_path_dfs(game, &route, game->map.p_x, game->map.p_y);
 	if (!route.valid_path || game->map.c_count != route.valid_collect)
-		exit(0);
+		exit(write(2, "Invalid path\n", 14));
 }
 
 void	get_map(t_vars *game, char *map_info)

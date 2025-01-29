@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:41:55 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/26 22:31:23 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/28 17:17:37 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,18 @@ void	sl_draw_tile(t_vars *game, char texture)
 				"./textures/road.xpm", &w, &h);
 	else if (texture == 'P') // 'P'인 경우 플레이어
 	{
-		game->img.ptr = mlx_xpm_file_to_image(game->mlx, \
+		if (game->player_face == DOWN)
+			game->img.ptr = mlx_xpm_file_to_image(game->mlx, 
 				"./textures/player/player_down.xpm", &w, &h);
+		else if (game->player_face == UP)
+			game->img.ptr = mlx_xpm_file_to_image(game->mlx, 
+				"./textures/player/player_up.xpm", &w, &h);
+		else if (game->player_face == LEFT)
+			game->img.ptr = mlx_xpm_file_to_image(game->mlx, 
+				"./textures/player/player_left.xpm", &w, &h);
+		else if (game->player_face == RIGHT)
+			game->img.ptr = mlx_xpm_file_to_image(game->mlx, 
+				"./textures/player/player_right.xpm", &w, &h);
 		game->location.player = game->img.ptr; // 플레이어 위치에 대한 이미지 포인터도 저장해줌
 	}
 }
