@@ -1,16 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
-NAME = push_swap
-SOURCES = main.c \
-	ft_init_stack.c \
-	ft_push.c \
-	ft_swap.c \
-	ft_rotate.c \
-	ft_rev_rotate.c \
-	ps_check_error.c \
-	ps_free.c \
-	ps_sort.c \
-	ps_split_av.c
+NAME = pipex
+SOURCES = pipex.c \
 OBJECTS = $(SOURCES:.c=.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -18,11 +9,11 @@ LIBFT_DIR = ./libft
 
 all : $(NAME)
 
-$(NAME) : $(OBJECTS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $^
+$(NAME): $(OBJECTS) $(LIBFT)
+	$(CC) $(OBJECTS) -o $(NAME) $(LIBFT)
 
-%.o : %.c
-	$(CC) $(CFLAGS) -o $@ -c $<
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT) :
 	make -C $(LIBFT_DIR)
