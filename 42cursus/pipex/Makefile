@@ -1,7 +1,7 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 NAME = pipex
-SOURCES = pipex.c \
+SOURCES = pipex.c
 OBJECTS = $(SOURCES:.c=.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a
