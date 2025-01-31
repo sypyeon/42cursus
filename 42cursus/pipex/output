@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:37:39 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/30 22:58:05 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/30 22:51:57 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	save_cmd(t_cmd_info *list, char **av)
 	t_cmd	*new;
 	t_cmd	*prev;
 
-	list->in_fd = open(av[1], O_RDONLY);
-	list->out_fd = open(av[list->size + 2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	i = 0;
 	while (i < list->size)
 	{
@@ -67,6 +65,8 @@ void	save_cmd(t_cmd_info *list, char **av)
 		{
 			list->head = new;
 			list->tail = new;
+			list->in_file = av[1];
+			list->out_file = av[list->size + 2];
 		}
 		new->cmd = ft_split(av[2 + i], ' ');
 		cmd_add_back(list, new);
@@ -157,10 +157,13 @@ int		main(int ac, char **av, char **envp)
 	pipe_fd[0] = 3;
 	pipe_fd[1] = 4;
 
+	write(4, str, strlen(str));
 
-	dup2(list.in_fd[1], STDOUT_FILENO);
+	dup2(pipe_fd[1], STDOUT_FILENO);
 	dup2(pipe_fd[0], STDIN_FILENO);
 
+	int fd1 = open(av[1], O_RDONLY);
+	int fd2 = open(av[ac - 1], O_WRONLY, )
 
 
 

@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:34:15 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/29 17:58:11 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/01/30 23:00:11 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,18 @@
 
 typedef struct	s_cmd
 {
-	char **cmd;
-	struct s_cmd *next;
-	struct s_cmd *prev;
+	char 			**cmd;
+	int				pipe_fd[2];
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
 }				t_cmd;
 
 typedef	struct	s_cmd_info
 {
 	int		size;
+	int		in_fd;
+	int		out_fd;
+	char	**path;
 	t_cmd	*head;
 	t_cmd	*tail;
 }				t_cmd_info;

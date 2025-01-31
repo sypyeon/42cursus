@@ -32,7 +32,7 @@ int	game_loop(t_vars *game)
 }
 
 int	main(int ac, char **av)
-{	
+{
 	t_vars	game;
 
 	if (ac != 2)
