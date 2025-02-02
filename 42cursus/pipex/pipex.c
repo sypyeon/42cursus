@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:37:39 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/30 22:58:05 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/03 00:35:07 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,29 +137,59 @@ char	**find_path(char **envp)
 	return (path_split);
 }
 
+void	pipex_child(t_cmd_info *list, int cmd_i)
+{
+	t_cmd	*cmd;
+	int		i;
+
+	i = 0;
+	cmd = list->head;
+	while (i < cmd_i)
+	{
+		cmd = cmd->next;
+		i++;
+	}
+	execve()
+}
+
+void	pipex_parent(t_cmd_info *list, pid_t *pid)
+{
+	int	i = 0;
+
+	while (i < list->size)
+	{
+		waitpid(pid[i], NULL, 0);
+		i++;
+	}
+	free();
+}
+
 int		main(int ac, char **av, char **envp)
 {
-	// int			i;
+	int			i;
 	t_cmd_info	list;
 	pid_t		*pid;
 
 	if (ac != 5)
 		return (0);
+	list.in_file = av[1];
+	list.in_file = av[ac - 1];
 	list.size = ac -3;
 	save_cmd(&list, av);
 	list.path = find_path(envp);
 	access_check(&list);
 	pid = (pid_t *)malloc(sizeof(pid_t) * list.size);
+	int i = 0;
+	while (i < list.size)
+	{
+		pid[i] = fork();
+		if (pid[i] == 0)
+			child(list, i);
+		i++;
+	}
+	pipex_parent(&list, pid);
 
-	int pipe_fd[2];
-	
-	pipe(pipe_fd);
-	pipe_fd[0] = 3;
-	pipe_fd[1] = 4;
 
-
-	dup2(list.in_fd[1], STDOUT_FILENO);
-	dup2(pipe_fd[0], STDIN_FILENO);
 
 
 
@@ -175,7 +205,7 @@ int		main(int ac, char **av, char **envp)
 	// 	new = new->next;
 	// }
 	// printf("%s\n", list.tail->cmd[0]);
-	
+
 	// int			status;
 	// if (!pid[i])
 	// {

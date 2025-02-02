@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 21:53:30 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/11/30 22:31:19 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/02 21:22:58 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <fcntl.h>
-#include <limits.h>
+# include <limits.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -84,22 +84,22 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
-						
-int		ft_printf(const char *s, ...);
-int		ft_s(char *arg);
-int		ft_p(void *arg, char *base);
-int		ft_d(int arg);
-int		ft_u(unsigned int arg);
-int		ft_x(unsigned int arg, char *base);
-void	ft_putchar(int c);
-void	ft_putstr(char *s);
-char	*ft_l_itoa(long n);
 
+int					ft_printf(const char *s, ...);
+int					ft_s(char *arg);
+int					ft_p(void *arg, char *base);
+int					ft_d(int arg);
+int					ft_u(unsigned int arg);
+int					ft_x(unsigned int arg, char *base);
+void				ft_putchar(int c);
+void				ft_putstr(char *s);
+char				*ft_l_itoa(long n);
 
-char	*get_next_line(int fd);
-char	*ft_gnl_strchr(const char *s, int c);
-char	*ft_gnl_substr(char const *s, unsigned int start, size_t len);
-char	*ft_gnl_str_join(char *dest, char *src);
-char	*ft_gnl_strdup(const char *s);
+char				*get_next_line(int fd);
+char				*ft_gnl_strchr(const char *s, int c);
+char				*ft_gnl_substr(char const *s, unsigned int start,
+						size_t len);
+char				*ft_gnl_str_join(char *dest, char *src);
+char				*ft_gnl_strdup(const char *s);
 
 #endif

@@ -1,39 +1,29 @@
-#include "pipex.h"
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
 
-int		main()
-{
-	// int			status;
-	// t_cmd		cmd;
-	// t_cmd_info	list;
-	// pid_t		*pid;
+int main() {
+    int fd[2];
+    char message[] = "Hello, child!";
+    char buffer[100];
+    pid_t pid;
 
-	// list.size = ac - 3;
-	// pid = (pid_t *)malloc(sizeof(pid_t) * list.size);
-	// init_cmd(&list, &cmd, av, pid);
-	// if (access < 0)
-	// {
-	// 	free;
-		
-	// }
-	// execve
-	// if (!a)
-	// {
-	// 	child func
-	// 	exit to not go thru parent func
-	// 	exit(11);
-	// }
-	// else if (a)
-	// {
-	// 	only parents
-	// 	waitpid(a, &status, 0);
-	// }
-	// printf("%d", status);
-	// int	n_fd;
-	// n_fd = 3;
-	// dup2(1, n_fd);
-	// write(n_fd, "hello", 5);
-	char	*s = "asdjfa";
-	write(0, s, 5);
-	// printf("%d", n_fd);
-	return (0);
+    pipe(fd);  // 파이프 생성
+    pid = fork();
+
+    if (pid > 0)
+	{  // 부모 프로세스
+        close(fd[0]);  // 읽기 끝 닫기 (부모는 쓰기만 함)
+        write(fd[1], message, strlen(message) + 1);
+        close(fd[1]);  // 쓰기 끝 닫기
+    }
+	else
+	{  // 자식 프로세스
+        close(fd[1]);  // 쓰기 끝 닫기 (자식은 읽기만 함)
+        read(fd[0], buffer, sizeof(buffer));
+        printf("Child received: %s\n", buffer);
+        close(fd[0]);  // 읽기 끝 닫기
+    }
+    return 0;
 }
