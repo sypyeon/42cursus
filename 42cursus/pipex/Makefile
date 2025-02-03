@@ -1,8 +1,15 @@
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 NAME = pipex
-SOURCES = pipex.c
+SOURCES = px_main.c \
+	px_cmd_utils.c \
+	px_path_utils.c
 OBJECTS = $(SOURCES:.c=.o)
+
+B_SRC = px_main_bonus.c \
+	px_cmd_utils_bonus.c \
+	px_path_utils_bonus.c
+B_OBJ = $(B_SRC:.c=.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFT_DIR = ./libft
@@ -12,6 +19,9 @@ all : $(NAME)
 $(NAME): $(OBJECTS) $(LIBFT)
 	$(CC) $(OBJECTS) -o $(NAME) $(LIBFT)
 
+bonus : $(B_OBJ) $(LIBFT)
+	$(CC) $(B_OBJ) -o $(NAME) $(LIBFT)
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -19,7 +29,7 @@ $(LIBFT) :
 	make -C $(LIBFT_DIR)
 
 clean :
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) $(B_OBJ)
 	make -C $(LIBFT_DIR) clean
 
 fclean : clean

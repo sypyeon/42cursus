@@ -1,26 +1,5 @@
 #include "so_long.h"
 
-void	struct_init(t_vars *game)
-{
-	game->player_face = 0;
-	game->move_count = 0;
-
-	game->img.ptr = 0;
-	game->img.addr = 0;
-	game->img.line_length = 0;
-
-	game->location.x = 0;
-	game->location.y = 0;
-
-	game->map.x_len = 0;
-	game->map.y_len = 0;
-	game->map.size = 0;
-	game->map.valid = 0;
-	game->map.c_count = 0;
-	game->map.exit_count = 0;
-	game->map.player_count = 0;
-}
-
 int	game_loop(t_vars *game)
 {
 	int	i;
@@ -37,7 +16,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (write(2, "Error (no input)\n", 17));
-	struct_init(&game);
+	ft_bzero(&game, sizeof(t_vars));
 	map_size_check(&game, av[1]);
 	get_map(&game, av[1]);
 	check_map_validity(&game, game.map.info);

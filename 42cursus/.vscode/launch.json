@@ -1,27 +1,54 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-	  {
-		"name": "Debug Makefile Program",
-		"type": "cppdbg",
-		"request": "launch",
-		"program": "${workspaceFolder}/so_long/so_long",  // 빌드된 실행 파일 경로
-		"args": ["./maps/map1.ber"],
-		"stopAtEntry": false,
-		"cwd": "${workspaceFolder}/so_long",
-		"environment": [],
-		"externalConsole": false,
-		"MIMode": "gdb",
-		"setupCommands": [
-		  {
-			"description": "Enable pretty-printing for gdb",
-			"text": "-enable-pretty-printing",
-			"ignoreFailures": true
-		  }
-		],
-		"miDebuggerPath": "/usr/bin/gdb",  // 시스템에 따라 GDB의 경로를 지정
-		"miDebuggerArgs": "",
-		"internalConsoleOptions": "openOnSessionStart"
-	  }
-	]
-  }
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C/C++: gcc 활성 파일 디버그",
+            "type": "cppdbg",
+            "request": "launch",
+            // "program": "${fileDirname}/a.out",
+            "program": "${workspaceFolder}/pipex/pipex",
+            "args": ["infile", "ls -l", "wc -l", "outfile"],
+            "stopAtEntry": false,
+            // "cwd": "${fileDirname}",
+            "cwd": "${workspaceFolder}/pipex/",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Enable multi-threading",
+                    "text": "set print thread-events on",
+                    "ignoreFailures": true
+                }
+            ],
+            "logging": {
+                "engineLogging": true,
+                "trace": true,
+                "traceResponse": true
+            }
+        }
+    ]
+}
+// "setupCommands":
+// [
+//     {
+//         "description": "Enable funcy printing to gdb",
+//         "text": "-enable-pretty-printing",
+//         "ignoreFailures": true
+//     },
+//     {
+//         "description":"In this mode GDB will be attached to both processes after a call to fork() or vfork().",
+//         "text": "-gdb-set detach-on-fork off",
+//         "ignoreFailures": true
+//     },
+//     {
+//         "description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+//         "text": "-gdb-set follow-fork-mode child",
+//         "ignoreFailures": true
+//     }
+// ],
