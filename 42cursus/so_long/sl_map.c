@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:42:14 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/28 18:43:07 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/05 02:34:22 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	**sl_visited_init(t_vars *game)
 	int	i;
 	int	j;
 
-	i = -1;
+	i = 0;
 	visited = (int **)malloc(sizeof(int *) * game->map.y_len);
 	if (!visited)
 		return(0);
-	while (++i < game->map.y_len - 1)
+	while (i < game->map.y_len - 1)
 	{
 		visited[i] = (int *)malloc(sizeof(int) * (game->map.x_len + 1));
 		if (!visited[i])
@@ -33,6 +33,7 @@ int	**sl_visited_init(t_vars *game)
 		j = -1;
 		while (j < game->map.x_len)
 			visited[i][++j] = 0;
+		i++;
 	}
 	return (visited);
 }
@@ -143,21 +144,46 @@ void	map_obj_counter(t_vars *game, char **map)
 		}
 		y++;
 	}
-	if (game->map.player_count != 1 || game->map.exit_count != 1)
-		exit(write(2, "Invalid player or exit count\n", 12));
-	else if (game->map.c_count <= 0)
-		exit(write(2, "Need collectibles\n", 12));
+}
+
+void	sl_texture_check(char *map_str)
+{
+	int		i;
+	int		check;
+	char	texture[6] = "01ECP\n";
+
+	i = 0;
+	while (map_str[i])
+	{
+		check = 0;
+		while (texture[check])
+		{
+			if (map_str[i] == texture[check])
+				break;
+			check++;
+		}
+		if (check == 6)
+			exit(write(2, "Invalid texture\n", 17));
+		i++;
+	}
 }
 
 void	check_map_validity(t_vars *game, char **map)
 {
 	t_check	route;
+	ft_bzero(&route, sizeof(t_check));
+	sl_texture_check(game->map.flat);
 	sl_wall_check(game, map, game->map.y_len - 1);
 	map_obj_counter(game, map);
+	route.visited = sl_visited_init(game);
 	sl_init_route(&route, game);
 	check_path_dfs(game, &route, game->map.p_x, game->map.p_y);
 	if (!route.valid_path || game->map.c_count != route.valid_collect)
 		exit(write(2, "Invalid path\n", 14));
+	if (game->map.player_count != 1 || game->map.exit_count != 1)
+		exit(write(2, "Invalid player or exit count\n", 12));
+	else if (game->map.c_count <= 0)
+		exit(write(2, "Need collectibles\n", 12));
 }
 
 void	get_map(t_vars *game, char *map_info)
