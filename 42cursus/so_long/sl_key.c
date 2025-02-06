@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:40:01 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/28 17:43:17 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/07 01:12:41 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int	close_game(t_vars *game)
 {
 	mlx_destroy_image(game->mlx, game->img.ptr);
-	mlx_destroy_display(game->mlx);
 	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free_map(game->map.info);
 	free(game->mlx);
 	exit (0);
 	return (0);
@@ -38,8 +39,7 @@ void	sl_player_move(t_vars *game, int x_move, int y_move)
 		else if (map[y + y_move][x + x_move] == 'E')
 		{
 			if (game->map.c_count == 0)
-				exit(0);
-			return ;
+				close_game(game);
 		}
 		map[y + y_move][x + x_move] = 'P';
 		map[y][x] = '0';

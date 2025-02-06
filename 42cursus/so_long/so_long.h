@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:17:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/05 02:30:22 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/06 22:46:38 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,19 @@ typedef struct s_check //맵 유효성 확인
 	int	**visited;
 }	t_check;
 
-int				close_game(t_vars *game);
-int				sl_keybind(int keycode, t_vars *game);
+int		close_game(t_vars *game);
+int		sl_keybind(int keycode, t_vars *game);
 
-void			map_size_check(t_vars *game, char *map_info);
-void			get_map(t_vars *game, char *map);
-void			check_map_validity(t_vars *game, char **map);
-void			check_path_dfs(t_vars *game, t_check *route, int y, int x);
+void	draw_map(t_vars *game, char *line, int l);
 
-void			draw_map(t_vars *game, char *line, int l);
+void	map_size_check(t_vars *game, char *map_info);
+void	map_obj_counter(t_vars *game, char **map);
+void	get_map(t_vars *game, char *map);
 
-void			d_ptr_free(char **to_free);
-void			visited_free(int **to_free);
+void	check_map_validity(t_vars *game, char **map);
+void	check_path_dfs(t_vars *game, t_check *route, int y, int x);
+
+void	free_map(char **to_free);
+void	visited_free(int **to_free);
 
 #endif

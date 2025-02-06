@@ -3,7 +3,8 @@ CFLAGS = -Wall -Werror -Wextra -g
 NAME = so_long
 SOURCES = sl_main.c \
 		sl_key.c \
-		sl_map.c \
+		sl_save_map_data.c \
+		sl_map_check.c \
 		sl_draw.c \
 		ft_free.c
 

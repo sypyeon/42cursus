@@ -18,7 +18,7 @@ int	main(int ac, char **av)
 	t_vars	game;
 
 	if (ac != 2)
-		return (write(2, "Error (no input)\n", 17));
+		return (write(2, "Error (wrong input)\n", 21));
 	ft_bzero(&game, sizeof(t_vars));
 	map_size_check(&game, av[1]);
 	get_map(&game, av[1]);

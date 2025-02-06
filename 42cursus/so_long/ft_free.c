@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 20:39:11 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/26 19:14:17 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/07 01:13:25 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ void	ft_free(void *to_free)
 	to_free = NULL;
 }
 
-void	d_ptr_free(char **to_free)
+void	free_map(char **to_free)
 {
 	int	i;
 
 	i = 0;
+	if (!to_free)
+		return ;
 	while (to_free[i])
 	{
 		ft_free(to_free[i]);
@@ -37,7 +39,9 @@ void	visited_free(int **to_free)
 	int	i;
 
 	i = 0;
-	while (to_free[i])
+	if (!to_free)
+		return ;
+	while (to_free[i] != NULL)
 	{
 		ft_free(to_free[i]);
 		i++;
