@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:37:39 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/05 00:56:10 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/07 15:57:29 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,41 @@ void	px_here_doc(t_cmd *node, t_cmd_info *list, char **envp, pid_t *pid)
 	}
 }
 
+void	px_free_node(t_cmd *node)
+{
+	int	i;
+
+	i = 0;
+	if (!node->cmd)
+		return ;
+	while (node->cmd[i])
+	{
+		free(node->cmd[i]);
+		i++;
+	}
+	free(node->cmd);
+}
+
+void	px_free_info(t_cmd_info *list)
+{
+	int	i;
+	t_cmd	*to_free;
+
+	to_free = list->head;
+	while (to_free)
+	{
+		px_free_node(to_free);
+		to_free = to_free->next;
+	}
+	i = 0;
+	while (list->path[i])
+	{
+		free(list->path[i]);
+		i++;
+	}
+	free(list->path);
+}
+
 int		main(int ac, char **av, char **envp)
 {
 	t_cmd_info	list;
@@ -179,15 +214,16 @@ int		main(int ac, char **av, char **envp)
 	list.path = find_path(envp);
 	access_check(&list);
 	node = list.head;
-	pid = (pid_t *)malloc(sizeof(pid_t) * list.size);
+	pid = (pid_t *)ft_calloc(sizeof(pid_t), list.size);
 	if (ac == 6 && list.here_doc == 1)
 		px_here_doc(node, &list, envp, pid);
 	else
 	{
 		px_child(node, &list, envp, pid);
-		close(list.in_fd);
+		close(listin_fd);
 	}
 	close(list.out_fd);
 	px_parent(&list, pid);
+	px_free_info(&list);
 	return (0);
 }
