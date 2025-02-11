@@ -3,12 +3,13 @@ CFLAGS = -Wall -Werror -Wextra -g
 NAME = pipex
 SOURCES = px_main.c \
 	px_cmd_utils.c \
-	px_path_utils.c
+	px_path_utils.c \
+	px_ft_free.c \
+	px_heredoc_bonus.c
+
 OBJECTS = $(SOURCES:.c=.o)
 
-B_SRC = px_main_bonus.c \
-	px_cmd_utils_bonus.c \
-	px_path_utils_bonus.c
+B_SRC = px_heredoc_bonus.c
 B_OBJ = $(B_SRC:.c=.o)
 
 LIBFT = $(LIBFT_DIR)/libft.a

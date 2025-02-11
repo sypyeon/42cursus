@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:21:18 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/04 01:26:24 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/11 14:40:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,12 @@ void	access_check(t_cmd_info *list)
 			cmd = ft_strjoin(set_path, check->cmd[0]);
 			free(set_path);
 			if (access(cmd, X_OK) == 0)
+			{
+				free(check->cmd[0]);
 				check->cmd[0] = cmd;
+			}
+			else
+				free(cmd);
 			i++;
 		}
 		check = check->next;

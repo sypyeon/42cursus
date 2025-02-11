@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:34:15 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/04 18:41:22 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/11 13:49:47 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,11 @@ void	save_cmd(t_cmd_info *list, int ac, char **av);
 int		strcmp_find_path(const char *path, const char *str);
 char	**find_path(char **envp);
 void	access_check(t_cmd_info *list);
+
+void	px_here_doc(t_cmd *node, t_cmd_info *list, char **envp, pid_t *pid);
+
+void	px_free_node(t_cmd *node);
+void	px_free_info(t_cmd_info *list);
+void	px_close_fd(t_cmd *node, t_cmd_info *list);
 
 #endif
