@@ -7,7 +7,7 @@
             "request": "launch",
             // "program": "${fileDirname}/a.out",
             "program": "${workspaceFolder}/pipex/pipex",
-            "args": ["here_doc", "e", "grep a", "grep b", "file"],
+            "args": ["infile", "", "", "outfile"],
             "stopAtEntry": false,
             // "cwd": "${fileDirname}",
             "cwd": "${workspaceFolder}/pipex/",

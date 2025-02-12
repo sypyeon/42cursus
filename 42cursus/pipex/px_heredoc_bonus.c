@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:00:49 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/11 14:24:34 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/12 18:16:42 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ void	px_here_doc(t_cmd *node, t_cmd_info *list, char **envp, pid_t *pid)
 			pipe(node->fd);
 		pid[i] = fork();
 		if (pid[i] == 0)
+		{
+			free(pid);
 			px_hd_child(node, list, envp);
+		}
 		if (node->prev)
 		{
 			close(node->prev->fd[0]);
