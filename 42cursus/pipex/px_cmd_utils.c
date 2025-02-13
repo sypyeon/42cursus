@@ -6,11 +6,12 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:19:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/12 19:02:17 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/13 21:26:07 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <errno.h>
 
 void	px_init_cmd_info(t_cmd_info *cmd_info, int ac, char **av)
 {
@@ -23,6 +24,11 @@ void	px_init_cmd_info(t_cmd_info *cmd_info, int ac, char **av)
 	}
 	else
 	{
+		if (access(av[1], R_OK) == -1)
+		{
+			perror(av[1]);
+			exit(errno);
+		}
 		cmd_info->in_fd = open(av[1], O_RDONLY);
 		if (cmd_info->in_fd < 0)
 			perror("file");
@@ -43,15 +49,6 @@ t_cmd	*new_cmd(char **cmd)
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
-}
-
-t_cmd	*last_cmd(t_cmd *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
 }
 
 void	cmd_add_back(t_cmd_info *list, t_cmd *new)
