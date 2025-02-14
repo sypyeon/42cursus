@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:42:14 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/07 02:48:58 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/14 13:16:23 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,22 @@ int	**sl_visited_init(t_vars *game)
 	return (visited);
 }
 
-void	check_path_dfs(t_vars *game, t_check *route, int y, int x)
+void	check_path_dfs(t_vars *game, t_check *route, int y, int x, int steps)
 {
-	const int	dx[4] = {0, 0, 1, -1}; // 네 방향 탐색
+	const int	dx[4] = {0, 0, 1, -1};
 	const int	dy[4] = {1, -1, 0, 0};
 	int			ny;
 	int			nx;
 	int			i;
 
 	route->visited[y][x] = 1;
-	if (game->map.info[y][x] == 'E')
-		route->valid_path += 1;
 	if (game->map.info[y][x] == 'C')
 		route->valid_collect += 1;
+	if (game->map.info[y][x] == 'E' && route->valid_collect == game->map.c_count)
+	{
+		route->valid_path += 1;
+		game->min_move = steps;
+	}
 	i = 0;
 	while (i < 4)
 	{
@@ -59,8 +62,10 @@ void	check_path_dfs(t_vars *game, t_check *route, int y, int x)
 		nx = x + dx[i];
 		i++;
 		if (game->map.info[ny][nx] != '1' && route->visited[ny][nx] == 0)
-			check_path_dfs(game, route, ny, nx);
+			check_path_dfs(game, route, ny, nx, steps + 1);
 	}
+	if (route->valid_collect != game->map.c_count)
+		route->visited[y][x] = 0;
 }
 
 void	sl_wall_check(t_vars *game, char **map, int bottom)
@@ -112,6 +117,12 @@ void	sl_texture_check(t_vars *game)
 			game->map.valid = 0;
 		i++;
 	}
+	if (!game->map.valid)
+	{
+		free(game->map.flat);
+		free_map(game->map.info);
+		exit(write(2, "Invalid map (invalid texture)\n", 31));
+	}
 }
 
 void	sl_err_msg(t_vars *game, t_check *route)
@@ -135,9 +146,10 @@ void	check_map_validity(t_vars *game, char **map)
 	game->map.valid = 1;
 	sl_texture_check(game);
 	sl_wall_check(game, map, game->map.y_len - 1);
+	free(game->map.flat);
 	map_obj_counter(game, map);
 	route.visited = sl_visited_init(game);
-	check_path_dfs(game, &route, game->map.p_x, game->map.p_y);
+	check_path_dfs(game, &route, game->map.p_x, game->map.p_y, 0);
 	if (game->map.size != (game->map.x_len * game->map.y_len))
 		game->map.valid = 0;
 	else if (!route.valid_path || game->map.c_count != route.valid_collect)
@@ -146,7 +158,6 @@ void	check_map_validity(t_vars *game, char **map)
 		game->map.valid = 0;
 	else if (game->map.c_count <= 0)
 		game->map.valid = 0;
-	free(game->map.flat);
 	if (!game->map.valid)
 		sl_err_msg(game, &route);
 	visited_free(route.visited);

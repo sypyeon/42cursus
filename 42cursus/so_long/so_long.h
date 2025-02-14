@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:17:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/06 22:46:38 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/14 11:15:28 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define KEY_PRESS		2
 # define KEY_RELEASE	3
+# define ON_DESTROY		17
 
 # define KEY_ESC		65307
 # define KEY_W			119
@@ -41,16 +42,6 @@
 # define UP				1
 # define LEFT			2
 # define RIGHT			3
-
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
 
 typedef struct s_param
 {
@@ -92,6 +83,7 @@ typedef struct	s_vars
 	t_param	location;
 	int		player_face;
 	int		move_count;
+	int		min_move;
 }				t_vars;
 
 typedef struct s_check //맵 유효성 확인
@@ -113,7 +105,7 @@ void	map_obj_counter(t_vars *game, char **map);
 void	get_map(t_vars *game, char *map);
 
 void	check_map_validity(t_vars *game, char **map);
-void	check_path_dfs(t_vars *game, t_check *route, int y, int x);
+void	check_path_dfs(t_vars *game, t_check *route, int y, int x, int steps);
 
 void	free_map(char **to_free);
 void	visited_free(int **to_free);
