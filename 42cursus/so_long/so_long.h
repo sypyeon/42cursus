@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:17:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/14 11:15:28 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/15 15:10:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@
 # define KEY_S			115
 # define KEY_D			100
 
-# define ROAD			0
-# define WALL			1
-# define COLLECT		67
-# define EXIT			69
+# define ROAD			'0'
+# define WALL			'1'
+# define COLLECT		'C'
+# define EXIT			'E'
 # define PLAYER			'P'
 # define TILE			64
 
@@ -50,7 +50,7 @@ typedef struct s_param
 	void	*player;
 }				t_param;
 
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*ptr;
 	char	*addr;
@@ -74,7 +74,7 @@ typedef struct s_map
 	int		c_count;
 }				t_map;
 
-typedef struct	s_vars
+typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
@@ -83,10 +83,9 @@ typedef struct	s_vars
 	t_param	location;
 	int		player_face;
 	int		move_count;
-	int		min_move;
 }				t_vars;
 
-typedef struct s_check //맵 유효성 확인
+typedef struct s_check
 {
 	int	x;
 	int	y;
@@ -101,11 +100,12 @@ int		sl_keybind(int keycode, t_vars *game);
 void	draw_map(t_vars *game, char *line, int l);
 
 void	map_size_check(t_vars *game, char *map_info);
-void	map_obj_counter(t_vars *game, char **map);
 void	get_map(t_vars *game, char *map);
+void	sl_texture_check(t_vars *game, char *texture);
+void	sl_wall_check(t_vars *game, char **map, int bottom);
+void	map_obj_counter(t_vars *game, char **map);
 
 void	check_map_validity(t_vars *game, char **map);
-void	check_path_dfs(t_vars *game, t_check *route, int y, int x, int steps);
 
 void	free_map(char **to_free);
 void	visited_free(int **to_free);

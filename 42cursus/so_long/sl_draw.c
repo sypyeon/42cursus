@@ -6,45 +6,48 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:41:55 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/01/28 17:17:37 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/15 15:12:51 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	sl_draw_player(t_vars *game, int *w, int *h)
+{
+	if (game->player_face == DOWN)
+		game->img.ptr = mlx_xpm_file_to_image(game->mlx,
+				"./textures/player/player_down.xpm", w, h);
+	else if (game->player_face == UP)
+		game->img.ptr = mlx_xpm_file_to_image(game->mlx,
+				"./textures/player/player_up.xpm", w, h);
+	else if (game->player_face == LEFT)
+		game->img.ptr = mlx_xpm_file_to_image(game->mlx,
+				"./textures/player/player_left.xpm", w, h);
+	else if (game->player_face == RIGHT)
+		game->img.ptr = mlx_xpm_file_to_image(game->mlx,
+				"./textures/player/player_right.xpm", w, h);
+	game->location.player = game->img.ptr;
+}
 
 void	sl_draw_tile(t_vars *game, char texture)
 {
 	int	w;
 	int	h;
 
-	if (texture == '1') // '1'일 경우 벽
+	if (texture == WALL)
 		game->img.ptr = mlx_xpm_file_to_image(game->mlx, \
 				"./textures/wall.xpm", &w, &h);
-	else if (texture == 'C') // 'C'일 경우 콜렉터블
+	else if (texture == COLLECT)
 		game->img.ptr = mlx_xpm_file_to_image(game->mlx, \
 				"./textures/collectible.xpm", &w, &h);
-	else if (texture == 'E') // 'E'일 경우 출구
+	else if (texture == EXIT)
 		game->img.ptr = mlx_xpm_file_to_image(game->mlx, \
 				"./textures/exit.xpm", &w, &h);
-	else if (texture == '0') // '0'일 경우 빈공간
+	else if (texture == ROAD)
 		game->img.ptr = mlx_xpm_file_to_image(game->mlx, \
 				"./textures/road.xpm", &w, &h);
-	else if (texture == 'P') // 'P'인 경우 플레이어
-	{
-		if (game->player_face == DOWN)
-			game->img.ptr = mlx_xpm_file_to_image(game->mlx, 
-				"./textures/player/player_down.xpm", &w, &h);
-		else if (game->player_face == UP)
-			game->img.ptr = mlx_xpm_file_to_image(game->mlx, 
-				"./textures/player/player_up.xpm", &w, &h);
-		else if (game->player_face == LEFT)
-			game->img.ptr = mlx_xpm_file_to_image(game->mlx, 
-				"./textures/player/player_left.xpm", &w, &h);
-		else if (game->player_face == RIGHT)
-			game->img.ptr = mlx_xpm_file_to_image(game->mlx, 
-				"./textures/player/player_right.xpm", &w, &h);
-		game->location.player = game->img.ptr; // 플레이어 위치에 대한 이미지 포인터도 저장해줌
-	}
+	else if (texture == PLAYER)
+		sl_draw_player(game, &w, &h);
 }
 
 void	draw_map(t_vars *game, char *line, int l)
@@ -52,18 +55,18 @@ void	draw_map(t_vars *game, char *line, int l)
 	int	i;
 
 	i = 0;
-
 	while (line[i])
 	{
-		if (line[i] == 'P') // 'P'일 경우 플레이어
+		if (line[i] == PLAYER)
 		{
-			game->location.x = i; // 플레이어의 x좌표
-			game->location.y = l; // 플레이어의 y좌표 (64픽셀로 그림 그리기 때문) -> 가장 오른쪽 하단 꼭짓점이 좌표가 됨
+			game->location.x = i;
+			game->location.y = l;
 		}
-		if(game->img.ptr)
+		if (game->img.ptr)
 			mlx_destroy_image(game->mlx, game->img.ptr);
 		sl_draw_tile(game, line[i]);
-		mlx_put_image_to_window(game->mlx, game->win, game->img.ptr, i * TILE, l * TILE); // 해당 위치의 이미지 저장값을 출력
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->img.ptr, i * TILE, l * TILE);
 		i++;
 	}
 }

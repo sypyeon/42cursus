@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:40:01 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/14 12:00:32 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/15 14:26:19 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,13 @@ void	sl_player_move(t_vars *game, int x_move, int y_move)
 	{
 		if (map[y + y_move][x + x_move] == 'C')
 			game->map.c_count--;
-		else if (map[y + y_move][x + x_move] == 'E')
+		if (map[y + y_move][x + x_move] == 'E' && game->map.c_count == 0)
 		{
-			if (game->map.c_count == 0)
-			{
-				ft_printf("%d\n", game->move_count + 1);
-				close_game(game);
-			}
-			return;
+			ft_printf("%d\n", game->move_count + 1);
+			close_game(game);
 		}
+		else if (map[y + y_move][x + x_move] == 'E' && game->map.c_count != 0)
+			return ;
 		map[y + y_move][x + x_move] = 'P';
 		map[y][x] = '0';
 		game->map.p_x += x_move;

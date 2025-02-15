@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 10:34:24 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/14 11:30:26 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/15 17:51:09 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,14 @@ int	main(int ac, char **av)
 		return (write(2, "Error (wrong input)\n", 21));
 	ft_bzero(&game, sizeof(t_vars));
 	map_size_check(&game, av[1]);
+	if (!game.map.flat || game.map.y_len < 1)
+		exit(write(2, "Empty map.\n", 12));
+	game.map.size = ft_strlen(game.map.flat);
 	get_map(&game, av[1]);
+	sl_texture_check(&game, "01ECP");
+	sl_wall_check(&game, game.map.info, game.map.y_len - 1);
+	free(game.map.flat);
 	check_map_validity(&game, game.map.info);
-	ft_printf("Minimum move count of this map is %d!!!\n", game.min_move);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, game.map.x_len * TILE,
 			game.map.y_len * TILE, "so_long");
