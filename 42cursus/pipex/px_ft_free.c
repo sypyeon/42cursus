@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:42:09 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/11 14:36:04 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:29:47 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	px_free_node(t_cmd *node)
 
 void	px_free_info(t_cmd_info *list)
 {
-	int	i;
+	int		i;
 	t_cmd	*node;
 	t_cmd	*to_free;
 

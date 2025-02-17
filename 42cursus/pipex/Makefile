@@ -18,7 +18,7 @@ LIBFT_DIR = ./libft
 all : $(NAME)
 
 $(NAME): $(OBJECTS) $(LIBFT)
-	$(CC) $(OBJECTS) -o $(NAME) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME) $(LIBFT)
 
 bonus : $(B_OBJ) $(LIBFT)
 	$(CC) $(B_OBJ) -o $(NAME) $(LIBFT)

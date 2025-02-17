@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:42:14 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/15 18:28:33 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/18 03:04:09 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static void	sl_check_path_dfs(t_vars *game, t_check *route, int y, int x)
 		if (game->map.info[ny][nx] != WALL && route->visited[ny][nx] == 0)
 			sl_check_path_dfs(game, route, ny, nx);
 	}
-	if (route->valid_collect != game->map.c_count)
-		route->visited[y][x] = 0;
 }
 
 static void	sl_err_msg(t_vars *game, t_check *route)

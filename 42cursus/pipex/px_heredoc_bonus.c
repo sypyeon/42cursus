@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:00:49 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/12 18:16:42 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/17 15:33:51 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	px_new_child(t_cmd *node, t_cmd_info *list)
 			read_len = read(STDIN_FILENO, buf, 100000);
 			buf[read_len] = '\0';
 			if (ft_strncmp(list->limiter, buf, read_len) == 0)
-				break;
+				break ;
 			write(hd_fd[1], buf, read_len);
 		}
 		px_close_fd(node, list);

@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:37:39 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/13 18:10:47 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/17 16:30:05 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 void	px_parent(t_cmd_info *list, pid_t *pid)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	while (i < list->size)
 	{
 		waitpid(pid[i], NULL, 0);
@@ -77,7 +78,7 @@ void	px_child(t_cmd *node, t_cmd_info *list, char **envp, pid_t *pid)
 	}
 }
 
-int		main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
 	t_cmd_info	list;
 	t_cmd		*node;
