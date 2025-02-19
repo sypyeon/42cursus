@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   px_path_utils.c                                    :+:      :+:    :+:   */
+/*   px_path_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:21:18 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/19 18:06:48 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/19 17:37:26 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	strcmp_find_path(const char *path, const char *str)
 {
@@ -50,7 +50,7 @@ void	access_check(t_cmd_info *list)
 {
 	int		i;
 	char	*cmd;
-	char	*set_path;
+	char	*temp;
 	t_cmd	*check;
 
 	check = list->head;
@@ -59,9 +59,9 @@ void	access_check(t_cmd_info *list)
 		i = 0;
 		while (list->path[i])
 		{
-			set_path = ft_strjoin(list->path[i], "/");
-			cmd = ft_strjoin(set_path, check->cmd[0]);
-			free(set_path);
+			temp = ft_strjoin("/",  check->cmd[0]);
+			cmd = ft_strjoin(list->path[i], temp);
+			free(temp);
 			if (access(cmd, X_OK) == 0)
 			{
 				free(check->cmd[0]);

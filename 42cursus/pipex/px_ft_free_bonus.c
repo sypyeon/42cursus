@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   px_ft_free.c                                       :+:      :+:    :+:   */
+/*   px_ft_free_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:42:09 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/19 16:36:12 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/19 17:50:35 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	px_free_node(t_cmd *node)
 {
@@ -49,4 +49,16 @@ void	px_free_info(t_cmd_info *list)
 		i++;
 	}
 	free(list->path);
+}
+
+void	px_close_fd(t_cmd *node, t_cmd_info *list)
+{
+	if (node->fd[0])
+		close(node->fd[0]);
+	if (node->fd[1])
+		close(node->fd[1]);
+	if (list->in_fd)
+		close(list->in_fd);
+	if (list->out_fd)
+		close(list->out_fd);
 }

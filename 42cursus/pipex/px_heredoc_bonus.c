@@ -6,11 +6,11 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:00:49 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/17 15:33:51 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:34:14 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 #include <errno.h>
 
 void	px_new_child(t_cmd *node, t_cmd_info *list)

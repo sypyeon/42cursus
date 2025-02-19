@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   px_main.c                                          :+:      :+:    :+:   */
+/*   px_main_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:37:39 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/19 16:24:54 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/19 18:28:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-void	px_parent_wait(t_cmd_info *list, pid_t *pid)
+void	px_parent(t_cmd_info *list, pid_t *pid)
 {
 	int	i;
 
@@ -84,18 +84,23 @@ int	main(int ac, char **av, char **envp)
 	t_cmd		*node;
 	pid_t		*pid;
 
-	if (ac != 5)
-		return (write(2, "must take 4 arguments",22));
+	if (ac < 5)
+		return (write(2, "Insufficient argument", 21));
 	px_init_cmd_info(&list, ac, av);
 	save_cmd(&list, ac, av);
 	list.path = find_path(envp);
 	access_check(&list);
 	node = list.head;
 	pid = (pid_t *)ft_calloc(sizeof(pid_t), list.size);
-	px_child(node, &list, envp, pid);
-	close(list.in_fd);
+	if (ac == 6 && list.here_doc == 1)
+		px_here_doc(node, &list, envp, pid);
+	else
+	{
+		px_child(node, &list, envp, pid);
+		close(list.in_fd);
+	}
 	close(list.out_fd);
-	px_parent_wait(&list, pid);
+	px_parent(&list, pid);
 	px_free_info(&list);
 	free(pid);
 	return (0);
