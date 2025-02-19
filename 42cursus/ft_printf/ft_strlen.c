@@ -6,15 +6,15 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:56:22 by sipyeon           #+#    #+#             */
-/*   Updated: 2024/10/24 00:52:01 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/19 21:18:03 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_strlen(char *s)
+size_t	ft_strlen(char *s)
 {
-	int	len;
+	size_t	len;
 
 	len = 0;
 	while (s[len])
