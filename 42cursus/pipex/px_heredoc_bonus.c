@@ -6,38 +6,42 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 17:00:49 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/19 15:34:14 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:38:52 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 #include <errno.h>
 
+void	px_grand_child(int *fd, t_cmd *node, t_cmd_info *list)
+{
+	int		read_len;
+	char	buf[100000];
+
+	while (1)
+	{
+		read_len = read(STDIN_FILENO, buf, 100000);
+		buf[read_len] = '\0';
+		if (ft_strncmp(list->limiter, buf, read_len) == 0)
+			break ;
+		write(fd[1], buf, read_len);
+	}
+	px_close_fd(node, list);
+	close(fd[0]);
+	close(fd[1]);
+	px_free_info(list);
+	exit(0);
+}
+
 void	px_new_child(t_cmd *node, t_cmd_info *list)
 {
 	int		hd_fd[2];
 	pid_t	hd_pid;
-	int		read_len;
-	char	buf[100000];
 
 	pipe(hd_fd);
 	hd_pid = fork();
 	if (hd_pid == 0)
-	{
-		while (1)
-		{
-			read_len = read(STDIN_FILENO, buf, 100000);
-			buf[read_len] = '\0';
-			if (ft_strncmp(list->limiter, buf, read_len) == 0)
-				break ;
-			write(hd_fd[1], buf, read_len);
-		}
-		px_close_fd(node, list);
-		close(hd_fd[0]);
-		close(hd_fd[1]);
-		px_free_info(list);
-		exit(0);
-	}
+		px_grand_child(hd_fd, node, list);
 	dup2(hd_fd[0], STDIN_FILENO);
 	close(hd_fd[0]);
 	close(hd_fd[1]);

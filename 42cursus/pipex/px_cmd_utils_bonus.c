@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:19:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/19 20:03:12 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:39:36 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	px_init_cmd_info(t_cmd_info *cmd_info, int ac, char **av)
 		cmd_info->here_doc = 1;
 		cmd_info->size = 2;
 		cmd_info->out_fd = open(av[ac - 1],
-			O_WRONLY | O_CREAT | O_APPEND, 0644);
+				O_WRONLY | O_CREAT | O_APPEND, 0644);
 	}
 	else
 	{
@@ -36,7 +36,7 @@ void	px_init_cmd_info(t_cmd_info *cmd_info, int ac, char **av)
 			perror("file");
 		cmd_info->size = ac - 3;
 		cmd_info->out_fd = open(av[ac - 1],
-			O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	}
 }
 
@@ -77,7 +77,7 @@ void	save_cmd(t_cmd_info *list, int ac, char **av)
 	while (i < ac - 3)
 	{
 		new = new_cmd(ft_split(av[2 + i], ' '));
-		if(!new->cmd[0])
+		if (!new->cmd[0])
 		{
 			free(new->cmd);
 			new->cmd = (char **)ft_calloc(2, sizeof(char *));

@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:37:39 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/19 16:24:54 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:39:12 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	main(int ac, char **av, char **envp)
 	pid_t		*pid;
 
 	if (ac != 5)
-		return (write(2, "must take 4 arguments",22));
+		return (write(2, "must take 4 arguments\n", 23));
 	px_init_cmd_info(&list, ac, av);
 	save_cmd(&list, ac, av);
 	list.path = find_path(envp);
