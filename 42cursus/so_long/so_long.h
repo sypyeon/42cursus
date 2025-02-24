@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:17:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/15 15:10:54 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/21 18:02:34 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,10 @@ void	sl_wall_check(t_vars *game, char **map, int bottom);
 void	map_obj_counter(t_vars *game, char **map);
 
 void	check_map_validity(t_vars *game, char **map);
+
+int		**sl_visited_init(t_vars *game);
+void	sl_collectible_dfs(t_vars *game, t_check *route, int y, int x);
+void	sl_exit_dfs(t_vars *game, t_check *route, int y, int x);
 
 void	free_map(char **to_free);
 void	visited_free(int **to_free);

@@ -6,7 +6,8 @@ SOURCES = sl_main.c \
 		sl_save_map_data.c \
 		sl_map_check.c \
 		sl_draw.c \
-		sl_ft_free.c
+		sl_ft_free.c \
+		sl_dfs.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

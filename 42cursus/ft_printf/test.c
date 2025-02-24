@@ -6,18 +6,9 @@
 
 int	main()
 {
-	unsigned int	i = 0;
-	int	max;
+	int d;
 
-	char *max_str = (char *)malloc(sizeof(char) * INT_MAX + 1);
-	if (!max_str)
-		return 0;
-	while (i <= INT_MAX)
-	{
-		max_str[i] = 'a';
-		i++;
-	}
-	max = ft_printf("%s", max_str);
-	printf("%d\n", max);
+	d = printf("%%k");
+	printf("%d\n", d);
 	return (0);
 }
