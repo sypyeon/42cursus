@@ -1,9 +1,13 @@
 # include "philo.h"
+# include <unistd.h>
 
 int main(int ac, char **av)
 {
-	int num = p_atoi(av[1]);
+	struct timeval	tv;
 
-	printf("%d\n", num);
+	gettimeofday(&tv, NULL);
+
+    printf("Seconds: %ld\n", tv.tv_sec);
+    printf("Microseconds: %ld\n", tv.tv_usec);
 	return (ac);
 }
