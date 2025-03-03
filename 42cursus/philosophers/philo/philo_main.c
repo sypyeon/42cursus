@@ -6,15 +6,16 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:39:54 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/03 16:41:54 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/03 22:51:41 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*philo_task()
+void	*philo_task(void *arg)
 {
-	
+	t_philo *philo;
+	philo = (t_philo *)arg;
 }
 
 int	get_philo_data(t_philo_data *data, char **av)
@@ -29,6 +30,17 @@ int	get_philo_data(t_philo_data *data, char **av)
 		data->eat_count = -1;
 }
 
+void	init_mutex(t_philo *philo, t_philo_data *data)
+{
+	int	i;
+
+	while (i < data->num_of_philo)
+	{
+		pthread_mutex_init(&(data->fork->key), NULL);
+		i++;
+	}
+}
+
 int	init_philo(t_philo **philo, t_philo_data *data)
 {
 	int	i;
@@ -36,31 +48,40 @@ int	init_philo(t_philo **philo, t_philo_data *data)
 	*philo = (t_philo *)malloc(sizeof(t_philo) * data->num_of_philo);
 	if (!(*philo))
 		return (-1);
+	memset(philo, 0, sizeof(t_mutex) * data->num_of_philo);
+	data->fork = (t_mutex *)malloc(sizeof(t_mutex) * data->num_of_philo);
+	memset(data->fork, 0, sizeof(t_mutex) * data->num_of_philo);
 	while (i < data->num_of_philo)
 	{
-		philo[i]->data = data;
-		philo[i]->no = i;
-		philo[i]->left_fork = i;
-		philo[i]->right_fork = i + 1;
+		(*philo)[i].data = data;
+		(*philo)[i].no = i + 1;
+		(*philo)[i].left_fork = i;
+		(*philo)[i].right_fork = i + 1;
+		(*philo)[i].eaten.data = 0;
+		(*philo)[i].dead.data = 0;
 		if (data->num_of_philo == i + 1)
-			philo[i]->right_fork = 0;
-		if (pthread_create(philo[i]->tid, NULL, philo_task, philo[i]))
-			return (-1);
-		philo[i]->dead = 0;
+			(*philo)[i].right_fork = 0;
 		i++;
 	}
 	return (0);
 }
+
+int	create_thread()
+{
+	pthread_create(philo[i].tid, NULL, philo_task, philo[i]);
+}
 	
 int	main(int ac, char **av)
 {
-	t_philo			**philo;
-	t_philo_data	*data;
+	t_philo			*philo;
+	t_philo_data	data;
 
 	if (ac != 5 && ac != 6)
 		return (write (2, "insufficient arguments", 23));
-	if (get_philo_data(data, av) == -1)
+	if (get_philo_data(&data, av) == -1)
 		return (terminate_philo(1, philo));
-	if (init_philo(philo, data) == -1)
+	if (init_philo(&philo, &data) == -1)
 		return (terminate_philo(1, philo));
+	if ()
+		return (-1);
 }
