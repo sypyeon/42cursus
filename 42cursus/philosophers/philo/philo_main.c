@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:39:54 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/03 22:51:41 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/04 00:15:22 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	init_mutex(t_philo *philo, t_philo_data *data)
 	while (i < data->num_of_philo)
 	{
 		pthread_mutex_init(&(data->fork->key), NULL);
+		pthread_mutex_init(&(philo->eaten), NULL);
+		pthread_mutex_init(&(philo->dead), NULL);
 		i++;
 	}
 }
