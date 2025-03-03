@@ -6,24 +6,26 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:19:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/20 17:16:27 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/03 17:06:43 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 #include <errno.h>
 
+void	px_init_heredoc_info(t_cmd_info *cmd_info, int ac, char **av)
+{
+	cmd_info->limiter = ft_strjoin(av[2], "\n");
+	cmd_info->here_doc = 1;
+	cmd_info->size = 2;
+	cmd_info->out_fd = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+}
+
 void	px_init_cmd_info(t_cmd_info *cmd_info, int ac, char **av)
 {
 	ft_bzero(cmd_info, sizeof(t_cmd_info));
 	if ((ac == 6) && (!ft_strncmp(av[1], "here_doc", 9)))
-	{
-		cmd_info->limiter = ft_strjoin(av[2], "\n");
-		cmd_info->here_doc = 1;
-		cmd_info->size = 2;
-		cmd_info->out_fd = open(av[ac - 1],
-				O_WRONLY | O_CREAT | O_APPEND, 0644);
-	}
+		px_init_heredoc_info(cmd_info, ac, av);
 	else
 	{
 		if (access(av[1], R_OK) == -1)
@@ -35,8 +37,15 @@ void	px_init_cmd_info(t_cmd_info *cmd_info, int ac, char **av)
 		if (cmd_info->in_fd < 0)
 			perror("file");
 		cmd_info->size = ac - 3;
+		if (access(av[ac - 1], F_OK) == 0 && access(av[ac - 1], W_OK) == -1)
+		{
+			perror(av[ac - 1]);
+			exit(errno);
+		}
 		cmd_info->out_fd = open(av[ac - 1],
 				O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (cmd_info->out_fd < 0)
+			perror("outfile");
 	}
 }
 
