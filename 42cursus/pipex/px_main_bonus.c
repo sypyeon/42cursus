@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 17:37:39 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/19 18:28:54 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/20 21:13:52 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	main(int ac, char **av, char **envp)
 	t_cmd		*node;
 	pid_t		*pid;
 
-	if (ac < 5)
-		return (write(2, "Insufficient argument", 21));
+	if (ac < 3)
+		return (write(2, "Insufficient argument", 22));
 	px_init_cmd_info(&list, ac, av);
 	save_cmd(&list, ac, av);
 	list.path = find_path(envp);

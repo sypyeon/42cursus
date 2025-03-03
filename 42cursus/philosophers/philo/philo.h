@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:01:28 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/02 23:24:55 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/03 16:13:23 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ typedef struct s_philo_data
 typedef struct s_philo
 {
 	t_philo_data	*data;
-	pthread_t		thread;
+	pthread_t		tid;
 	int				no;
 	int				left_fork;
 	int				right_fork;
+	int				dead;
 }	t_philo;
 
 int	p_atoi(char *str);

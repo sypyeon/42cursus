@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:39:54 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/02 23:34:12 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/03 16:41:54 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	get_philo_data(t_philo_data *data, char **av)
 	data->tt_sleep = p_atoi(av[4]); // = time_to_sleep (in milliseconds)
 	if (av[5])
 		data->eat_count = p_atoi(av[5]); // = [number_of_times_each_philosopher_must_eat] (optional argument)
+	else
+		data->eat_count = -1;
 }
 
 int	init_philo(t_philo **philo, t_philo_data *data)
@@ -42,9 +44,12 @@ int	init_philo(t_philo **philo, t_philo_data *data)
 		philo[i]->right_fork = i + 1;
 		if (data->num_of_philo == i + 1)
 			philo[i]->right_fork = 0;
-		if (pthread_create(philo[i]->thread, NULL, philo_task, philo[i]))
+		if (pthread_create(philo[i]->tid, NULL, philo_task, philo[i]))
 			return (-1);
+		philo[i]->dead = 0;
+		i++;
 	}
+	return (0);
 }
 	
 int	main(int ac, char **av)
@@ -57,4 +62,5 @@ int	main(int ac, char **av)
 	if (get_philo_data(data, av) == -1)
 		return (terminate_philo(1, philo));
 	if (init_philo(philo, data) == -1)
+		return (terminate_philo(1, philo));
 }

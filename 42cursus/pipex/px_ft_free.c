@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:42:09 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/19 16:36:12 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/20 21:13:22 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	px_free_info(t_cmd_info *list)
 		node = node->next;
 		free(to_free);
 	}
-	free(list->limiter);
 	i = 0;
 	while (list->path[i])
 	{

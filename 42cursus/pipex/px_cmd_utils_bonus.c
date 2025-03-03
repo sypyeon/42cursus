@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:19:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/24 19:19:16 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:16:27 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,21 @@ void	px_init_cmd_info(t_cmd_info *cmd_info, int ac, char **av)
 		cmd_info->size = 2;
 		cmd_info->out_fd = open(av[ac - 1],
 				O_WRONLY | O_CREAT | O_APPEND, 0644);
-		return ;
 	}
-	if (access(av[1], R_OK) == -1)
+	else
 	{
-		perror(av[1]);
-		exit(errno);
+		if (access(av[1], R_OK) == -1)
+		{
+			perror(av[1]);
+			exit(errno);
+		}
+		cmd_info->in_fd = open(av[1], O_RDONLY);
+		if (cmd_info->in_fd < 0)
+			perror("file");
+		cmd_info->size = ac - 3;
+		cmd_info->out_fd = open(av[ac - 1],
+				O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	}
-	cmd_info->in_fd = open(av[1], O_RDONLY);
-	if (cmd_info->in_fd < 0)
-		perror("file");
-	cmd_info->size = ac - 3;
-	cmd_info->out_fd = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 }
 
 t_cmd	*new_cmd(char **cmd)

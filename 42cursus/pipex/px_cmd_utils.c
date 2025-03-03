@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:19:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/19 15:53:50 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:00:31 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ void	save_cmd(t_cmd_info *list, int ac, char **av)
 	while (i < ac - 3)
 	{
 		new = new_cmd(ft_split(av[2 + i], ' '));
+		if (!new->cmd[0])
+		{
+			free(new->cmd);
+			new->cmd = (char **)ft_calloc(2, sizeof(char *));
+			new->cmd[0] = ft_strdup("");
+		}
 		cmd_add_back(list, new);
 		i++;
 	}
