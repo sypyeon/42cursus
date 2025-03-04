@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:01:28 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/04 19:00:13 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/04 21:48:28 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-# define DEAD	0
-# define FINISH	1
-# define EAT	2
-# define SLEEP	3
-# define THINK	4
-# define GRAB	5
+# define MSG	"has taken a fork\0is eating\0is sleeping\0is thinking\0died"
+
+typedef enum e_msg
+{
+	GRAB = 0,
+	EAT = 17,
+	SLEEP = 27,
+	THINK = 39,
+	DEAD = 51,
+}	t_msg;
 
 typedef struct s_mutex
 {
@@ -36,12 +40,13 @@ typedef struct s_mutex
 
 typedef struct s_philo_data
 {
-	int		num_of_philo;
-	int		tt_die;
-	int		tt_eat;
-	int		tt_sleep;
-	int		eat_count;
-	t_mutex	*fork;
+	int				num_of_philo;
+	int				tt_die;
+	int				tt_eat;
+	int				tt_sleep;
+	int				eat_count;
+	t_mutex			*fork;
+	pthread_mutex_t	print;
 }	t_philo_data;
 
 typedef struct s_philo
@@ -56,10 +61,11 @@ typedef struct s_philo
 	t_mutex			dead;
 }	t_philo;
 
-int	p_atoi(char *str);
+int	ph_atoi(char *str);
 int	terminate_philo(int flag, t_philo **philo);
 
-// timestamp_in_ms X has taken a fork
+// printf("%d  \n", philo->no);
+// has taken a fork
 // timestamp_in_ms X is eating
 // timestamp_in_ms X is sleeping
 // timestamp_in_ms X is thinking

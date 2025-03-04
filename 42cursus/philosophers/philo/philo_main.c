@@ -6,48 +6,87 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:39:54 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/04 18:59:17 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/04 23:39:44 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ph_reach_fork(t_philo *philo, t_philo_data *data)
+long	ph_get_status(t_mutex *mutex)
+{
+	long	value;
+
+	pthread_mutex_lock(&(mutex->key));
+	value = mutex->status;
+	pthread_mutex_unlock(&(mutex->key));
+	return (value);
+}
+
+void	ph_set_status(t_mutex *mutex, long philo_num)
+{
+	pthread_mutex_lock(&(mutex->key));
+	mutex->status = philo_num;
+	pthread_mutex_unlock(&(mutex->key));
+}
+
+void	print_philo_status(t_philo *philo, t_msg status)
+{
+	pthread_mutex_lock(&(philo->data->print));
+	printf("%d %s", philo->no, MSG[status]);
+	pthread_mutex_unlock(&(philo->data->print));
+}
+
+void	philo_eat(t_philo *philo, t_philo_data *data)
 {
 	t_mutex	left_fork;
 	t_mutex	right_fork;
-	
+	long	value;
+
 	left_fork = data->fork[philo->left_fork];
 	right_fork = data->fork[philo->right_fork];
 	while (1)
 	{
-		if (left_fork.status != 0 && right_fork.status != 0)
+		value = ph_get_status(&left_fork);
+		if (value == 0)
 		{
-			pthread_mutex_lock(&left_fork.key);
-			pthread_mutex_lock(&right_fork.key);
-			left_fork.status = philo->no;
-			right_fork.status = philo->no;
-			philo->ready_to_eat = 1;
-			break ;
+			ph_set_status(&left_fork, philo->no);
+			value = ph_get_status(&right_fork);
+			if (value == 0)
+			{
+				ph_set_status(&right_fork, philo->no);
+				philo->ready_to_eat = 1;
+				print_philo_status(philo, EAT);
+				schrodingers_philo(philo, data->tt_eat);
+				break ;
+			}
 		}
 	}
 }
-void	ph_eat_and_release(t_philo *philo, t_philo_data *data)
+
+unsigned long	current_time(void)
 {
-	t_mutex	left_fork;
-	t_mutex	right_fork;
+	struct timeval	time;
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	schrodingers_philo(t_philo *philo, int time)
+{
+	unsigned long	wait;
 	
-	left_fork = data->fork[philo->left_fork];
-	right_fork = data->fork[philo->right_fork];
-	if (philo->ready_to_eat)
-	{
-		usleep(philo->data->tt_eat);
-		left_fork.status = 0;
-		right_fork.status = 0;
-		philo->ready_to_eat = 0;
-		pthread_mutex_unlock(&left_fork.key);
-		pthread_mutex_unlock(&right_fork.key);
-	}
+	wait = current_time() + time;
+	while (current_time() < wait && !ph_get_status(&philo->dead))
+		usleep(200);
+}
+
+void	philo_sleep(t_philo *philo, t_philo_data *data)
+{
+	schrodingers_philo(philo, data->tt_sleep);
+}
+
+void	philo_think(t_philo *philo, t_philo_data *data)
+{
+	schrodingers_philo(philo, data->tt_);
 }
 
 void	*philo_task(void *arg)
@@ -55,25 +94,26 @@ void	*philo_task(void *arg)
 	t_philo *philo;
 	philo = (t_philo *)arg;
 
-	if ((philo->no % 2) == 0)
+	if ((philo->no % 2) == 1)
 		usleep(100);
-	while (1)
+	while (!ph_get_status(&(philo->dead)))
 	{
-		if(philo->data->eat_count <= philo->eaten.status)
-			break ;
-		ph_reach_fork(philo, philo->data);
-		ph_eat_and_release(philo, philo->data);
+		philo_eat(philo, philo->data);
+		philo_sleep(philo, philo->data);
+		philo_think(philo, philo->data);
 	}
+	print_philo_status(philo, DEAD);
+	return (NULL);
 }
 
 int	get_philo_data(t_philo_data *data, char **av)
 {
-	if (data->num_of_philo = p_atoi(av[1]) < 1);
-	data->tt_die = p_atoi(av[2]);
-	data->tt_eat = p_atoi(av[3]);
-	data->tt_sleep = p_atoi(av[4]);
+	if (data->num_of_philo = ph_atoi(av[1]) < 1);
+	data->tt_die = ph_atoi(av[2]);
+	data->tt_eat = ph_atoi(av[3]);
+	data->tt_sleep = ph_atoi(av[4]);
 	if (av[5])
-		data->eat_count = p_atoi(av[5]);
+		data->eat_count = ph_atoi(av[5]);
 	else
 		data->eat_count = -1;
 }
