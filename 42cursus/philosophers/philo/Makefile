@@ -2,7 +2,9 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 NAME = philo
 
-M_SRC = 
+M_SRC = philo_terminate.c,	philo_main.c\
+	ph_atoi.c, philo_action.c,	philo_mutex_manage.c\
+	philo_time.c, philo_init.c, philo_observer.c
 M_OBJ = $(M_SRC:.c=.o)
 
 B_SRC = 

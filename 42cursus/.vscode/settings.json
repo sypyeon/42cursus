@@ -3,6 +3,7 @@
 		"libft.h": "c",
 		"pipex_bonus.h": "c",
 		"unistd.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"philo.h": "c"
 	}
 }

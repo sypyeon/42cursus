@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:19:41 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/03 17:06:20 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:42:48 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void	px_init_cmd_info(t_cmd_info *cmd_info, int ac, char **av)
 {
 	ft_bzero(cmd_info, sizeof(t_cmd_info));
 	if (access(av[1], R_OK) == -1)
-	{
 		perror(av[1]);
-		exit(errno);
-	}
 	cmd_info->in_fd = open(av[1], O_RDONLY);
 	if (cmd_info->in_fd < 0)
 		perror("file");
