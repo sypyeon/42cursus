@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:22:16 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/05 21:05:05 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/06 02:30:46 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	get_philo_data(t_philo_data *data, char **av)
 	return (0);
 }
 
-void	init_mutex(t_philo **philo, t_philo_data *data)
+void	init_mutex(t_philo *philo, t_philo_data *data)
 {
 	int	i;
 
@@ -35,8 +35,8 @@ void	init_mutex(t_philo **philo, t_philo_data *data)
 	while (i < data->num_of_philo)
 	{
 		pthread_mutex_init(&(data->fork[i].key), NULL);
-		pthread_mutex_init(&(philo[i]->eaten.key), NULL);
-		pthread_mutex_init(&(philo[i]->dead.key), NULL);
+		pthread_mutex_init(&(philo[i].eaten.key), NULL);
+		pthread_mutex_init(&(philo[i].dead.key), NULL);
 		i++;
 	}
 }
@@ -48,11 +48,12 @@ int	init_philo(t_philo **philo, t_philo_data *data)
 	*philo = (t_philo *)malloc(sizeof(t_philo) * data->num_of_philo);
 	if (!(*philo))
 		return (-1);
-	memset(philo, 0, sizeof(t_mutex) * data->num_of_philo);
+	memset(*philo, 0, sizeof(t_philo) * data->num_of_philo);
 	data->fork = (t_mutex *)malloc(sizeof(t_mutex) * data->num_of_philo);
 	if (!data->fork)
 		return (-1);
 	memset(data->fork, 0, sizeof(t_mutex) * data->num_of_philo);
+	i = 0;
 	while (i < data->num_of_philo)
 	{
 		(*philo)[i].data = data;
@@ -61,34 +62,21 @@ int	init_philo(t_philo **philo, t_philo_data *data)
 		(*philo)[i].right_fork = (i + 1) % data->num_of_philo;
 		i++;
 	}
-	init_mutex(philo, data);
+	init_mutex(*philo, data);
 	return (0);
 }
 
-void	*philo_task(void *arg)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	if ((philo->no % 2) == 1)
-		usleep(100);
-	while (!ph_get_status(&(philo->dead)))
-	{
-		philo_eat(philo, philo->data);
-		philo_sleep(philo, philo->data);
-	}
-	print_philo_status(philo, DEAD);
-	return (NULL);
-}
-
-int	create_philos(t_philo **philo, t_philo_data *data)
+int	create_philos(t_philo *philo, t_philo_data *data)
 {
 	int	i;
+	int	t_ok;
 
 	i = 0;
 	while (i < data->num_of_philo)
 	{
-		pthread_create(&philo[i]->tid, NULL, philo_task, philo[i]);
+		t_ok = pthread_create(&philo[i].tid, NULL, philo_task, &philo[i]);
+		if (t_ok != 0)
+			return (-1);
 		i++;
 	}
 	return (0);

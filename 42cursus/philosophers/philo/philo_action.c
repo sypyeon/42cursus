@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:14:40 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/05 19:54:05 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/06 01:33:16 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	philo_eat(t_philo *philo, t_philo_data *data)
 	t_mutex	left_fork;
 	t_mutex	right_fork;
 	long	value;
-
+	
 	left_fork = data->fork[philo->left_fork];
 	right_fork = data->fork[philo->right_fork];
 	while (1)
@@ -42,4 +42,20 @@ void	philo_eat(t_philo *philo, t_philo_data *data)
 void	philo_sleep(t_philo *philo, t_philo_data *data)
 {
 	schrodingers_philo(philo, data->tt_sleep);
+}
+
+void	*philo_task(void *arg)
+{
+	t_philo	*philo;
+
+	philo = (t_philo *)arg;
+	if ((philo->no % 2) == 1)
+		usleep(100);
+	while (1)
+	{
+		print_philo_status(philo, THINK);
+		philo_eat(philo, philo->data);
+		philo_sleep(philo, philo->data);
+	}
+	return (NULL);
 }

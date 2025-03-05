@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:01:28 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/05 21:06:55 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/06 02:34:02 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int				ph_atoi(char *str);
 
 int				get_philo_data(t_philo_data *data, char **av);
 int				init_philo(t_philo **philo, t_philo_data *data);
-int				create_philos(t_philo **philo, t_philo_data *data);
+int				create_philos(t_philo *philo, t_philo_data *data);
 
+void			*philo_task(void *arg);
 void			philo_sleep(t_philo *philo, t_philo_data *data);
 void			philo_eat(t_philo *philo, t_philo_data *data);
 
@@ -81,7 +82,7 @@ void			print_philo_status(t_philo *philo, t_msg status);
 void			schrodingers_philo(t_philo *philo, int time);
 unsigned long	current_time(void);
 
-int				philo_observe(t_philo **philo, t_philo_data *data);
+int				philo_observe(t_philo *philo, t_philo_data *data);
 
 // printf("%d  \n", philo->no);
 // has taken a fork

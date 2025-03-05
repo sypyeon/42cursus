@@ -4,6 +4,12 @@
 		"pipex_bonus.h": "c",
 		"unistd.h": "c",
 		"ft_printf.h": "c",
-		"philo.h": "c"
+		"philo.h": "c",
+		"system_error": "c",
+		"array": "c",
+		"functional": "c",
+		"tuple": "c",
+		"type_traits": "c",
+		"utility": "c"
 	}
 }

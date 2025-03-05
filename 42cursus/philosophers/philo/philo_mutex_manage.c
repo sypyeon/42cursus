@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 18:03:16 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/05 21:07:19 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/06 02:36:04 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void	ph_set_status(t_mutex *mutex, long philo_num)
 void	print_philo_status(t_philo *philo, t_msg status)
 {	
 	pthread_mutex_lock(&(philo->data->print));
-	printf("%d %s", philo->no, &MSG[status]);
+	printf("%d %s\n", philo->no, &MSG[status]);
 	pthread_mutex_unlock(&(philo->data->print));
 }
