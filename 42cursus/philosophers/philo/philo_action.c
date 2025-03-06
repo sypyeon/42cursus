@@ -6,41 +6,66 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:14:40 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/06 01:33:16 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/06 22:06:05 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_eat(t_philo *philo, t_philo_data *data)
+static void	philo_eat(t_philo *philo, t_philo_data *data, t_mutex *right_fork)
 {
-	t_mutex	left_fork;
-	t_mutex	right_fork;
+	long	eaten;
+
+	ph_set_status(right_fork, philo->no);
+	print_philo_status(philo, GRAB);
+	print_philo_status(philo, EAT);
+	ph_set_status(&(philo->starve_time), current_time() + data->tt_die);
+	schrodingers_philo(philo, data->tt_eat);
+	eaten = ph_get_status(&(philo->eaten));
+	ph_set_status(&(philo->eaten), eaten + 1);
+	ph_set_status(right_fork, 0);
+}
+
+static void	philo_grab_fork(t_philo *philo, t_philo_data *data)
+{
+	t_mutex	*left_fork;
+	t_mutex	*right_fork;
 	long	value;
-	
-	left_fork = data->fork[philo->left_fork];
-	right_fork = data->fork[philo->right_fork];
-	while (1)
+
+	if (philo->no == data->num_of_philo)
 	{
-		value = ph_get_status(&left_fork);
-		if (value == 0)
+		right_fork = &(data->fork[philo->left_fork]);
+		left_fork = &(data->fork[philo->right_fork]);
+	}
+	else
+	{
+		left_fork = &(data->fork[philo->left_fork]);
+		right_fork = &(data->fork[philo->right_fork]);
+	}
+	while (!ph_get_status(&(philo->dead)))
+	{
+		value = ph_get_status(left_fork);
+		if (value == 0 || value == philo->no)
 		{
-			ph_set_status(&left_fork, philo->no);
-			value = ph_get_status(&right_fork);
+			if (value == 0)
+				print_philo_status(philo, GRAB);
+			ph_set_status(left_fork, philo->no);
+			value = ph_get_status(right_fork);
 			if (value == 0)
 			{
-				ph_set_status(&right_fork, philo->no);
-				philo->ready_to_eat = 1;
-				print_philo_status(philo, EAT);
-				schrodingers_philo(philo, data->tt_eat);
+				philo_eat(philo, data, right_fork);
+				ph_set_status(left_fork, 0);;
 				break ;
 			}
 		}
 	}
 }
 
-void	philo_sleep(t_philo *philo, t_philo_data *data)
+static void	philo_sleep(t_philo *philo, t_philo_data *data)
 {
+	if (ph_get_status(&(philo->dead)))
+		return ;
+	print_philo_status(philo, SLEEP);
 	schrodingers_philo(philo, data->tt_sleep);
 }
 
@@ -50,11 +75,11 @@ void	*philo_task(void *arg)
 
 	philo = (t_philo *)arg;
 	if ((philo->no % 2) == 1)
-		usleep(100);
-	while (1)
+		usleep(1000);
+	while (!ph_get_status(&(philo->dead)))
 	{
 		print_philo_status(philo, THINK);
-		philo_eat(philo, philo->data);
+		philo_grab_fork(philo, philo->data);
 		philo_sleep(philo, philo->data);
 	}
 	return (NULL);

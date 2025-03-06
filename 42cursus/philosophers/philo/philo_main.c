@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 19:39:54 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/06 02:33:08 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/06 18:18:37 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(int ac, char **av)
 		return (-1);
 	if (create_philos(philo, &data) == -1)
 		return (-1);
+	usleep (100);
 	while (philo_observe(philo, &data) == RUN)
 		usleep(200);
 	return (0);

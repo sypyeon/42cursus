@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 16:22:16 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/06 02:30:46 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/06 21:20:18 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_philo_data(t_philo_data *data, char **av)
 	if (av[5])
 		data->eat_count = ph_atoi(av[5]);
 	else
-		data->eat_count = __LONG_LONG_MAX__;
+		data->eat_count = -1;
 	return (0);
 }
 
@@ -37,6 +37,7 @@ void	init_mutex(t_philo *philo, t_philo_data *data)
 		pthread_mutex_init(&(data->fork[i].key), NULL);
 		pthread_mutex_init(&(philo[i].eaten.key), NULL);
 		pthread_mutex_init(&(philo[i].dead.key), NULL);
+		pthread_mutex_init(&(philo[i].starve_time.key), NULL);
 		i++;
 	}
 }
@@ -63,6 +64,7 @@ int	init_philo(t_philo **philo, t_philo_data *data)
 		i++;
 	}
 	init_mutex(*philo, data);
+	pthread_mutex_init(&(data->print), NULL);
 	return (0);
 }
 
@@ -74,6 +76,7 @@ int	create_philos(t_philo *philo, t_philo_data *data)
 	i = 0;
 	while (i < data->num_of_philo)
 	{
+		ph_set_status(&(philo[i].starve_time), current_time() + philo->data->tt_die);
 		t_ok = pthread_create(&philo[i].tid, NULL, philo_task, &philo[i]);
 		if (t_ok != 0)
 			return (-1);

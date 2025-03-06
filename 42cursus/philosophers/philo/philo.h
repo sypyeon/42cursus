@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:01:28 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/03/06 02:34:02 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/03/06 22:37:06 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_philo_data
 	int				tt_die;
 	int				tt_eat;
 	int				tt_sleep;
-	unsigned long	eat_count;
+	int				eat_count;
 	t_mutex			*fork;
 	pthread_mutex_t	print;
 }	t_philo_data;
@@ -59,7 +59,6 @@ typedef struct s_philo
 	int				no;
 	int				left_fork;
 	int				right_fork;
-	int				ready_to_eat;
 	t_mutex			starve_time;
 	t_mutex			eaten;
 	t_mutex			dead;
@@ -72,11 +71,9 @@ int				init_philo(t_philo **philo, t_philo_data *data);
 int				create_philos(t_philo *philo, t_philo_data *data);
 
 void			*philo_task(void *arg);
-void			philo_sleep(t_philo *philo, t_philo_data *data);
-void			philo_eat(t_philo *philo, t_philo_data *data);
 
 long			ph_get_status(t_mutex *mutex);
-void			ph_set_status(t_mutex *mutex, long philo_num);
+void			ph_set_status(t_mutex *mutex, long status);
 void			print_philo_status(t_philo *philo, t_msg status);
 
 void			schrodingers_philo(t_philo *philo, int time);
