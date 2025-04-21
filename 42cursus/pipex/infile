@@ -1,0 +1,14 @@
+infile
+libft
+Makefile
+pipex_bonus.h
+pipex.h
+px_cmd_utils_bonus.c
+px_cmd_utils.c
+px_ft_free_bonus.c
+px_ft_free.c
+px_heredoc_bonus.c
+px_main_bonus.c
+px_main.c
+px_path_utils_bonus.c
+px_path_utils.c
