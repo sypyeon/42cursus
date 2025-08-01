@@ -116,7 +116,7 @@ int exec(char **argv, int i, char **envp)
 
     // Fork the process and if the fork fails, print error and exit
     if ((pid = fork()) == -1)
-	err("error: fatal\n"), exit(1);
+		err("error: fatal\n"), exit(1);
     if (!pid)
     {
         argv[i] = 0;
