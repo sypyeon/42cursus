@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 17:17:36 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/21 18:02:34 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/06/06 00:04:27 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_param
 {
 	int		x;
 	int		y;
-	void	*player;
 }				t_param;
 
 typedef struct s_img
@@ -83,7 +82,7 @@ typedef struct s_vars
 	t_param	location;
 	int		player_face;
 	int		move_count;
-}				t_vars;
+}	t_vars;
 
 typedef struct s_check
 {

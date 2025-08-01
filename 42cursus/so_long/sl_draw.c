@@ -6,7 +6,7 @@
 /*   By: sipyeon <sipyeon@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 17:41:55 by sipyeon           #+#    #+#             */
-/*   Updated: 2025/02/15 15:12:51 by sipyeon          ###   ########.fr       */
+/*   Updated: 2025/06/06 00:03:56 by sipyeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	sl_draw_player(t_vars *game, int *w, int *h)
 	else if (game->player_face == RIGHT)
 		game->img.ptr = mlx_xpm_file_to_image(game->mlx,
 				"./textures/player/player_right.xpm", w, h);
-	game->location.player = game->img.ptr;
 }
 
 void	sl_draw_tile(t_vars *game, char texture)

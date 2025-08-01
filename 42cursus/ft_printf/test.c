@@ -6,9 +6,12 @@
 
 int	main()
 {
+	int	a = 12987398;
 	int d;
 
-	d = printf("%%k");
-	printf("%d\n", d);
+	d = printf("%");
+	ft_printf("%d\n", d);
+	d = write(1, "Hello World!", 12);
+	ft_printf("%d\n", d);
 	return (0);
 }
