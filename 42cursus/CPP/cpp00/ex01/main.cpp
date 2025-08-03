@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <sstream>
 
 class Contact
 {
@@ -11,6 +12,7 @@ class Contact
 	std::string darkest_secret;
 	public:
 	void display_contact();
+	void display_search(int i);
     void input_contact();
 };
 
@@ -47,48 +49,77 @@ void PhoneBook::add_contact()
         noc = 0;
 }
 
+void Contact::display_contact()
+{
+    std::cout << "First Name: " << first_name << std::endl;
+    std::cout << "Last Name: " << last_name << std::endl;
+    std::cout << "Nickname: " << nickname << std::endl;
+    std::cout << "Phone Number: " << phone_number << std::endl;
+    std::cout << "Darkest Secret: " << darkest_secret << std::endl;
+}
+
 void	display_(std::string str)
 {
-	int i = 0;
+	size_t i = 0;
 
 	if (str.length() > 10)
 	{
 		str.erase(str.begin() + 9, str.end());
 		str.push_back('.');
 	}
+	while (i < 10 - str.length())
+	{
+		std::cout << ' ';
+		i++;
+	}
+	i = 0;
 	while (i < str.length())
 	{
 		std::cout << str[i];
 		i++;
 	}
-	while (i < 10)
-	{
-		std::cout << ' ';
-		i++;
-	}
 }
 
-void	Contact::display_contact()
+void	display_search_header()
 {
+	std::cout << "=============================================" << std::endl;
+	std::cout << "|     index|first name| last name|  nickname|" << std::endl;
+	std::cout << "=============================================" << std::endl;
+}
+
+void	Contact::display_search(int index)
+{
+	std::cout << '|';
+	display_(std::to_string(index + 1));
+	std::cout << '|';
 	display_(first_name);
 	std::cout << '|';
 	display_(last_name);
 	std::cout << '|';
 	display_(nickname);
-	std::cout << '|';
-	display_(phone_number);
-	std::cout << '\n';
+	std::cout << '|' << std::endl;
+	std::cout << "---------------------------------------------" << std::endl;
 }
 
 void	PhoneBook::search_phonebook()
 {
 	int i = 0;
+	std::string input;
 
+	display_search_header();
 	while (noc > i)
 	{
-		contact[i].display_contact();
+		contact[i].display_search(i);
 		i++;
 	}
+	std::cout << "Index of contact to display: ";
+	std::cin >> input;
+	std::stringstream ss(input);
+	int index;
+	if ((ss >> index) && (index >= 1 && index <= 8) && index <= noc)
+		contact[index - 1].display_contact();
+	else
+  	  std::cout << "Invalid index!" << std::endl;
 }
 
 int	main()
@@ -98,12 +129,17 @@ int	main()
 
 	while(true)
 	{
+		std::cout << std::endl << "Input command." << std::endl;
+		std::cout << "ADD: save a new contact" << std::endl;
+		std::cout << "SEARCH: display a specific contact" << std::endl;
+		std::cout << "EXIT: quit program. contacts are lost forever!" << std::endl;
+		std::cout << ">";
 		std::cin >> input;
 		if (input == "ADD" || input == "add")
 			phonebook.add_contact();
-		if (input == "SEARCH" || input == "search")
+		else if (input == "SEARCH" || input == "search")
 			phonebook.search_phonebook();
-		if (input == "EXIT" || input == "exit")
+		else if (input == "EXIT" || input == "exit")
 			break;
 	}
 	return 0;
