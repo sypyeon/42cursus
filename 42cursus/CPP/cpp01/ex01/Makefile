@@ -1,10 +1,10 @@
-NAME = ZombieHorde
+NAME = zombieHorde
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 OBJ_DIR = ./obj
-SRC = main.cpp newZombie.cpp  randomChump.cpp  Zombie.cpp
+SRC = main.cpp zombieHorde.cpp Zombie.cpp
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
 
 

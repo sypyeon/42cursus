@@ -1,5 +1,6 @@
 #include "Contact.hpp"
 #include <iostream>
+#include <sstream>
 #include <iomanip>
 
 void	display_(std::string str)
@@ -13,10 +14,17 @@ void	display_(std::string str)
 	std::cout << str;
 }
 
+std::string int_to_string(int num)
+{
+    std::stringstream ss;
+    ss << num;
+    return ss.str();
+}
+
 void	Contact::display_search(int index)
 {
 	std::cout << '|';
-	display_(std::to_string(index + 1));
+	display_(int_to_string(index + 1));
 	std::cout << '|';
 	display_(first_name);
 	std::cout << '|';
@@ -30,21 +38,29 @@ void	Contact::display_search(int index)
 
 void Contact::input_contact()
 {
+	std::cout << "First Name: ";
+	std::getline(std::cin, first_name);
 	while (first_name.empty())
 	{
 		std::cout << "First Name: ";
 		std::getline(std::cin, first_name);
 	}
+	std::cout << "Last Name: ";
+	std::getline(std::cin, last_name);
 	while (last_name.empty())
 	{
 		std::cout << "Last Name: ";
 		std::getline(std::cin, last_name);
 	}
+	std::cout << "Nickname: ";
+	std::getline(std::cin, nickname);
 	while (nickname.empty())
 	{
 		std::cout << "Nickname: ";
 		std::getline(std::cin, nickname);
 	}
+	std::cout << "Phone Number: ";
+	std::getline(std::cin, phone_number);
 	while (phone_number.empty())
 	{
 		std::cout << "Phone Number: ";
