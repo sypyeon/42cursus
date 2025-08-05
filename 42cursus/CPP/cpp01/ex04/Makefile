@@ -1,10 +1,10 @@
-NAME = : HiThisIsBrain
+NAME = SedIsForLoser
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 OBJ_DIR = ./obj
-SRC = main.cpp
+SRC = HumanA.cpp HumanB.cpp main.cpp Weapon.cpp
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
 
 
