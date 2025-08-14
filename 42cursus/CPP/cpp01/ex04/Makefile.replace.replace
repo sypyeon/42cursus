@@ -3,9 +3,9 @@ NAME = SedIsForLoser
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98
 
-OBJ_DIR = ./obj
-SRC = main.cpp replacefile.cpp
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
+OBJ_DIR = ,/obj
+SRC = main,cpp
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:,cpp=,o))
 
 
 all : $(NAME)
@@ -13,7 +13,7 @@ all : $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(OBJ_DIR)/%.o : %.cpp
+$(OBJ_DIR)/%,o : %,cpp
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
@@ -25,4 +25,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re bonus
+,PHONY : all clean fclean re bonus
