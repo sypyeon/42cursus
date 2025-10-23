@@ -4,7 +4,7 @@ int main(int ac, char **av)
 {
 	if (ac != 4)
 	{
-		std::cerr << "Usage: " << av[0] << " <string>" << std::endl;
+		std::cerr << "Usage: " << av[0] << " <file name> <string1> <string2>" << std::endl;
 		return 1;
 	}
 	replaceFile file(av[1], av[2], av[3]);

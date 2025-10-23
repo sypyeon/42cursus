@@ -53,7 +53,8 @@ void replaceFile::replaceAndCreateFile()
 	outFile.close();
 }
 
-replaceFile::~replaceFile() {
+replaceFile::~replaceFile()
+{
 	if (file.is_open())
 		file.close();
-};
+}

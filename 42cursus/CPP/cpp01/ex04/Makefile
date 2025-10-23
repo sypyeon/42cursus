@@ -1,7 +1,7 @@
 NAME = SedIsForLoser
 
-CC = c++
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CXX = c++
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 OBJ_DIR = ./obj
 SRC = main.cpp replacefile.cpp
@@ -11,11 +11,11 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
 all : $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 $(OBJ_DIR)/%.o : %.cpp
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean :
 	rm -rf $(OBJ_DIR)
