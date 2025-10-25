@@ -1,10 +1,11 @@
 #include "Fixed.hpp"
 #include <iostream>
 
-int main(void) {
+int main(void)
+{
 	Fixed a;
+	a.setRawBits(1234.123);
 	Fixed b(a);
-	a.setRawBits(256);
 	Fixed c;
 
 	c = b;
