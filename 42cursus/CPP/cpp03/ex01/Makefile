@@ -17,7 +17,7 @@ $(OBJ_DIR)/%.o : %.cpp
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
