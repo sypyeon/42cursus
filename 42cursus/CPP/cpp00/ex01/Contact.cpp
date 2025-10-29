@@ -21,7 +21,7 @@ std::string int_to_string(int num)
     return ss.str();
 }
 
-void	Contact::display_search(int index)
+void	Contact::display_search(int index) const
 {
 	std::cout << '|';
 	display_(int_to_string(index + 1));
@@ -35,42 +35,56 @@ void	Contact::display_search(int index)
 	std::cout << "---------------------------------------------" << std::endl;
 }
 
+void Contact::clear_contact()
+{
+	first_name = "";
+	last_name = "";
+	nickname = "";
+	phone_number = "";
+	darkest_secret = "";
+}
 
 void Contact::input_contact()
 {
-	std::cout << "First Name: ";
-	std::getline(std::cin, first_name);
+	this->clear_contact();
 	while (first_name.empty())
 	{
 		std::cout << "First Name: ";
 		std::getline(std::cin, first_name);
+		if (!std::cin)
+			return;
 	}
-	std::cout << "Last Name: ";
-	std::getline(std::cin, last_name);
 	while (last_name.empty())
 	{
 		std::cout << "Last Name: ";
 		std::getline(std::cin, last_name);
+		if (!std::cin)
+			return;
 	}
-	std::cout << "Nickname: ";
-	std::getline(std::cin, nickname);
 	while (nickname.empty())
 	{
 		std::cout << "Nickname: ";
 		std::getline(std::cin, nickname);
+		if (!std::cin)
+			return;
 	}
-	std::cout << "Phone Number: ";
-	std::getline(std::cin, phone_number);
 	while (phone_number.empty())
 	{
 		std::cout << "Phone Number: ";
 		std::getline(std::cin, phone_number);
+		if (!std::cin)
+			return;
 	}
-    std::cout << "Darkest Secret: ";
-	std::getline(std::cin, darkest_secret);
+	while (darkest_secret.empty())
+	{
+		std::cout << "Darkest Secret: ";
+		std::getline(std::cin, darkest_secret);
+		if (!std::cin)
+			return;
+	}
 }
 
-void Contact::display_contact()
+void Contact::display_contact() const
 {
     std::cout << "First Name: " << first_name << std::endl;
     std::cout << "Last Name: " << last_name << std::endl;
