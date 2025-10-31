@@ -4,12 +4,10 @@ int main()
 {
 	Zombie *heap;
 
-	heap = newZombie("heap");
+	randomChump("stack zombie");
+	heap = newZombie("heap zombie");
 	heap->announce();
-	randomChump("stack");
 
-	std::cout << "Stack zombie is destroyed when function ends" << std::endl;
 	delete heap;
-	std::cout << heap->get_name() << " zombie is destroyed" << std::endl;
 	return 0;
 }

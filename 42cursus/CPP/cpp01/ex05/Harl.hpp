@@ -8,7 +8,7 @@
 class Harl {
 private:
 	int  complainIndex[HARL_HASH];
-	void (Harl::*functions[HARL_HASH])();
+	void (Harl::*functions[5])();
 	void doNothing();
     void debug();
     void info();
