@@ -2,10 +2,21 @@
 
 Animal::Animal()
 {
+	std::cout << "CALL: Animal default constructor" << std::endl;
+}
+Animal::Animal(const Animal &animal)
+{
+	std::cout << "CALL: Animal default destructor" << std::endl;
+}
+
+Animal &operator=(const Animal &animal)
+{
+
 }
 
 Animal::~Animal()
 {
+	std::cout << "Animal default destructor" << std::endl;
 }
 
 std::string Animal::getType() const
@@ -15,5 +26,5 @@ std::string Animal::getType() const
 
 void Animal::makeSound() const
 {
-	std::cout << this->type << " animal func" << std::endl;
+	std::cout << this->type << " goes";
 }
