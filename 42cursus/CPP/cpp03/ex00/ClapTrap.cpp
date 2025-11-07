@@ -37,7 +37,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "CALL: ClapTrap " << name << " has been destroyed." << std::endl;
+	std::cout << "CALL: ClapTrap " << name << " destructor." << std::endl;
 }
 
 bool ClapTrap::isAlive()
@@ -67,8 +67,14 @@ void ClapTrap::attack(const std::string &target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	this->hp -= amount;
 	std::cout << "ClapTrap " << this->name << " has taken " << amount << " damage!" << std::endl;
+	if (amount > static_cast<unsigned int>(this->hp))
+	{
+		this->hp = 0;
+		std::cout << "ClapTrap " << this->name << " has been destroyed!" << std::endl;
+	}
+	else
+		this->hp -= amount;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)

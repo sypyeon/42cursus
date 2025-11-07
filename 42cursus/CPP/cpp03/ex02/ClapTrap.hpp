@@ -11,9 +11,13 @@ protected:
 	int hp;
 	int ep;
 	int ad;
-	bool has_ep();
+	bool hasEp();
+	bool isAlive();
 public:
+	ClapTrap();
 	ClapTrap(std::string name);
+	ClapTrap(const ClapTrap &other);
+	ClapTrap &operator=(const ClapTrap &other);
 	~ClapTrap();
 
 	void attack(const std::string &target);

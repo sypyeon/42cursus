@@ -15,7 +15,7 @@ ScavTrap::~ScavTrap()
 
 void ScavTrap::attack(const std::string &target)
 {
-	if (this->has_ep())
+	if (this->hasEp())
 	{
 		std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing " << this->ad << " points of damage!" << std::endl;
 		--this->ep;
