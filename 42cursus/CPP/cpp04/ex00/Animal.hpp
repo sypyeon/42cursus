@@ -10,12 +10,13 @@ protected:
 	std::string type;
 public:
 	Animal();
+	Animal(std::string type);
 	Animal(const Animal &animal);
 	Animal &operator=(const Animal &animal);
-	~Animal();
+	virtual ~Animal();
 
-	void makeSound() const;
-	std::string getType() const;
+	virtual void makeSound() const;
+	const std::string getType() const;
 };
 
 #endif

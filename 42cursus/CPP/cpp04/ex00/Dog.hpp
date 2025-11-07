@@ -6,11 +6,14 @@
 
 class Dog : public Animal
 {
+	
 public:
 	Dog();
-	~Dog();
+	Dog(const Dog &dog);
+	Dog &operator=(const Dog &dog);
+	virtual ~Dog();
 
-	void makeSound();
+	virtual void makeSound() const;
 };
 
 #endif
