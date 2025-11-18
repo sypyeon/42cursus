@@ -8,8 +8,19 @@ int main()
 	bob = jake;
 
 	jake.takeDamage(50);
+	jake.attack("enemy");
 	bob2.takeDamage(1);
-	bob.attack("jake");
-	bob.takeDamage(1);
 	bob.beRepaired(2);
+	bob.attack("enemy");
+	bob.attack("enemy");
+	bob.attack("enemy");
+	bob.attack("enemy");
+	bob.attack("enemy");
+	bob.attack("enemy");
+	bob.attack("enemy");
+	bob.attack("enemy");
+	bob.attack("enemy");
+	bob.attack("enemy");
+	bob.beRepaired(2);
+	bob.takeDamage(12);
 }

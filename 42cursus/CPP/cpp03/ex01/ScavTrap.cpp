@@ -1,8 +1,7 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap("ScavTrap")
 {
-	this->name = "ScavTrap";
 	this->hp = 100;
 	this->ep = 50;
 	this->ad = 20;
@@ -29,21 +28,21 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 	if (this != &other)
 	{
 		this->name = other.name;
-		this->hp = 100;
-		this->ep = 50;
-		this->ad = 20;
+		this->hp = other.hp;
+		this->ep = other.ep;
+		this->ad = other.ad;
 	}
 	return *this;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap " << name << " has been destroyed." << std::endl;
+	std::cout << "CALL: ScavTrap " << name << " destructor." << std::endl;
 }
 
 void ScavTrap::attack(const std::string &target)
 {
-	if (this->hasEp())
+	if (this->isAlive() && this->hasEp())
 	{
 		std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing " << this->ad << " points of damage!" << std::endl;
 		--this->ep;
@@ -52,5 +51,9 @@ void ScavTrap::attack(const std::string &target)
 
 void ScavTrap::guardGate()
 {
-	std::cout << "ScavTrap " << this->name << " is now in Gate keeper mode." << std::endl;
+	if (this->isAlive() && this->hasEp())
+	{
+		std::cout << "ScavTrap " << this->name << " is now in Gate keeper mode." << std::endl;
+		--this->ep;
+	}
 }
