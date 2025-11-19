@@ -16,6 +16,7 @@ public:
 	virtual ~Cat();
 
 	void makeSound() const;
+	Brain *getBrain();
 };
 
 #endif
