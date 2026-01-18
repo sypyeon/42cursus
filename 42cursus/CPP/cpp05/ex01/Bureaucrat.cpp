@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : name("unknown"), grade(150) {}
 
@@ -51,6 +52,9 @@ void Bureaucrat::signForm(Form& form)
 {
 	form.beSigned(*this);
 	if (form.getIsSigned())
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	else
+		std::cout << this->getName() << " couldn't sign " << form.getName() << std::endl;
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()

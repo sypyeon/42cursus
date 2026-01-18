@@ -1,8 +1,11 @@
 #ifndef FORM_HPP
 #define FORM_HPP
 
-#include "Bureaucrat.hpp"
+#include <ostream>
+#include <string>
+#include <exception>
 
+class Bureaucrat;
 class Form
 {
 private:
@@ -12,7 +15,7 @@ private:
 	const int toExec;
 public:
 	Form();
-	Form(std::string name, bool isSigned, int toSign, int toExec);
+	Form(std::string name, int toSign, int toExec);
 	Form(Form& other);
 	~Form();
 
