@@ -41,10 +41,17 @@ int main()
 	std::cout << std::endl;
 
 
-	//Form
-	ShrubberyCreationForm SCF("Tree");
-	try { highGrade.signForm(SCF); }
+	// //Shrubbery Creation Form
+	// ShrubberyCreationForm SCF("Tree");
+	// try { highGrade.signForm(SCF); }
+	// catch (const std::exception& e) { std::cerr << e.what() << std::endl; }
+	// try { highGrade.executeForm(SCF); }
+	// catch (const std::exception& e) { std::cerr << e.what() << std::endl; }
+
+	//Robotomy Request Form
+	RobotomyRequestForm RRF("Robot");
+	try { highGrade.signForm(RRF); }
 	catch (const std::exception& e) { std::cerr << e.what() << std::endl; }
-	try { highGrade.executeForm(SCF); }
+	try { highGrade.executeForm(RRF); }
 	catch (const std::exception& e) { std::cerr << e.what() << std::endl; }
 }

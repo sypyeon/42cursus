@@ -6,10 +6,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", target, 145, 137) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
-{
-	*this = other;
-}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) { *this = other; }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
@@ -69,3 +66,8 @@ bool ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 	return true;
 }
 
+std::ostream &operator<<(std::ostream& os, const ShrubberyCreationForm& form)
+{
+	os << form.getName();
+	return os;
+}

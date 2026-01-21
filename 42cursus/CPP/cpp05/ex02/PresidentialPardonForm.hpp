@@ -7,6 +7,7 @@
 
 #include "AForm.hpp"
 
+class Bureaucrat;
 //Required grades: sign 25, exec 5
 class PresidentialPardonForm : public AForm
 {
@@ -18,7 +19,7 @@ public:
 
 	PresidentialPardonForm &operator=(PresidentialPardonForm& other);
 
-	
+	bool execute(Bureaucrat const & executor) const;
 };
 
 std::ostream &operator<<(std::ostream& os, PresidentialPardonForm& form);

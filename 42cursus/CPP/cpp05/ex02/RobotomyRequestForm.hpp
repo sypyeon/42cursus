@@ -7,18 +7,21 @@
 
 #include "AForm.hpp"
 
+class Bureaucrat;
 //Required grades: sign 72, exec 45
 class RobotomyRequestForm : public AForm
 {
 public:
 	RobotomyRequestForm();
-	RobotomyRequestForm(std::string name, int toSign, int toExec);
-	RobotomyRequestForm(RobotomyRequestForm& other);
+	RobotomyRequestForm(std::string target);
+	RobotomyRequestForm(const RobotomyRequestForm& other);
 	~RobotomyRequestForm();
 
-	RobotomyRequestForm &operator=(RobotomyRequestForm& other);
+	RobotomyRequestForm &operator=(const RobotomyRequestForm& other);
+
+	bool execute(Bureaucrat const & executor) const;
 };
 
-std::ostream &operator<<(std::ostream& os, RobotomyRequestForm& form);
+std::ostream& operator<<(std::ostream& os, RobotomyRequestForm& form);
 
 #endif
