@@ -14,9 +14,11 @@ public:
 	PresidentialPardonForm();
 	PresidentialPardonForm(std::string name, int toSign, int toExec);
 	PresidentialPardonForm(PresidentialPardonForm& other);
-	virtual ~PresidentialPardonForm();
+	~PresidentialPardonForm();
 
 	PresidentialPardonForm &operator=(PresidentialPardonForm& other);
+
+	
 };
 
 std::ostream &operator<<(std::ostream& os, PresidentialPardonForm& form);

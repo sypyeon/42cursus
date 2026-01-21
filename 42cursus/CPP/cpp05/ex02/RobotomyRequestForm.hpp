@@ -14,7 +14,7 @@ public:
 	RobotomyRequestForm();
 	RobotomyRequestForm(std::string name, int toSign, int toExec);
 	RobotomyRequestForm(RobotomyRequestForm& other);
-	virtual ~RobotomyRequestForm();
+	~RobotomyRequestForm();
 
 	RobotomyRequestForm &operator=(RobotomyRequestForm& other);
 };

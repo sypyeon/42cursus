@@ -14,12 +14,12 @@ class ShrubberyCreationForm : public AForm
 public:
 	ShrubberyCreationForm();
 	ShrubberyCreationForm(std::string target);
-	ShrubberyCreationForm(ShrubberyCreationForm& other);
-	virtual ~ShrubberyCreationForm();
+	ShrubberyCreationForm(const ShrubberyCreationForm& other);
+	~ShrubberyCreationForm();
 
-	ShrubberyCreationForm &operator=(ShrubberyCreationForm& other);
+	ShrubberyCreationForm &operator=(const ShrubberyCreationForm& other);
 
-	bool execute();
+	bool execute(Bureaucrat const & executor) const;
 };
 
 std::ostream &operator<<(std::ostream& os, ShrubberyCreationForm& form);

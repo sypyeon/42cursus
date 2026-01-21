@@ -1,5 +1,7 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include <iostream>
 
 int main()
@@ -40,7 +42,9 @@ int main()
 
 
 	//Form
-	Form topSecret("Top secret", 1, 1);
-	Form commonForm("Common form", 150, 150);
-	Form invaldForm("invalid form", 200, 200);
+	ShrubberyCreationForm SCF("Tree");
+	try { highGrade.signForm(SCF); }
+	catch (const std::exception& e) { std::cerr << e.what() << std::endl; }
+	try { highGrade.executeForm(SCF); }
+	catch (const std::exception& e) { std::cerr << e.what() << std::endl; }
 }

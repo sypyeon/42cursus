@@ -1,7 +1,7 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-//constructor
+//constructor and destructor
 AForm::AForm(): name("unknown"), isSigned(false), toSign(150), toExec(150) {}
 
 AForm::AForm(std::string name, std::string target, int toSign, int toExec): name(name), target(target), isSigned(false), toSign(toSign), toExec(toExec)
@@ -37,10 +37,19 @@ const int &AForm::getToExec() const { return this->toExec; }
 //functions
 void AForm::beSigned(Bureaucrat& bureaucrat)
 {
-	if (bureaucrat.getGrade() < this->toSign)
+	if (bureaucrat.getGrade() > this->toSign)
 		throw AForm::GradeTooLowException();
 	else
 		this->isSigned = true;
+}
+
+bool AForm::execute(Bureaucrat const & executor) const
+{
+	if (!this->isSigned)
+		throw AForm::FormNotSigned();
+	else if (this->toExec < executor.getGrade())
+		throw AForm::GradeTooLowException();
+	return true;
 }
 
 //exception
@@ -52,6 +61,11 @@ const char* AForm::GradeTooHighException::what() const throw()
 const char* AForm::GradeTooLowException::what() const throw()
 {
 	return "Grade too low";
+}
+
+const char* AForm::FormNotSigned::what() const throw()
+{
+	return "Form not signed";
 }
 
 
