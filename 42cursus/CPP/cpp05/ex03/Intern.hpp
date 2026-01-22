@@ -12,13 +12,17 @@ class Intern
 {
 private:
 	std::vector<std::string> formats; 
+	AForm* (Intern::*formatCreateFunction[3])(std::string target);
+	AForm* robotomyForm(std::string target);
+	AForm* presidentialForm(std::string target);
+	AForm* shrubberyForm(std::string target);
+	Intern(Intern &other);
+	Intern& operator=(Intern &other);
 public:
 	Intern();
-	Intern(Intern &other);
 	~Intern();
-	Intern& operator=(Intern &other);
 
-	AForm* makeForm(const std::string name, const std::string target) const;
+	AForm* makeForm(const std::string name, const std::string target);
 	
 	class FormDoesNotExist : public std::exception
 	{
