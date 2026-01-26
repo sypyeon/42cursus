@@ -7,7 +7,6 @@ int main(int ac, char** av)
 		std::cout << "invalid input" << std::endl;
 		return 1;
 	}
-	std::cout << av[1] << std::endl;
 	ScalarConverter::convert(av[1]);
 	return 0;
 }
