@@ -1,10 +1,10 @@
-NAME = ScalarConverter
+NAME = Serializer
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -fPIE
 
 OBJ_DIR = ./obj
-SRC = main.cpp ScalarConverter.cpp
+SRC = main.cpp Serializer.cpp
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
