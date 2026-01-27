@@ -6,44 +6,16 @@
 
 int main()
 {
-	Bureaucrat lowGrade("LowGrade", 150);
+	Bureaucrat lowGrade("LOWGRADE", 150);
 	std::cout << lowGrade << std::endl;
-	Bureaucrat highGrade("HighGrade", 1);
+	Bureaucrat highGrade("HIGHGRADE", 1);
 	std::cout << highGrade << std::endl;
-
-	std::cout << "Trying to construct Bureaucrat with too low grade." << std::endl;
-	try {Bureaucrat tooLow("tooLow", 151);}
-	catch (std::exception &e) {std::cout << e.what() << std::endl;}
 	std::cout << std::endl;
-
-	//invalid decrement
-	std::cout << "Trying to decrease grade of " << lowGrade << std::endl;
-	try	{lowGrade.decrementGrade();}
-	catch(const std::exception& e) {std::cerr << e.what() << '\n';}
-	std::cout << std::endl;
-
-	//valid increment
-	std::cout << "Trying to increase grade of " << lowGrade << std::endl;
-	try	{lowGrade.incrementGrade();}
-	catch(const std::exception& e) {std::cerr << e.what() << '\n';}
-	std::cout << std::endl;
-
-	//invalid increment
-	std::cout << "Trying to increase grade of " << highGrade << std::endl;
-	try	{highGrade.incrementGrade();}
-	catch(const std::exception& e) {std::cerr << e.what() << '\n';}
-	std::cout << std::endl;
-
-	//valid decrement
-	std::cout << "Trying to decrease grade of " << highGrade << std::endl;
-	try	{highGrade.decrementGrade();}
-	catch(const std::exception& e) {std::cerr << e.what() << '\n';}
-	std::cout << std::endl;
-
 
 	//Shrubbery Creation Form
-	std::cout << "===Shrubbery Creation Form===" << std::endl;
-	ShrubberyCreationForm SCF("Tree");
+	std::cout << "=== Shrubbery Creation Form ===" << std::endl;
+	ShrubberyCreationForm SCF("TREE");
+	std::cout << SCF.getName() << " has been created." << std::endl;
 	try { highGrade.signForm(SCF); }
 	catch (const std::exception& e) { std::cerr << e.what() << std::endl; }
 	try { highGrade.executeForm(SCF); }
@@ -53,8 +25,9 @@ int main()
 	std::cout << std::endl;
 
 	//Robotomy Request Form
-	std::cout << "===Robotomy Request Form===" << std::endl;
-	RobotomyRequestForm RRF("Robot");
+	std::cout << "=== Robotomy Request Form ===" << std::endl;
+	RobotomyRequestForm RRF("ROBOT");
+	std::cout << RRF.getName() << " has been created." << std::endl;
 	try { highGrade.signForm(RRF); }
 	catch (const std::exception& e) { std::cerr << e.what() << std::endl; }
 	try { highGrade.executeForm(RRF); }
@@ -65,8 +38,9 @@ int main()
 
 
 	//Presidential Pardon Form
-	std::cout << "===Presidential Pardon Form===" << std::endl;
-	PresidentialPardonForm PPF("Pardon");
+	std::cout << "=== Presidential Pardon Form ===" << std::endl;
+	PresidentialPardonForm PPF("PARDON");
+	std::cout << PPF.getName() << " has been created." << std::endl;
 	try { highGrade.signForm(PPF); }
 	catch (const std::exception& e) { std::cerr << e.what() << std::endl; }
 	try { highGrade.executeForm(PPF); }

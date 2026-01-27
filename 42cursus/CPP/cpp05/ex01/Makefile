@@ -1,7 +1,7 @@
 NAME = Form
 
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -fPIE
 
 OBJ_DIR = ./obj
 SRC = main.cpp Bureaucrat.cpp Form.cpp
