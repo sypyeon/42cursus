@@ -4,6 +4,8 @@
 #include <cstdlib>
 #include <ctime>
 
+Base::~Base() {}
+
 Base* generate(void)
 {
 	Base* base;
@@ -13,9 +15,9 @@ Base* generate(void)
 	if (random == 0)
 		base = new A();
 	else if (random == 1)
-		base = new B;
-	else if (random == 2)
-		base = new C;
+		base = new B();
+	else
+		base = new C();
 	return base;
 }
 
@@ -36,30 +38,20 @@ void identify(Base& p)
 {
 	try
 	{
-		dynamic_cast<A&>(p);
+		A a = dynamic_cast<A&>(p);
 		std::cout << "actual type of the object pointed to by is A" << std::endl;
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	catch(const std::exception& e) {}
 	try
 	{
-		dynamic_cast<B&>(p);
+		B b = dynamic_cast<B&>(p);
 		std::cout << "actual type of the object pointed to by is B" << std::endl;
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	catch(const std::exception& e) {}
 	try
 	{
-		dynamic_cast<C&>(p);
+		C c = dynamic_cast<C&>(p);
 		std::cout << "actual type of the object pointed to by is C" << std::endl;
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
+	catch(const std::exception& e) {}	
 }
