@@ -2,15 +2,17 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
+#include <sys/time.h>
 
 Base::~Base() {}
 
 Base* generate(void)
 {
 	Base* base;
-	std::srand(std::time(NULL));
-	int random = std::rand() % 3;
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	unsigned long ms = tv.tv_usec;
+	int random = ms % 3;
 	
 	if (random == 0)
 		base = new A();
