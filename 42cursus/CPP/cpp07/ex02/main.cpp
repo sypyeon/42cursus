@@ -7,11 +7,12 @@
 int main(int, char **)
 {
 	int *a = new int();
-	Array<int> aa;
-	std::cout << *a << std::endl;
-	std::cout << aa.size() << std::endl;
+	Array<int> aa(-1);
+	std::cout << "size of a:  " << *a << std::endl;
+	std::cout << "size of aa: " << aa.size() << std::endl;
 	delete a;
 
+	std::cout << std::endl << "=== testing random values ===" << std::endl;
 	Array<int> numbers(MAX_VAL);
 	int *mirror = new int[MAX_VAL];
 	srand(time(NULL));
@@ -20,13 +21,8 @@ int main(int, char **)
 		const int value = rand();
 		numbers[i] = value;
 		mirror[i] = value;
+		std::cout << numbers[i] << std::endl;
 	}
-	// SCOPE
-	{
-		Array<int> tmp = numbers;
-		Array<int> test(tmp);
-	}
-
 	for (int i = 0; i < MAX_VAL; i++)
 	{
 		if (mirror[i] != numbers[i])
@@ -35,16 +31,18 @@ int main(int, char **)
 			return 1;
 		}
 	}
+	std::cerr << "== array<int> and int* saved the same value ==" << std::endl;
+	// SCOPE
+	{
+		Array<int> tmp = numbers;
+		Array<int> test(tmp);
+	}
+
 	try { numbers[-2] = 0; }
 	catch (const std::exception &e) { std::cerr << e.what() << std::endl; }
 	try { numbers[MAX_VAL] = 0; }
 	catch (const std::exception &e) { std::cerr << e.what() << std::endl; }
 
-	for (int i = 0; i < MAX_VAL; i++)
-	{
-		numbers[i] = rand();
-		std::cout << numbers[i] << std::endl;
-	}
 	delete[] mirror;
 	return 0;
 }
