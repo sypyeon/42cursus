@@ -7,12 +7,15 @@
 int main(int, char **)
 {
 	int *a = new int();
-	Array<int> aa(-1);
+	Array<int> aa;
+	std::cout << "=== testing default constructor ===" << std::endl;
 	std::cout << "size of a:  " << *a << std::endl;
+	std::cout << "=== construct with negative value ===" << std::endl;
+	std::cout << "(underflow expected due to unsigned value)" << std::endl;
 	std::cout << "size of aa: " << aa.size() << std::endl;
 	delete a;
 
-	std::cout << std::endl << "=== testing random values ===" << std::endl;
+	std::cout << "\n=== testing random values ===" << std::endl;
 	Array<int> numbers(MAX_VAL);
 	int *mirror = new int[MAX_VAL];
 	srand(time(NULL));
@@ -23,6 +26,8 @@ int main(int, char **)
 		mirror[i] = value;
 		std::cout << numbers[i] << std::endl;
 	}
+
+	std::cout << "\n=== comparing random values ===" << std::endl;
 	for (int i = 0; i < MAX_VAL; i++)
 	{
 		if (mirror[i] != numbers[i])
@@ -31,13 +36,13 @@ int main(int, char **)
 			return 1;
 		}
 	}
-	std::cerr << "== array<int> and int* saved the same value ==" << std::endl;
-	// SCOPE
+	std::cerr << "\n=== testing copy constructor and operator ===" << std::endl;
 	{
 		Array<int> tmp = numbers;
 		Array<int> test(tmp);
 	}
 
+	std::cerr << "\n=== testing exception handling test ===" << std::endl;
 	try { numbers[-2] = 0; }
 	catch (const std::exception &e) { std::cerr << e.what() << std::endl; }
 	try { numbers[MAX_VAL] = 0; }
