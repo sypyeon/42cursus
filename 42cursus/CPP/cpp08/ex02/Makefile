@@ -1,10 +1,10 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = easyfind
+NAME = MutantStack
 
 OBJ_DIR = ./obj
-SRC = main.cpp
+SRC = main.cpp MutantStack.tpp
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
