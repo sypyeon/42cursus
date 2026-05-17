@@ -7,12 +7,13 @@
 int main(int, char **)
 {
 	int *a = new int();
-	Array<int> aa;
+	const Array<int> aa(123);
 	std::cout << "=== testing default constructor ===" << std::endl;
 	std::cout << "size of a:  " << *a << std::endl;
 	std::cout << "=== construct with negative value ===" << std::endl;
 	std::cout << "(underflow expected due to unsigned value)" << std::endl;
 	std::cout << "size of aa: " << aa.size() << std::endl;
+	std::cout << "aa: " << aa[0] << std::endl;
 	delete a;
 
 	std::cout << "\n=== testing random values ===" << std::endl;

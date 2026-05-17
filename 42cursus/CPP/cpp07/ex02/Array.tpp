@@ -38,7 +38,15 @@ Array<T>& Array<T>::operator=(const Array<T> &other)
 }
 
 template <typename T>
-T &Array<T>::operator[](unsigned int n)
+T Array<T>::operator[](unsigned int n) const
+{
+	if (n >= this->n)
+		throw std::exception();
+	return (this->array[n]);
+}
+
+template <typename T>
+T& Array<T>::operator[](unsigned int n)
 {
 	if (n >= this->n)
 		throw std::exception();

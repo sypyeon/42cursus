@@ -15,6 +15,7 @@ public:
 	Array(const Array &other);
 	Array &operator=(const Array &other);
 
+	T operator[](unsigned int n) const;
 	T &operator[](unsigned int n);
 	unsigned int size() const;
 	~Array();

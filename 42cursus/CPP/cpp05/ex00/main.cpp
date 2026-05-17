@@ -6,7 +6,7 @@ int main()
 	{
 		std::cout << "=== testing Bureaucrat construction and functions ===" << std::endl;
 		std::cout << std::endl << "--- valid Bureaucrat creation ---" << std::endl;
-		Bureaucrat lowB("Low Grade Bureaucrat", 150);
+		Bureaucrat lowB("Low Grade Bureaucrat", 151);
 		std::cout << lowB << std::endl;
 		Bureaucrat highB("High Grade Bureaucrat", 1);
 		std::cout << highB << std::endl;

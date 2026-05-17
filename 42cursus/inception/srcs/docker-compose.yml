@@ -1,0 +1,132 @@
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ~/data/wordpress
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ~/data/mariadb
+
+networks:
+  inception:
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    image: nginx:sipyeon
+    ports:
+      - "443:443"
+    volumes:
+      - ./secrets/nginx.crt:${SSL_CERT_PATH}:ro
+      - ./secrets/nginx.key:${SSL_KEY_PATH}:ro
+      - wordpress:/var/www/html
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
+      SSL_CERT_PATH: ${SSL_CERT_PATH}
+      SSL_KEY_PATH: ${SSL_KEY_PATH}
+    networks:
+      - inception
+    restart: unless-stopped
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    image: wordpress:sipyeon
+    ports:
+      - "9000:9000"
+    env_file:
+      - ./secrets/wordpress.env
+      - ./secrets/db-info.env
+    volumes:
+      - wordpress:/var/www/html
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
+    networks:
+      - inception
+    restart: unless-stopped
+
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+      dockerfile: Dockerfile
+    image: mariadb:sipyeon
+    ports:
+      - "3306:3306"
+    env_file:
+      - ./secrets/mariadb.env
+      - ./secrets/db-info.env
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - inception
+    restart: unless-stopped
+
+  redis:
+    container_name: redis
+    build:
+      context: ./bonus/redis
+      dockerfile: Dockerfile
+    image: redis:sipyeon
+    ports:
+      - "6379:6379"
+    networks:
+      - inception
+    restart: unless-stopped
+
+  ftp:
+    container_name: ftp
+    build:
+      context: ./bonus/ftp
+      dockerfile: Dockerfile
+    image: ftp:sipyeon
+    ports:
+      - "21:21"
+      - "30000-30010:30000-30010"
+    env_file:
+      - ./secrets/ftp.env
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    restart: unless-stopped
+
+  adminer:
+    container_name: adminer
+    build:
+      context: ./bonus/adminer
+      dockerfile: Dockerfile
+    image: adminer:sipyeon
+    environment:
+      ADMINER_DEFAULT_SERVER: mariadb
+    ports:
+      - "8080:8080"
+    networks:
+      - inception
+    restart: unless-stopped
+
+  portainer:
+    container_name: portainer
+    build:
+      context: ./bonus/portainer
+      dockerfile: Dockerfile
+    image: portainer:sipyeon
+    ports:
+      - "8000:8000"
+      - "9090:9090"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - inception
+    restart: unless-stopped
