@@ -6,7 +6,7 @@
 
 class NotFoundException : public std::exception
 {
-    virtual const char* what() const throw(){
+	virtual const char* what() const throw() {
 		return "couldn't find value in container";
 	}
 };
@@ -14,10 +14,10 @@ class NotFoundException : public std::exception
 template <typename T>
 typename T::iterator easyfind(T& container, int value)
 {
-    typename T::iterator it = std::find(container.begin(), container.end(), value);
-    if (it == container.end())
-        throw NotFoundException();
-    return it;
+	typename T::iterator it = std::find(container.begin(), container.end(), value);
+	if (it == container.end())
+		throw NotFoundException();
+	return it;
 }
 
 #endif

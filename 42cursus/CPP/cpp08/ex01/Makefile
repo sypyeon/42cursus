@@ -1,10 +1,10 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -fPIE
 
-NAME = easyfind
+NAME = Span
 
 OBJ_DIR = ./obj
-SRC = main.cpp
+SRC = main.cpp Span.cpp
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.cpp=.o))
 
 all: $(NAME)
