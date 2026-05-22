@@ -9,6 +9,11 @@ class MutantStack : std::stack<T>
 {
 private:
 public:
+	MutantStack();
+	MutantStack(MutantStack &other);
+	MutantStack &operator=(MutantStack &other);
+	~MutantStack();
+
 	typedef typename std::stack<T>::container_type::iterator iterator;
 	typedef typename std::stack<T>::container_type::const_iterator const_iterator;
 
