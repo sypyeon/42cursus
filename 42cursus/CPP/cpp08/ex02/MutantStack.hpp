@@ -5,7 +5,7 @@
 #include <iterator>
 
 template <typename T>
-class MutantStack : std::stack<T>
+class MutantStack : public std::stack<T>
 {
 private:
 public:
@@ -21,6 +21,14 @@ public:
 	iterator end();
 	const_iterator begin() const;
 	const_iterator end() const;
+
+	T top();
+	bool empty();
+	std::size_t size();
+	void push(const T &value);
+	void pop();
 };
+
+#include "MutantStack.tpp"
 
 #endif
