@@ -101,7 +101,7 @@ void BitcoinExchange::processInput(std::string& file_name)
 	}
 
 	std::string line;
-	std::getline(fs, line); // Skip header
+	std::getline(fs, line);
 
 	while (std::getline(fs, line))
 	{
