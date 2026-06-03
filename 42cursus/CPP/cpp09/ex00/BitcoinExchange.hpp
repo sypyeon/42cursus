@@ -16,7 +16,7 @@ private:
 	std::map<std::string, float> input;
 
 	BitcoinExchange(BitcoinExchange& other);
-	BitcoinExchange& operator=(BitcoinExchange& other);
+	BitcoinExchange &operator=(BitcoinExchange& other);
 public:
 	BitcoinExchange();
 	~BitcoinExchange();
