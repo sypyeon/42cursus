@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <list>
+#include <deque>
 
 class PmergeMe
 {
@@ -15,16 +15,18 @@ private: // not using
 	PmergeMe &operator=(PmergeMe& other);
 	PmergeMe();
 private:
-	std::vector<int> vec;
-	std::list<int> list;
+	std::vector<unsigned int> jacobsthal;
+	std::vector<unsigned int> raw;
+	std::vector<unsigned int> vec;
+	std::deque<unsigned int> deq;
 
 	void sort_vector();
 	void sort_list();
 public:
-	PmergeMe(char **av);
+	PmergeMe(int ac, char **av);
 	~PmergeMe();
 
-	void run(char **av);
+	void run();
 };
 
 #endif
