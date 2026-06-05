@@ -7,6 +7,12 @@
 #include <string>
 #include <vector>
 #include <deque>
+#include <cstdlib>
+#include <stdexcept>
+#include <cctype>
+#include <climits>
+
+#include <algorithm>
 
 class PmergeMe
 {
@@ -21,7 +27,7 @@ private:
 	std::deque<unsigned int> deq;
 
 	void sort_vector();
-	void sort_list();
+	void sort_deque();
 public:
 	PmergeMe(int ac, char **av);
 	~PmergeMe();
