@@ -54,6 +54,36 @@ PmergeMe::PmergeMe(int ac, char **av)
 	this->raw = convert_av_to_raw(av);
 }
 
+void recursive_sort(std::vector<unsigned int> &v)
+{
+	if (v.size() <= 1)
+		return;
+
+    // leftover
+    bool has_leftover = v.size() % 2 != 0;
+    unsigned int leftover = 0;
+    if (has_leftover)
+        leftover = v.back();
+
+    // 1. 쌍 만들기
+    std::vector<t_pair> pairs;
+    for (size_t i = 0; i < v.size() - has_leftover; i += 2)
+    {
+        if (v[i] < v[i + 1])
+            pairs.push_back(std::make_pair(v[i + 1], v[i]));
+        else
+            pairs.push_back(std::make_pair(v[i], v[i + 1]));
+    }
+
+    // 2. main만 추출
+    std::vector<unsigned int> larger_elements;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        larger_elements.push_back(pairs[i].first);
+
+    // 3. 재귀 — main들을 정렬
+    recursive_sort(larger_elements);
+}
+
 void PmergeMe::sort_vector()
 {
 	std::vector<unsigned int> small; // Pendants
@@ -70,7 +100,7 @@ void PmergeMe::sort_vector()
 	}
 
 	// pairing elements
-	std::vector<std::pair<unsigned int, unsigned int> > pairs;
+	std::vector<t_pair> pairs;
 	for (size_t i = 0; i < temp_raw.size(); i += 2)
 	{
 		unsigned int a = temp_raw[i];

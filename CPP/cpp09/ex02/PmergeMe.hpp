@@ -14,6 +14,8 @@
 
 #include <algorithm>
 
+typedef std::pair<unsigned int, unsigned int> t_pair;
+
 class PmergeMe
 {
 private: // not using
