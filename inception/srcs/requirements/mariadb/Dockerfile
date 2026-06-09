@@ -1,16 +1,16 @@
-FROM alpine:3.20
+FROM debian:11
 
-COPY ./conf/template.sql /etc/mysql/template.sql
-COPY ./conf/run.sh /etc/mysql/run.sh
+RUN apt-get update && apt-get install -y \
+    mariadb-server \
+    gettext-base \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apk add --no-cache gettext mariadb && \
-	mkdir -p /var/lib/mysql /run/mysqld && \
-	chown -R mysql:mysql /var/lib/mysql /run/mysqld
+RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
 
-RUN sed -i 's/^skip-networking/#skip-networking/' /etc/my.cnf.d/mariadb-server.cnf && \
-	sed -i 's/^#bind-address=0.0.0.0/bind-address=0.0.0.0/' /etc/my.cnf.d/mariadb-server.cnf
+COPY conf/init.sql /etc/mysql/init.sql
+COPY tools/run.sh /usr/local/bin/run.sh
+RUN chmod +x /usr/local/bin/run.sh
 
 EXPOSE 3306
 
-ENTRYPOINT ["sh"]
-CMD ["/etc/mysql/run.sh"]
+ENTRYPOINT ["run.sh"]

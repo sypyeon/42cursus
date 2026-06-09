@@ -1,23 +1,19 @@
-COMPOSE_FILE := srcs/docker-compose.yml
-COMPOSE := docker compose -f $(COMPOSE_FILE)
-VOLUME_PATH := $(HOME)/data
+COMPOSE_FILE = srcs/docker-compose.yml
+DATA_PATH = $(HOME)/data
 
-.PHONY: all build up down clean re
-
-all: build up
-
-build:
-	mkdir -p $(VOLUME_PATH)/wordpress $(VOLUME_PATH)/mariadb
-	$(COMPOSE) build --no-cache
+all: up
 
 up:
-	$(COMPOSE) up -d
+	mkdir -p $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress
+	docker-compose -f $(COMPOSE_FILE) up --build -d
 
 down:
-	$(COMPOSE) down
+	docker-compose -f $(COMPOSE_FILE) down
 
-clean:
+clean: down
 	docker system prune -a --volumes -f
-	sudo rm -rf $(VOLUME_PATH)/*
+	rm -rf $(DATA_PATH)
 
-re: down clean all
+re: clean up
+
+.PHONY: all up down clean re
