@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker-compose -f srcs/docker-compose.yml up --build -d mariadb)",
+      "Bash(docker compose *)",
+      "Bash(docker version *)",
+      "Bash(docker-compose -f srcs/docker-compose.yml down)",
+      "Bash(docker-compose -f srcs/docker-compose.yml up --build -d)",
+      "Bash(ls ~/data/ 2>&1)",
+      "Read(//home/siyoung/data/**)",
+      "Bash(curl -sk https://sipyeon.42.fr -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -sk https://sipyeon.42.fr)",
+      "Read(//etc/**)",
+      "Bash(docker exec *)",
+      "Bash(docker-compose -f srcs/docker-compose.yml ps)",
+      "Bash(make up *)",
+      "Bash(curl -sk https://sipyeon.42.fr -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(curl -sk https://sipyeon.42.fr -o /dev/null -w \"HTTP status: %{http_code}\\\\n\")",
+      "Bash(chmod +x /home/siyoung/inception/scripts/setup.sh)"
+    ]
+  }
+}
