@@ -8,6 +8,8 @@ services:
       - mariadb:/var/lib/mysql
     env_file:
       - .env
+      - secrets/mariadb.env
+      - secrets/db-info.env
     networks:
       - inception
     restart: unless-stopped
@@ -19,6 +21,8 @@ services:
       - wordpress:/var/www/html
     env_file:
       - .env
+      - secrets/wordpress.env
+      - secrets/db-info.env
     networks:
       - inception
     restart: unless-stopped
@@ -32,6 +36,8 @@ services:
       - "443:443"
     volumes:
       - wordpress:/var/www/html
+    env_file:
+      - .env
     networks:
       - inception
     restart: unless-stopped

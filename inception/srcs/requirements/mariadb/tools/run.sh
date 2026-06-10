@@ -6,4 +6,4 @@ fi
 
 envsubst < /etc/mysql/init.sql > /etc/mysql/init_real.sql
 
-exec mysqld --user=mysql --init-file=/etc/mysql/init_real.sql --console
+exec mysqld --user=mysql --init-file=/etc/mysql/init_real.sql --console --bind-address=0.0.0.0

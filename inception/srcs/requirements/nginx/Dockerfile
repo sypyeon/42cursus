@@ -1,16 +1,11 @@
-FROM debian:11
+FROM alpine:3.20
 
-RUN apt-get update && apt-get install -y \
-    nginx \
-    openssl \
-    && rm -rf /var/lib/apt/lists/*
-    
+COPY ./conf/template.conf /etc/nginx/template.conf
+COPY ./tools/run.sh /etc/nginx/run.sh
+
 RUN apk add --no-cache gettext nginx openssl
-
-COPY conf/nginx.conf /etc/nginx/nginx.conf
-COPY tools/run.sh /usr/local/bin/run.sh
-RUN chmod +x /usr/local/bin/run.sh
 
 EXPOSE 443
 
-ENTRYPOINT ["run.sh"]
+ENTRYPOINT ["sh"]
+CMD ["/etc/nginx/run.sh"]
