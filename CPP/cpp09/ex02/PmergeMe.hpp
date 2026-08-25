@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <cctype>
 #include <climits>
+#include <ctime>
 
 #include <algorithm>
 
@@ -23,7 +24,6 @@ private: // not using
 	PmergeMe &operator=(PmergeMe& other);
 	PmergeMe();
 private:
-	std::vector<unsigned int> jacobsthal;
 	std::vector<unsigned int> raw;
 	std::vector<unsigned int> vec;
 	std::deque<unsigned int> deq;

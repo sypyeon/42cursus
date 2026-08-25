@@ -9,23 +9,6 @@ PmergeMe &PmergeMe::operator=(PmergeMe &other)
 PmergeMe::PmergeMe() {}
 PmergeMe::~PmergeMe() {}
 
-static std::vector<unsigned int> gen_jacobsthal(int n)
-{
-	std::vector<unsigned int> jacobsthal;
-	unsigned int limit = n / 2 + 1;
-
-	jacobsthal.push_back(0);
-	jacobsthal.push_back(1);
-	unsigned int j = 1;
-	while (jacobsthal.back() < limit)
-	{
-		int i = jacobsthal.size();
-		j = jacobsthal.at(i - 1) + (2 * jacobsthal.at(i - 2));
-		jacobsthal.push_back(j);
-	}
-	return jacobsthal;
-}
-
 static std::vector<unsigned int> convert_av_to_raw(char **av)
 {
 	std::vector<unsigned int> vec;
@@ -50,141 +33,145 @@ static std::vector<unsigned int> convert_av_to_raw(char **av)
 
 PmergeMe::PmergeMe(int ac, char **av)
 {
-	this->jacobsthal = gen_jacobsthal(ac);
+	(void)ac;
 	this->raw = convert_av_to_raw(av);
 }
 
-void recursive_sort(std::vector<unsigned int> &v)
+// 야콥스탈 수열(0, 1, 1, 3, 5, 11, ...)을 이용해 pendant 삽입 순서를 만든다.
+// b1은 항상 먼저 삽입되므로, 반환되는 순서는 b3 b2, b5 b4, b11 ... b6 형태 (1-based index)
+static std::vector<size_t> build_insertion_order(size_t pendant_count)
+{
+	std::vector<size_t> order;
+	if (pendant_count < 2)
+		return order;
+
+	size_t prev_jacob = 1;
+	size_t j_a = 1, j_b = 1; // J(2)=1, J(3)=3, J(n)=J(n-1)+2*J(n-2)
+	while (prev_jacob < pendant_count)
+	{
+		size_t current_jacob = j_b + 2 * j_a;
+		size_t end_point = std::min(current_jacob, pendant_count);
+
+		for (size_t k = end_point; k > prev_jacob; --k)
+			order.push_back(k);
+		prev_jacob = current_jacob;
+		j_a = j_b;
+		j_b = current_jacob;
+	}
+	return order;
+}
+
+template <typename Container>
+static void merge_insertion_sort(Container &v)
 {
 	if (v.size() <= 1)
 		return;
 
-    // leftover
-    bool has_leftover = v.size() % 2 != 0;
-    unsigned int leftover = 0;
-    if (has_leftover)
-        leftover = v.back();
+	// leftover (홀수 개일 때 남는 요소)
+	bool has_leftover = v.size() % 2 != 0;
+	unsigned int leftover = 0;
+	if (has_leftover)
+		leftover = v[v.size() - 1];
 
-    // 1. 쌍 만들기
-    std::vector<t_pair> pairs;
-    for (size_t i = 0; i < v.size() - has_leftover; i += 2)
-    {
-        if (v[i] < v[i + 1])
-            pairs.push_back(std::make_pair(v[i + 1], v[i]));
-        else
-            pairs.push_back(std::make_pair(v[i], v[i + 1]));
-    }
+	// 1. 쌍 만들기 (first = 큰 값, second = 작은 값)
+	std::vector<t_pair> pairs;
+	for (size_t i = 0; i + 1 < v.size(); i += 2)
+	{
+		if (v[i] < v[i + 1])
+			pairs.push_back(std::make_pair(v[i + 1], v[i]));
+		else
+			pairs.push_back(std::make_pair(v[i], v[i + 1]));
+	}
 
-    // 2. main만 추출
-    std::vector<unsigned int> larger_elements;
-    for (size_t i = 0; i < pairs.size(); ++i)
-        larger_elements.push_back(pairs[i].first);
+	// 2. main(큰 값)들만 추출해서 재귀 정렬
+	Container mains;
+	for (size_t i = 0; i < pairs.size(); ++i)
+		mains.push_back(pairs[i].first);
+	merge_insertion_sort(mains);
 
-    // 3. 재귀 — main들을 정렬
-    recursive_sort(larger_elements);
+	// 3. 정렬된 main 순서에 맞춰 pendant(작은 값) 재배열 (중복 값은 used로 구분)
+	std::vector<unsigned int> pendants;
+	std::vector<bool> used(pairs.size(), false);
+	for (size_t i = 0; i < mains.size(); ++i)
+	{
+		for (size_t j = 0; j < pairs.size(); ++j)
+		{
+			if (!used[j] && pairs[j].first == mains[i])
+			{
+				pendants.push_back(pairs[j].second);
+				used[j] = true;
+				break;
+			}
+		}
+	}
+
+	// 4. main chain 구성: b1은 a1보다 작거나 같으므로 무조건 맨 앞
+	Container result;
+	result.push_back(pendants[0]);
+	for (size_t i = 0; i < mains.size(); ++i)
+		result.push_back(mains[i]);
+
+	// 5. 나머지 pendant를 야콥스탈 순서로 이진 삽입
+	std::vector<size_t> order = build_insertion_order(pendants.size());
+	for (size_t i = 0; i < order.size(); ++i)
+	{
+		unsigned int element = pendants[order[i] - 1];
+		typename Container::iterator pos =
+			std::lower_bound(result.begin(), result.end(), element);
+		result.insert(pos, element);
+	}
+
+	// 6. leftover 삽입
+	if (has_leftover)
+	{
+		typename Container::iterator pos =
+			std::lower_bound(result.begin(), result.end(), leftover);
+		result.insert(pos, leftover);
+	}
+
+	v = result;
 }
 
 void PmergeMe::sort_vector()
 {
-	std::vector<unsigned int> small; // Pendants
-	unsigned int leftover = 0;
-	bool has_leftover = false;
-
-	// cut off residual element
-	std::vector<unsigned int> temp_raw = this->raw;
-	if (temp_raw.size() % 2 != 0)
-	{
-		leftover = temp_raw.back();
-		temp_raw.pop_back();
-		has_leftover = true;
-	}
-
-	// pairing elements
-	std::vector<t_pair> pairs;
-	for (size_t i = 0; i < temp_raw.size(); i += 2)
-	{
-		unsigned int a = temp_raw[i];
-		unsigned int b = temp_raw[i + 1];
-		if (a < b)
-			std::swap(a, b);
-		pairs.push_back(std::make_pair(a, b));
-	}
-
-	// 큰 값(first)을 기준으로 쌍들을 정렬 (관계 유지)
-	for (size_t i = 0; i < pairs.size(); i++)
-	{
-		for (size_t j = i + 1; j < pairs.size(); j++)
-		{
-			if (pairs[i].first > pairs[j].first)
-				std::swap(pairs[i], pairs[j]);
-		}
-	}
-
-	// 2. Main Chain(vec)과 Pendants(small) 구성
-	for (size_t i = 0; i < pairs.size(); i++)
-	{
-		vec.push_back(pairs[i].first);
-		small.push_back(pairs[i].second);
-	}
-
-	// 3. 첫 번째 작은 값은 무조건 맨 앞 (pairs[0].first > pairs[0].second 이므로 안전)
-	vec.insert(vec.begin(), small[0]);
-
-	// 4. 야콥스탈 순서에 따른 이진 삽입
-	std::vector<size_t> insertion_order;
-	size_t pendant_size = small.size();
-	size_t j_idx = 3;
-	size_t last_jacob = 1;
-
-	while (insertion_order.size() < pendant_size - 1)
-	{
-		size_t current_jacob = (j_idx < jacobsthal.size()) ? jacobsthal[j_idx] : pendant_size;
-		size_t end_point = std::min(current_jacob, pendant_size);
-
-		for (size_t k = end_point; k > last_jacob; --k)
-		{
-			if (k > 1)
-				insertion_order.push_back(k); // 1번은 이미 삽입됨
-		}
-		last_jacob = current_jacob;
-		j_idx++;
-		if (last_jacob >= pendant_size)
-			break;
-	}
-
-	for (size_t i = 0; i < insertion_order.size(); ++i)
-	{
-		unsigned int element_to_insert = small[insertion_order[i] - 1];
-		std::vector<unsigned int>::iterator insert_pos =
-			std::lower_bound(vec.begin(), vec.end(), element_to_insert);
-		vec.insert(insert_pos, element_to_insert);
-	}
-
-	// 5. 남은 홀수 요소 삽입
-	if (has_leftover)
-	{
-		std::vector<unsigned int>::iterator insert_pos =
-			std::lower_bound(vec.begin(), vec.end(), leftover);
-		vec.insert(insert_pos, leftover);
-	}
+	this->vec.assign(this->raw.begin(), this->raw.end());
+	merge_insertion_sort(this->vec);
 }
 
 void PmergeMe::sort_deque()
 {
+	this->deq.assign(this->raw.begin(), this->raw.end());
+	merge_insertion_sort(this->deq);
 }
 
-static void print_vec(std::vector<unsigned int> v)
+static void print_vec(const std::vector<unsigned int> &v)
 {
-	for (std::vector<unsigned int>::iterator it = v.begin(); it != v.end(); ++it)
+	for (std::vector<unsigned int>::const_iterator it = v.begin(); it != v.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
 }
 
 void PmergeMe::run()
 {
+	std::cout << "Before: ";
+	print_vec(this->raw);
+
 	clock_t start_vec = clock();
 	sort_vector();
 	clock_t finish_vec = clock();
-	print_vec(vec);
-	std::cout << "Time to process a range of " << vec.size() << " elements with std::vector : " << finish_vec - start_vec << " us" << std::endl;
+
+	clock_t start_deq = clock();
+	sort_deque();
+	clock_t finish_deq = clock();
+
+	std::cout << "After:  ";
+	print_vec(this->vec);
+
+	double time_vec = static_cast<double>(finish_vec - start_vec) / CLOCKS_PER_SEC * 1000000.0;
+	double time_deq = static_cast<double>(finish_deq - start_deq) / CLOCKS_PER_SEC * 1000000.0;
+
+	std::cout << "Time to process a range of " << vec.size()
+		<< " elements with std::vector : " << time_vec << " us" << std::endl;
+	std::cout << "Time to process a range of " << deq.size()
+		<< " elements with std::deque  : " << time_deq << " us" << std::endl;
 }
