@@ -6,6 +6,10 @@ all: setup up
 setup:
 	@which docker > /dev/null 2>&1 && docker compose version > /dev/null 2>&1 \
 		&& grep -q "sipyeon.42.fr" /etc/hosts \
+		&& test -f srcs/.env \
+		&& test -f srcs/secrets/mariadb.env \
+		&& test -f srcs/secrets/db-info.env \
+		&& test -f srcs/secrets/wordpress.env \
 		|| bash scripts/setup.sh
 
 up:

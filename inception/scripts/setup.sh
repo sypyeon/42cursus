@@ -22,6 +22,23 @@ else
     echo "[*] docker compose already installed: $(docker compose version)"
 fi
 
+# env files (copy templates, fill __GENERATE__ with random secrets)
+gen_secret() {
+    tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 32
+}
+
+for f in srcs/.env srcs/secrets/mariadb.env srcs/secrets/db-info.env srcs/secrets/wordpress.env; do
+    if [ ! -f "$f" ]; then
+        cp "$f.example" "$f"
+        while grep -q "__GENERATE__" "$f"; do
+            sed -i "0,/__GENERATE__/s//$(gen_secret)/" "$f"
+        done
+        echo "[+] Created $f from template (random secrets generated)"
+    else
+        echo "[*] $f already exists"
+    fi
+done
+
 # /etc/hosts
 DOMAIN="sipyeon.42.fr"
 if ! grep -q "$DOMAIN" /etc/hosts; then
