@@ -4,7 +4,13 @@ set -e
 sed -i 's/listen = 127.0.0.1:9000/listen = 9000/g' /etc/php83/php-fpm.d/www.conf
 
 echo "Waiting for MariaDB..."
+tries=0
 until nc -z mariadb 3306; do
+    tries=$((tries + 1))
+    if [ "$tries" -ge 30 ]; then
+        echo "MariaDB is unreachable after 60s, giving up." >&2
+        exit 1
+    fi
     sleep 2
 done
 echo "MariaDB is up."
@@ -33,5 +39,8 @@ if ! wp core is-installed --allow-root 2>/dev/null; then
         --user_pass="${WP_PASSWORD}" \
         --allow-root
 fi
+
+# php-fpm workers run as "nobody" on Alpine, but wp-cli ran as root.
+chown -R nobody:nobody /var/www/html
 
 exec php-fpm83 -F

@@ -43,9 +43,10 @@ git):
   and application passwords.
 
 To change a WordPress password, log into the admin panel and use
-Users → Profile. To regenerate all credentials from scratch, run `make clean`,
-delete `srcs/.env` and the three files in `srcs/secrets/`, then run `make`
-again (this recreates the site, so content is lost).
+Users → Profile. To regenerate all credentials from scratch, run `make clean`
+(this also deletes the volumes), delete `srcs/.env` and the three files in
+`srcs/secrets/`, then run `make` again — the site is recreated, so content is
+lost.
 
 ## Basic checks
 
@@ -53,8 +54,8 @@ again (this recreates the site, so content is lost).
   should print `200`.
 - Containers up? `docker ps` should list `nginx`, `wordpress`, `mariadb`.
 - Logs of a service: `docker logs nginx` (or `wordpress`, `mariadb`).
-- Data on disk: `ls ~/data/wordpress ~/data/mariadb` — site files and
-  database files live here and survive restarts.
+- Data on disk: `docker volume ls` — the `srcs_wordpress` and `srcs_mariadb`
+  volumes hold the site files and the database, and survive restarts.
 
 If a container crashed, Docker restarts it automatically. If the site stays
 unreachable, run `make down && make up`.

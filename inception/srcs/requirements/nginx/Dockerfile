@@ -7,5 +7,4 @@ RUN apk add --no-cache gettext nginx openssl
 
 EXPOSE 443
 
-ENTRYPOINT ["sh"]
-CMD ["/etc/nginx/run.sh"]
+ENTRYPOINT ["sh", "/etc/nginx/run.sh"]

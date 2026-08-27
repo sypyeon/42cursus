@@ -25,7 +25,9 @@ srcs/
 
 Each service has exactly one Dockerfile. Images are built from the
 penultimate stable base versions (`alpine:3.23.5`, `debian:12`) and are named
-after their service (`nginx`, `wordpress`, `mariadb`).
+after their service, with an explicit tag (`nginx:1.0`, `wordpress:1.0`,
+`mariadb:1.0`) — the `latest` tag is forbidden by the subject, and an
+untagged `image:` would default to it.
 
 ## Setup and secrets
 
@@ -41,9 +43,9 @@ placeholder with a random 32-character secret. Real env files are listed in
 ```bash
 make          # setup + up
 make setup    # checks docker/compose/hosts/env files, runs scripts/setup.sh if needed
-make up       # mkdir ~/data/{mariadb,wordpress}; docker compose up --build -d
+make up       # docker compose up --build -d
 make down     # docker compose down
-make clean    # down + docker system prune -a --volumes + rm -rf ~/data
+make clean    # docker compose down -v --rmi local (project-scoped, touches nothing else)
 make re       # clean + up
 ```
 
@@ -78,12 +80,15 @@ docker exec -it wordpress sh                            # shell in a container
 
 ## Data persistence
 
-Two named volumes are bind-mounted to the host:
+Two Docker named volumes, declared without `driver_opts` — the subject
+requires named volumes and forbids bind mounts for these two storages, so
+Docker owns their backing store under `/var/lib/docker/volumes/`:
 
-- `~/data/mariadb` ↔ `/var/lib/mysql` (database files)
-- `~/data/wordpress` ↔ `/var/www/html` (WordPress files, shared with nginx
-  so it can serve static assets directly)
+- `srcs_mariadb` → `/var/lib/mysql` (database files)
+- `srcs_wordpress` → `/var/www/html` (WordPress files, mounted into nginx as
+  well so it can serve static assets directly)
 
-`make down` / reboots keep all data; recreating containers reuses it. Only
-`make clean` / `make re` wipe `~/data`. To reset a single service's state,
-stop the stack and remove the matching directory before `make up`.
+`make down`, container recreation and host reboots all keep the data; only an
+explicit `docker compose down -v` (`make clean` / `make re`) removes it. To
+reset a single service, `docker volume rm srcs_<name>` while the stack is
+down.
