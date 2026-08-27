@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.23.5
 
 COPY ./conf/template.conf /etc/nginx/template.conf
 COPY ./tools/run.sh /etc/nginx/run.sh
