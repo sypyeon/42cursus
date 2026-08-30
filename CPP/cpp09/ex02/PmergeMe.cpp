@@ -1,177 +1,202 @@
 #include "PmergeMe.hpp"
 
+// Orthodox Canonical Form
+PmergeMe::PmergeMe() {}
 PmergeMe::PmergeMe(PmergeMe &other) { (void)other; }
 PmergeMe &PmergeMe::operator=(PmergeMe &other)
 {
 	(void)other;
 	return *this;
 }
-PmergeMe::PmergeMe() {}
 PmergeMe::~PmergeMe() {}
 
-static std::vector<unsigned int> convert_av_to_raw(char **av)
+// Parsing & Helper Utility
+static std::vector<uint> parse_arguments(char **av)
 {
-	std::vector<unsigned int> vec;
+	std::vector<uint> numbers;
 
 	for (int i = 1; av[i]; ++i)
 	{
-		std::string str(av[i]);
-		if (str.empty())
-			throw std::runtime_error("empty argument");
-		for (size_t j = 0; j < str.length(); ++j)
+		std::string arg(av[i]);
+		if (arg.empty())
+			throw std::runtime_error("Empty argument");
+
+		for (size_t j = 0; j < arg.length(); ++j)
 		{
-			if (!std::isdigit(str[j]))
-				throw std::runtime_error("not a positive integer");
+			if (!std::isdigit(arg[j]))
+				throw std::runtime_error("Non-digit character");
 		}
+
 		long val = std::atol(av[i]);
 		if (val < 0 || val > UINT_MAX)
-			throw std::runtime_error("out of range");
-		vec.push_back(static_cast<unsigned int>(val));
+			throw std::runtime_error("Out of range");
+
+		numbers.push_back(static_cast<uint>(val));
 	}
-	return vec;
+	return numbers;
 }
 
 PmergeMe::PmergeMe(int ac, char **av)
 {
 	(void)ac;
-	this->raw = convert_av_to_raw(av);
+	this->raw = parse_arguments(av);
 }
 
-// 야콥스탈 수열(0, 1, 1, 3, 5, 11, ...)을 이용해 pendant 삽입 순서를 만든다.
-// b1은 항상 먼저 삽입되므로, 반환되는 순서는 b3 b2, b5 b4, b11 ... b6 형태 (1-based index)
-static std::vector<size_t> build_insertion_order(size_t pendant_count)
+// Jacobsthal 수열 기반으로 Insert order 순서를 생성
+static std::vector<size_t> make_jacobsthal_order(size_t count)
 {
 	std::vector<size_t> order;
-	if (pendant_count < 2)
+	if (count < 2)
 		return order;
 
-	size_t prev_jacob = 1;
-	size_t j_a = 1, j_b = 1; // J(2)=1, J(3)=3, J(n)=J(n-1)+2*J(n-2)
-	while (prev_jacob < pendant_count)
-	{
-		size_t current_jacob = j_b + 2 * j_a;
-		size_t end_point = std::min(current_jacob, pendant_count);
+	size_t prev = 1;
+	size_t j_prev = 1;
+	size_t j_curr = 1;
 
-		for (size_t k = end_point; k > prev_jacob; --k)
+	while (prev < count)
+	{
+		size_t next_jacob = j_curr + 2 * j_prev;
+		size_t limit = std::min(next_jacob, count);
+
+		for (size_t k = limit; k > prev; --k)
 			order.push_back(k);
-		prev_jacob = current_jacob;
-		j_a = j_b;
-		j_b = current_jacob;
+
+		prev = next_jacob;
+		j_prev = j_curr;
+		j_curr = next_jacob;
 	}
 	return order;
 }
 
-template <typename Container>
-static void merge_insertion_sort(Container &v)
+// Comparison Helper
+struct ByKey
 {
-	if (v.size() <= 1)
+	const std::vector<uint> &raw_data;
+
+	explicit ByKey(const std::vector<uint> &data) : raw_data(data) {}
+	bool operator()(uint idx1, uint idx2) const
+	{
+		return raw_data[idx1] < raw_data[idx2];
+	}
+};
+
+// Merge-Insertion Algorithm Core
+template <typename Container>
+static void merge_insertion_sort(Container &elements, const std::vector<uint> &key)
+{
+	if (elements.size() <= 1)
 		return;
 
-	// leftover (홀수 개일 때 남는 요소)
-	bool has_leftover = v.size() % 2 != 0;
-	unsigned int leftover = 0;
+	ByKey less(key);
+
+	// 1. 홀수 개일 때 남는 요소 처리
+	bool has_leftover = (elements.size() % 2 != 0);
+	uint leftover = 0;
 	if (has_leftover)
-		leftover = v[v.size() - 1];
-
-	// 1. 쌍 만들기 (first = 큰 값, second = 작은 값)
-	std::vector<t_pair> pairs;
-	for (size_t i = 0; i + 1 < v.size(); i += 2)
 	{
-		if (v[i] < v[i + 1])
-			pairs.push_back(std::make_pair(v[i + 1], v[i]));
-		else
-			pairs.push_back(std::make_pair(v[i], v[i + 1]));
+		leftover = elements.back();
+		elements.pop_back();
 	}
 
-	// 2. main(큰 값)들만 추출해서 재귀 정렬
+	// 2. 페어링 (큰 값 -> main, 작은 값 -> partner)
 	Container mains;
-	for (size_t i = 0; i < pairs.size(); ++i)
-		mains.push_back(pairs[i].first);
-	merge_insertion_sort(mains);
+	std::vector<uint> partner(key.size(), 0);
 
-	// 3. 정렬된 main 순서에 맞춰 pendant(작은 값) 재배열 (중복 값은 used로 구분)
-	std::vector<unsigned int> pendants;
-	std::vector<bool> used(pairs.size(), false);
-	for (size_t i = 0; i < mains.size(); ++i)
+	typename Container::iterator it = elements.begin();
+	while (it != elements.end())
 	{
-		for (size_t j = 0; j < pairs.size(); ++j)
-		{
-			if (!used[j] && pairs[j].first == mains[i])
-			{
-				pendants.push_back(pairs[j].second);
-				used[j] = true;
-				break;
-			}
-		}
+		uint a = *it++;
+		uint b = *it++;
+
+		if (less(a, b))
+			std::swap(a, b);
+
+		mains.push_back(a);
+		partner[a] = b;
 	}
 
-	// 4. main chain 구성: b1은 a1보다 작거나 같으므로 무조건 맨 앞
-	Container result;
-	result.push_back(pendants[0]);
-	for (size_t i = 0; i < mains.size(); ++i)
-		result.push_back(mains[i]);
+	// 3. Main 체인 재귀 정렬
+	merge_insertion_sort(mains, key);
 
-	// 5. 나머지 pendant를 야콥스탈 순서로 이진 삽입
-	std::vector<size_t> order = build_insertion_order(pendants.size());
+	// 4. Main 순서에 대응하는 Pendants 추출
+	std::vector<uint> pendants;
+	pendants.reserve(mains.size());
+	for (typename Container::const_iterator mit = mains.begin(); mit != mains.end(); ++mit)
+		pendants.push_back(partner[*mit]);
+
+	// 5. Main Chain 기본 배치 (b1은 항상 맨 앞에 배치)
+	Container main_chain;
+	main_chain.push_back(pendants[0]);
+	main_chain.insert(main_chain.end(), mains.begin(), mains.end());
+
+	// 6. Jacobsthal 순서대로 Pendants 이진 삽입
+	std::vector<size_t> order = make_jacobsthal_order(pendants.size());
 	for (size_t i = 0; i < order.size(); ++i)
 	{
-		unsigned int element = pendants[order[i] - 1];
+		uint pendant = pendants[order[i] - 1];
 		typename Container::iterator pos =
-			std::lower_bound(result.begin(), result.end(), element);
-		result.insert(pos, element);
+			std::lower_bound(main_chain.begin(), main_chain.end(), pendant, less);
+		main_chain.insert(pos, pendant);
 	}
 
-	// 6. leftover 삽입
+	// 7. Leftover 삽입
 	if (has_leftover)
 	{
 		typename Container::iterator pos =
-			std::lower_bound(result.begin(), result.end(), leftover);
-		result.insert(pos, leftover);
+			std::lower_bound(main_chain.begin(), main_chain.end(), leftover, less);
+		main_chain.insert(pos, leftover);
 	}
 
-	v = result;
+	elements = main_chain;
 }
 
-void PmergeMe::sort_vector()
+// Container Sort Wrapper
+template <typename Container>
+static void run_sort(Container &out, const std::vector<uint> &raw)
 {
-	this->vec.assign(this->raw.begin(), this->raw.end());
-	merge_insertion_sort(this->vec);
+	Container index_list;
+	for (uint i = 0; i < raw.size(); ++i)
+		index_list.push_back(i);
+
+	merge_insertion_sort(index_list, raw);
+
+	out.clear();
+	for (typename Container::const_iterator it = index_list.begin(); it != index_list.end(); ++it)
+		out.push_back(raw[*it]);
 }
 
-void PmergeMe::sort_deque()
-{
-	this->deq.assign(this->raw.begin(), this->raw.end());
-	merge_insertion_sort(this->deq);
-}
+void PmergeMe::sort_vector() { run_sort(this->vec, this->raw); }
+void PmergeMe::sort_list() { run_sort(this->list, this->raw); }
 
-static void print_vec(const std::vector<unsigned int> &v)
+// Output & Execution
+static void print_elements(const std::vector<uint> &v)
 {
-	for (std::vector<unsigned int>::const_iterator it = v.begin(); it != v.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
+	for (size_t i = 0; i < v.size(); ++i)
+		std::cout << v[i] << " ";
+	std::cout << "\n";
 }
 
 void PmergeMe::run()
 {
 	std::cout << "Before: ";
-	print_vec(this->raw);
+	print_elements(this->raw);
 
-	clock_t start_vec = clock();
+	clock_t start_v = clock();
 	sort_vector();
-	clock_t finish_vec = clock();
+	clock_t end_v = clock();
 
-	clock_t start_deq = clock();
-	sort_deque();
-	clock_t finish_deq = clock();
+	clock_t start_l = clock();
+	sort_list();
+	clock_t end_l = clock();
 
 	std::cout << "After:  ";
-	print_vec(this->vec);
+	print_elements(this->vec);
 
-	double time_vec = static_cast<double>(finish_vec - start_vec) / CLOCKS_PER_SEC * 1000000.0;
-	double time_deq = static_cast<double>(finish_deq - start_deq) / CLOCKS_PER_SEC * 1000000.0;
+	double time_v = static_cast<double>(end_v - start_v) / CLOCKS_PER_SEC * 1e6;
+	double time_l = static_cast<double>(end_l - start_l) / CLOCKS_PER_SEC * 1e6;
 
 	std::cout << "Time to process a range of " << vec.size()
-		<< " elements with std::vector : " << time_vec << " us" << std::endl;
-	std::cout << "Time to process a range of " << deq.size()
-		<< " elements with std::deque  : " << time_deq << " us" << std::endl;
+			  << " elements with std::vector : " << time_v << " us\n";
+	std::cout << "Time to process a range of " << list.size()
+			  << " elements with std::list   : " << time_l << " us\n";
 }

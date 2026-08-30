@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <deque>
+#include <list>
 #include <cstdlib>
 #include <stdexcept>
 #include <cctype>
@@ -15,8 +15,6 @@
 
 #include <algorithm>
 
-typedef std::pair<unsigned int, unsigned int> t_pair;
-
 class PmergeMe
 {
 private: // not using
@@ -24,12 +22,12 @@ private: // not using
 	PmergeMe &operator=(PmergeMe& other);
 	PmergeMe();
 private:
-	std::vector<unsigned int> raw;
-	std::vector<unsigned int> vec;
-	std::deque<unsigned int> deq;
+	std::vector<uint> raw;
+	std::vector<uint> vec;
+	std::list<uint> list;
 
 	void sort_vector();
-	void sort_deque();
+	void sort_list();
 public:
 	PmergeMe(int ac, char **av);
 	~PmergeMe();
