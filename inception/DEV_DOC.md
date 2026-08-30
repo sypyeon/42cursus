@@ -43,9 +43,10 @@ placeholder with a random 32-character secret. Real env files are listed in
 ```bash
 make          # setup + up
 make setup    # checks docker/compose/hosts/env files, runs scripts/setup.sh if needed
-make up       # docker compose up --build -d
+make up       # mkdir ~/data/{mariadb,wordpress}; docker compose up --build -d
 make down     # docker compose down
-make clean    # docker compose down -v --rmi local (project-scoped, touches nothing else)
+make clean    # docker compose down -v --rmi local + rm -rf ~/data
+              # (project-scoped: no system-wide prune, nothing else is touched)
 make re       # clean + up
 ```
 

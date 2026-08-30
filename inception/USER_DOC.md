@@ -42,6 +42,12 @@ git):
 - `srcs/secrets/mariadb.env` and `srcs/secrets/db-info.env` — database root
   and application passwords.
 
+To look up the administrator account, read the file directly:
+
+```bash
+cat srcs/secrets/wordpress.env    # WP_ADMIN_USER / WP_ADMIN_PASSWORD
+```
+
 To change a WordPress password, log into the admin panel and use
 Users → Profile. To regenerate all credentials from scratch, run `make clean`
 (this also deletes the volumes), delete `srcs/.env` and the three files in

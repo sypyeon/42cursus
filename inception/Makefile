@@ -17,16 +17,14 @@ setup:
 
 up:
 	mkdir -p $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress
-	docker compose -f $(COMPOSE_FILE) up --build -d
 	$(COMPOSE) up --build -d
 
 down:
 	$(COMPOSE) down
 
 clean:
-	docker system prune -a --volumes -f
-	rm -rf $(DATA_PATH)
 	$(COMPOSE) down -v --rmi local
+	rm -rf $(DATA_PATH)
 
 re: clean up
 
